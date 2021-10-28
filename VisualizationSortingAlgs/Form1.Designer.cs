@@ -74,7 +74,7 @@ namespace Algorithm
             this.genBtn.TabIndex = 1;
             this.genBtn.Text = "Сгенерировать массив";
             this.genBtn.UseVisualStyleBackColor = true;
-            this.genBtn.Click += new System.EventHandler(this.genBtn_Click);
+            this.genBtn.Click += new System.EventHandler(this.genBtn_Click_1);
             // 
             // arraynum
             // 
@@ -91,7 +91,7 @@ namespace Algorithm
             this.googleToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1394, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1113, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -126,32 +126,32 @@ namespace Algorithm
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(782, 43);
+            this.chart1.Location = new System.Drawing.Point(410, 27);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(554, 443);
+            this.chart1.Size = new System.Drawing.Size(691, 589);
             this.chart1.TabIndex = 4;
             this.chart1.Text = "chart1";
             // 
             // bubblecheck
             // 
             this.bubblecheck.AutoSize = true;
-            this.bubblecheck.Location = new System.Drawing.Point(299, 43);
+            this.bubblecheck.Location = new System.Drawing.Point(266, 27);
             this.bubblecheck.Name = "bubblecheck";
             this.bubblecheck.Size = new System.Drawing.Size(78, 17);
             this.bubblecheck.TabIndex = 5;
             this.bubblecheck.Text = "BubbleSort";
             this.bubblecheck.UseVisualStyleBackColor = true;
-            this.bubblecheck.CheckedChanged += new System.EventHandler(this.bubblecheck_CheckedChanged);
+            this.bubblecheck.CheckedChanged += new System.EventHandler(this.bubblecheck_CheckedChanged_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1394, 725);
+            this.ClientSize = new System.Drawing.Size(1113, 641);
             this.Controls.Add(this.bubblecheck);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.arraynum);
@@ -161,7 +161,6 @@ namespace Algorithm
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

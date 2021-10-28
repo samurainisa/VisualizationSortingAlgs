@@ -131,36 +131,6 @@ namespace Algorithm
                 }
             }
         }
-
-
-        private void genBtn_Click(object sender, EventArgs e)
-        {
-            GenerateData();
-            DtgtoArr();
-
-        }
-
-        private void DtgtoArr()
-        {
-            for (int i = 0; i < dataGridView1.RowCount; i++)
-            { 
-                if(int.TryParse(dataGridView1[0, i].Value.ToString(), out int value))
-                {
-                    algorithm.Items.Add(value);
-                }
-
-            }
-        }
-
-        private void bubblecheck_CheckedChanged(object sender, EventArgs e)
-        {
-            algorithm.Sort();
-            foreach(var item in algorithm.Items)
-            {
-                Console.WriteLine(item);
-            }
-        }
-
         public void GenerateData()
         {
                 dataGridView1.AllowUserToAddRows = false;
@@ -179,11 +149,36 @@ namespace Algorithm
 
         #endregion
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
+        //From datagridview1 to list 
+        private void DtgtoList()
+        {
+            dataGridView1.AllowUserToAddRows = false;
+
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                if (int.TryParse(dataGridView1[0, i].Value.ToString(), out int value))
+                {
+                    algorithm.Items.Add(value);
+                }
+            }
+            dataGridView1.AllowUserToAddRows = true;
         }
 
 
+        private void genBtn_Click_1(object sender, EventArgs e)
+        {
+            GenerateData();
+            DtgtoList();
+        }
+
+        private void bubblecheck_CheckedChanged_1(object sender, EventArgs e)
+        {
+            algorithm.Sort();
+            foreach (var item in algorithm.Items)
+            {
+                Console.WriteLine(item);
+            }
+        }
     }
 }
