@@ -15,7 +15,8 @@ namespace VisualizationSortingAlgs
 {
     public partial class Form1 : Form
     {
-        
+
+        AlgorithmBase<int> algorithm = new BubbleSort<int>();
 
         public Form1()
         {
