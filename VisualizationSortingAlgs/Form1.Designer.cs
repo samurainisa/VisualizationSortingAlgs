@@ -1,5 +1,5 @@
 ﻿
-namespace VisualizationSortingAlgs
+namespace Algorithm
 {
     partial class Form1
     {
@@ -161,6 +161,7 @@ namespace VisualizationSortingAlgs
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

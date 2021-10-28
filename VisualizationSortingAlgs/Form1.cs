@@ -11,17 +11,17 @@ using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;
 
 
-namespace VisualizationSortingAlgs
+namespace Algorithm
 {
     public partial class Form1 : Form
     {
-
         AlgorithmBase<int> algorithm = new BubbleSort<int>();
 
         public Form1()
         {
             InitializeComponent();
         }
+
 
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -136,6 +136,29 @@ namespace VisualizationSortingAlgs
         private void genBtn_Click(object sender, EventArgs e)
         {
             GenerateData();
+            DtgtoArr();
+
+        }
+
+        private void DtgtoArr()
+        {
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            { 
+                if(int.TryParse(dataGridView1[0, i].Value.ToString(), out int value))
+                {
+                    algorithm.Items.Add(value);
+                }
+
+            }
+        }
+
+        private void bubblecheck_CheckedChanged(object sender, EventArgs e)
+        {
+            algorithm.Sort();
+            foreach(var item in algorithm.Items)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         public void GenerateData()
@@ -156,9 +179,11 @@ namespace VisualizationSortingAlgs
 
         #endregion
 
-        private void bubblecheck_CheckedChanged(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
+
+
     }
 }

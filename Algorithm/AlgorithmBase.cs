@@ -5,7 +5,7 @@ namespace Algorithm
 {
     public class AlgorithmBase<T> where T: IComparable
     {
-        public List <T> Items { get; set; } = new List<T>();
+        public List<T> Items { get; set; } = new List<T>();
 
         protected void Swop(int positionA, int positionB)
         {
