@@ -29,9 +29,7 @@ namespace Algorithm
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Mass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.genBtn = new System.Windows.Forms.Button();
@@ -41,11 +39,20 @@ namespace Algorithm
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.googleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.bubblecheck = new System.Windows.Forms.CheckBox();
+            this.SortLabel = new System.Windows.Forms.Label();
+            this.TimeElapsedLabel = new System.Windows.Forms.Label();
+            this.ComparisonLabel = new System.Windows.Forms.Label();
+            this.SortCounterLabel = new System.Windows.Forms.Label();
+            this.TimeElapsedInt = new System.Windows.Forms.Label();
+            this.ComparisonInt = new System.Windows.Forms.Label();
+            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
+            this.shakercheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -91,7 +98,7 @@ namespace Algorithm
             this.googleToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1113, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1329, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -120,40 +127,146 @@ namespace Algorithm
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(410, 27);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(691, 589);
-            this.chart1.TabIndex = 4;
-            this.chart1.Text = "chart1";
-            // 
             // bubblecheck
             // 
             this.bubblecheck.AutoSize = true;
-            this.bubblecheck.Location = new System.Drawing.Point(266, 27);
+            this.bubblecheck.Location = new System.Drawing.Point(400, 66);
             this.bubblecheck.Name = "bubblecheck";
             this.bubblecheck.Size = new System.Drawing.Size(78, 17);
             this.bubblecheck.TabIndex = 5;
             this.bubblecheck.Text = "BubbleSort";
             this.bubblecheck.UseVisualStyleBackColor = true;
-            this.bubblecheck.CheckedChanged += new System.EventHandler(this.bubblecheck_CheckedChanged_1);
+            // 
+            // SortLabel
+            // 
+            this.SortLabel.AutoSize = true;
+            this.SortLabel.Location = new System.Drawing.Point(715, 27);
+            this.SortLabel.Name = "SortLabel";
+            this.SortLabel.Size = new System.Drawing.Size(31, 13);
+            this.SortLabel.TabIndex = 6;
+            this.SortLabel.Text = "Sorts";
+            // 
+            // TimeElapsedLabel
+            // 
+            this.TimeElapsedLabel.AutoSize = true;
+            this.TimeElapsedLabel.Location = new System.Drawing.Point(801, 27);
+            this.TimeElapsedLabel.Name = "TimeElapsedLabel";
+            this.TimeElapsedLabel.Size = new System.Drawing.Size(30, 13);
+            this.TimeElapsedLabel.TabIndex = 7;
+            this.TimeElapsedLabel.Text = "Time";
+            // 
+            // ComparisonLabel
+            // 
+            this.ComparisonLabel.AutoSize = true;
+            this.ComparisonLabel.Location = new System.Drawing.Point(912, 27);
+            this.ComparisonLabel.Name = "ComparisonLabel";
+            this.ComparisonLabel.Size = new System.Drawing.Size(67, 13);
+            this.ComparisonLabel.TabIndex = 8;
+            this.ComparisonLabel.Text = "Comparisons";
+            // 
+            // SortCounterLabel
+            // 
+            this.SortCounterLabel.AutoSize = true;
+            this.SortCounterLabel.Location = new System.Drawing.Point(750, 27);
+            this.SortCounterLabel.Name = "SortCounterLabel";
+            this.SortCounterLabel.Size = new System.Drawing.Size(13, 13);
+            this.SortCounterLabel.TabIndex = 9;
+            this.SortCounterLabel.Text = "0";
+            // 
+            // TimeElapsedInt
+            // 
+            this.TimeElapsedInt.AutoSize = true;
+            this.TimeElapsedInt.Location = new System.Drawing.Point(833, 27);
+            this.TimeElapsedInt.Name = "TimeElapsedInt";
+            this.TimeElapsedInt.Size = new System.Drawing.Size(13, 13);
+            this.TimeElapsedInt.TabIndex = 10;
+            this.TimeElapsedInt.Text = "0";
+            // 
+            // ComparisonInt
+            // 
+            this.ComparisonInt.AutoSize = true;
+            this.ComparisonInt.Location = new System.Drawing.Point(984, 27);
+            this.ComparisonInt.Name = "ComparisonInt";
+            this.ComparisonInt.Size = new System.Drawing.Size(13, 13);
+            this.ComparisonInt.TabIndex = 11;
+            this.ComparisonInt.Text = "0";
+            // 
+            // zedGraphControl1
+            // 
+            this.zedGraphControl1.Location = new System.Drawing.Point(275, 89);
+            this.zedGraphControl1.Name = "zedGraphControl1";
+            this.zedGraphControl1.ScrollGrace = 0D;
+            this.zedGraphControl1.ScrollMaxX = 0D;
+            this.zedGraphControl1.ScrollMaxY = 0D;
+            this.zedGraphControl1.ScrollMaxY2 = 0D;
+            this.zedGraphControl1.ScrollMinX = 0D;
+            this.zedGraphControl1.ScrollMinY = 0D;
+            this.zedGraphControl1.ScrollMinY2 = 0D;
+            this.zedGraphControl1.Size = new System.Drawing.Size(369, 285);
+            this.zedGraphControl1.TabIndex = 12;
+            this.zedGraphControl1.UseExtendedPrintDialog = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(405, 606);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Start";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(486, 606);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 14;
+            this.button2.Text = "Reset";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // zedGraphControl2
+            // 
+            this.zedGraphControl2.Location = new System.Drawing.Point(753, 89);
+            this.zedGraphControl2.Name = "zedGraphControl2";
+            this.zedGraphControl2.ScrollGrace = 0D;
+            this.zedGraphControl2.ScrollMaxX = 0D;
+            this.zedGraphControl2.ScrollMaxY = 0D;
+            this.zedGraphControl2.ScrollMaxY2 = 0D;
+            this.zedGraphControl2.ScrollMinX = 0D;
+            this.zedGraphControl2.ScrollMinY = 0D;
+            this.zedGraphControl2.ScrollMinY2 = 0D;
+            this.zedGraphControl2.Size = new System.Drawing.Size(377, 285);
+            this.zedGraphControl2.TabIndex = 15;
+            this.zedGraphControl2.UseExtendedPrintDialog = true;
+            // 
+            // shakercheck
+            // 
+            this.shakercheck.AutoSize = true;
+            this.shakercheck.Location = new System.Drawing.Point(915, 66);
+            this.shakercheck.Name = "shakercheck";
+            this.shakercheck.Size = new System.Drawing.Size(82, 17);
+            this.shakercheck.TabIndex = 16;
+            this.shakercheck.Text = "Shaker Sort";
+            this.shakercheck.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1113, 641);
+            this.ClientSize = new System.Drawing.Size(1329, 739);
+            this.Controls.Add(this.shakercheck);
+            this.Controls.Add(this.zedGraphControl2);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.zedGraphControl1);
+            this.Controls.Add(this.ComparisonInt);
+            this.Controls.Add(this.TimeElapsedInt);
+            this.Controls.Add(this.SortCounterLabel);
+            this.Controls.Add(this.ComparisonLabel);
+            this.Controls.Add(this.TimeElapsedLabel);
+            this.Controls.Add(this.SortLabel);
             this.Controls.Add(this.bubblecheck);
-            this.Controls.Add(this.chart1);
             this.Controls.Add(this.arraynum);
             this.Controls.Add(this.genBtn);
             this.Controls.Add(this.dataGridView1);
@@ -161,10 +274,10 @@ namespace Algorithm
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,8 +294,18 @@ namespace Algorithm
         private System.Windows.Forms.ToolStripMenuItem googleToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mass;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.CheckBox bubblecheck;
+        private System.Windows.Forms.Label SortLabel;
+        private System.Windows.Forms.Label TimeElapsedLabel;
+        private System.Windows.Forms.Label ComparisonLabel;
+        private System.Windows.Forms.Label SortCounterLabel;
+        private System.Windows.Forms.Label TimeElapsedInt;
+        private System.Windows.Forms.Label ComparisonInt;
+        private ZedGraph.ZedGraphControl zedGraphControl1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private ZedGraph.ZedGraphControl zedGraphControl2;
+        private System.Windows.Forms.CheckBox shakercheck;
     }
 }
 
