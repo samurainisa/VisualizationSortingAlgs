@@ -19,7 +19,11 @@ namespace Algorithm
     public partial class Form1 : Form
     {
         double[] unsortedArray;
-        
+        double[] unsortedArray1;
+
+
+
+
         public Form1()
         {
             InitializeComponent();
@@ -65,6 +69,8 @@ namespace Algorithm
                             dataGridView1.Rows.Add(sx);
                         }
                     }
+                    DtgtoList();
+                    InitGraphics();
                     GC.Collect();
                 }
 
@@ -72,6 +78,7 @@ namespace Algorithm
                 ObjWorkExcel.Quit();
                 ObjWorkExcel.Quit();
                 GC.Collect();
+
             }
 
             catch (Exception exception)
@@ -131,6 +138,8 @@ namespace Algorithm
                 {
                     var res = string.Join(" ", row.Select(r => r.ToString()));
                     dataGridView1.Rows.Add(res);
+                    DtgtoList();
+                    InitGraphics();
                 }
             }
         }
@@ -158,10 +167,12 @@ namespace Algorithm
         {
             dataGridView1.AllowUserToAddRows = false;
             unsortedArray = new double[dataGridView1.RowCount];
+            unsortedArray1 = new double[dataGridView1.RowCount];
 
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
                 unsortedArray[i] = double.Parse(dataGridView1[0, i].Value.ToString());
+                unsortedArray1[i] = double.Parse(dataGridView1[0, i].Value.ToString());
             }
 
             dataGridView1.AllowUserToAddRows = true;
@@ -172,19 +183,50 @@ namespace Algorithm
         {
             GenerateData();
             DtgtoList();
-            CreateGraph3(zedGraphControl1);
+            InitGraphics();
+        }
+
+        private void InitGraphics()
+        {
+            BubbleGraph(zedGraphControl1);
+            ShakerGraph(zedGraphControl2);
         }
 
 
-        private async void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             if (bubblecheck.Checked)
             {
-               await buildasync();
+                /*                Invoke((MethodInvoker)delegate
+                                {
+                                    Task.Run(() => BubbleSorting(unsortedArray));
+                                });*/
+                Thread bubble = new Thread(new ThreadStart(BubbleS));
+                bubble.Start();
+            }
+
+            if (shakercheck.Checked)
+            {
+                /*                Invoke((MethodInvoker)delegate
+                                {
+                                    Task.Run(() => ShakerSorting(unsortedArray1));
+                                });*/
+                Thread shaker = new Thread(new ThreadStart(ShakerS));
+                shaker.Start();
             }
         }
 
-        private void CreateGraph3(ZedGraphControl zedGraphControl1)
+        private async void BubbleS()
+        {
+            await Task.Run(() => BubbleSorting(unsortedArray));
+        }
+
+        private async void ShakerS()
+        {
+            await Task.Run(() => ShakerSorting(unsortedArray1));
+        }
+
+        private void BubbleGraph(ZedGraphControl zedGraphControl1)
         {
             // get a reference to the GraphPane
             GraphPane pane = zedGraphControl1.GraphPane;
@@ -193,7 +235,7 @@ namespace Algorithm
             pane.Title.Text = "Sorting";
             //Clear current values
             pane.CurveList.Clear();
-            var n = unsortedArray.Length;
+            var n = dataGridView1.RowCount-1;
             // histogram high
             double[] values = new double[n];
 
@@ -212,6 +254,34 @@ namespace Algorithm
             zedGraphControl1.Invalidate();
         }
 
+        private void ShakerGraph(ZedGraphControl zedGraphControl2)
+        {
+            // get a reference to the GraphPane
+            GraphPane pane = zedGraphControl2.GraphPane;
+
+            // Set the Titles
+            pane.Title.Text = "Sorting";
+            //Clear current values
+            pane.CurveList.Clear();
+            var n = unsortedArray1.Length;
+            // histogram high
+            double[] values = new double[n];
+
+            //fill values
+            for (int i = 0; i < n; i++)
+            {
+                values[i] = unsortedArray1[i]; //A1 is an array that is currently sort
+            }
+
+            //create histogram
+            BarItem curve = pane.AddBar("Elements", null, values, Color.Blue);
+
+            pane.BarSettings.MinClusterGap = 0.0F; //set columns references
+
+            zedGraphControl2.AxisChange();
+            zedGraphControl2.Invalidate();
+        }
+
         static void Swap(double[] array, int i, int j)
         {
             double glass = array[i];
@@ -219,14 +289,9 @@ namespace Algorithm
             array[j] = glass;
         }
 
-        private async Task buildasync()
-        {
-            await Task.Run(() => BubbleSorting(unsortedArray));
-        }
-
         private void BubbleSorting(double[] unsortedArray)
         {
-            var n = unsortedArray.Length;
+            var n = dataGridView1.RowCount-1;
             for (int i = 0; i < n; i++)
             { 
                 for (int j = 0; j < n - i - 1; j++)
@@ -234,43 +299,46 @@ namespace Algorithm
                     Thread.Sleep(5);
                     if (unsortedArray[j] > unsortedArray[j + 1])
                     {
-                        CreateGraph3(zedGraphControl1);
+                        BubbleGraph(zedGraphControl1);
                         Swap(unsortedArray, j, j + 1);
                     }
                 }
             }
-             CreateGraph3(zedGraphControl1);
+            BubbleGraph(zedGraphControl1);
         }
-        private void ShakerSorting(double[] array)
+
+        private void ShakerSorting(double[] array1)
         {
-            var n = unsortedArray.Length;
+            var n = unsortedArray1.Length;
             int left = 0,
                 right = n - 1;
 
             while (left < right)
             {
-
                 for (int i = left; i < right; i++)
                 {
-                    if (array[i] > array[i + 1])
+                    if (array1[i] > array1[i + 1])
                     {
-                        Swap(array, i, i + 1);
-                        CreateGraph3(zedGraphControl1);
+                        Swap(array1, i, i + 1);
+                        ShakerGraph(zedGraphControl2);
+                        Thread.Sleep(5);
                     }
                 }
                 right--;
 
                 for (int i = right; i > left; i--)
                 {
-                    if (array[i - 1] > array[i])
+                    if (array1[i - 1] > array1[i])
                     {
-                        Swap(array, i - 1, i);
-                        CreateGraph3(zedGraphControl1);
+                        Swap(array1, i - 1, i);
+                        ShakerGraph(zedGraphControl2);
+
                     }
                 }
                 left++;
             }
-            CreateGraph3(zedGraphControl1);
+            ShakerGraph(zedGraphControl2);
+
         }
 
         private void Form1_Load(object sender, EventArgs e)

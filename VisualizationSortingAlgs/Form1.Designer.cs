@@ -51,6 +51,12 @@ namespace Algorithm
             this.button2 = new System.Windows.Forms.Button();
             this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
             this.shakercheck = new System.Windows.Forms.CheckBox();
+            this.intergraph = new ZedGraph.ZedGraphControl();
+            this.Intersectioncheck = new System.Windows.Forms.CheckBox();
+            this.quickgraph = new ZedGraph.ZedGraphControl();
+            this.quickcheck = new System.Windows.Forms.CheckBox();
+            this.bogograph = new ZedGraph.ZedGraphControl();
+            this.bogocheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -61,9 +67,9 @@ namespace Algorithm
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Mass});
-            this.dataGridView1.Location = new System.Drawing.Point(0, 27);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 89);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(243, 516);
+            this.dataGridView1.Size = new System.Drawing.Size(243, 524);
             this.dataGridView1.TabIndex = 0;
             // 
             // Mass
@@ -75,7 +81,7 @@ namespace Algorithm
             // 
             // genBtn
             // 
-            this.genBtn.Location = new System.Drawing.Point(69, 575);
+            this.genBtn.Location = new System.Drawing.Point(77, 645);
             this.genBtn.Name = "genBtn";
             this.genBtn.Size = new System.Drawing.Size(106, 41);
             this.genBtn.TabIndex = 1;
@@ -85,7 +91,7 @@ namespace Algorithm
             // 
             // arraynum
             // 
-            this.arraynum.Location = new System.Drawing.Point(69, 549);
+            this.arraynum.Location = new System.Drawing.Point(77, 619);
             this.arraynum.Name = "arraynum";
             this.arraynum.Size = new System.Drawing.Size(106, 20);
             this.arraynum.TabIndex = 2;
@@ -98,7 +104,7 @@ namespace Algorithm
             this.googleToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1329, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1506, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -130,7 +136,7 @@ namespace Algorithm
             // bubblecheck
             // 
             this.bubblecheck.AutoSize = true;
-            this.bubblecheck.Location = new System.Drawing.Point(400, 66);
+            this.bubblecheck.Location = new System.Drawing.Point(417, 66);
             this.bubblecheck.Name = "bubblecheck";
             this.bubblecheck.Size = new System.Drawing.Size(78, 17);
             this.bubblecheck.TabIndex = 5;
@@ -208,9 +214,9 @@ namespace Algorithm
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(405, 606);
+            this.button1.Location = new System.Drawing.Point(1190, 516);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(94, 53);
             this.button1.TabIndex = 13;
             this.button1.Text = "Start";
             this.button1.UseVisualStyleBackColor = true;
@@ -218,16 +224,16 @@ namespace Algorithm
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(486, 606);
+            this.button2.Location = new System.Drawing.Point(1311, 516);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(92, 53);
             this.button2.TabIndex = 14;
             this.button2.Text = "Reset";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // zedGraphControl2
             // 
-            this.zedGraphControl2.Location = new System.Drawing.Point(753, 89);
+            this.zedGraphControl2.Location = new System.Drawing.Point(1099, 89);
             this.zedGraphControl2.Name = "zedGraphControl2";
             this.zedGraphControl2.ScrollGrace = 0D;
             this.zedGraphControl2.ScrollMaxX = 0D;
@@ -243,18 +249,99 @@ namespace Algorithm
             // shakercheck
             // 
             this.shakercheck.AutoSize = true;
-            this.shakercheck.Location = new System.Drawing.Point(915, 66);
+            this.shakercheck.Location = new System.Drawing.Point(1255, 66);
             this.shakercheck.Name = "shakercheck";
             this.shakercheck.Size = new System.Drawing.Size(82, 17);
             this.shakercheck.TabIndex = 16;
             this.shakercheck.Text = "Shaker Sort";
             this.shakercheck.UseVisualStyleBackColor = true;
             // 
+            // intergraph
+            // 
+            this.intergraph.Location = new System.Drawing.Point(275, 401);
+            this.intergraph.Name = "intergraph";
+            this.intergraph.ScrollGrace = 0D;
+            this.intergraph.ScrollMaxX = 0D;
+            this.intergraph.ScrollMaxY = 0D;
+            this.intergraph.ScrollMaxY2 = 0D;
+            this.intergraph.ScrollMinX = 0D;
+            this.intergraph.ScrollMinY = 0D;
+            this.intergraph.ScrollMinY2 = 0D;
+            this.intergraph.Size = new System.Drawing.Size(369, 285);
+            this.intergraph.TabIndex = 18;
+            this.intergraph.UseExtendedPrintDialog = true;
+            // 
+            // Intersectioncheck
+            // 
+            this.Intersectioncheck.AutoSize = true;
+            this.Intersectioncheck.Location = new System.Drawing.Point(417, 378);
+            this.Intersectioncheck.Name = "Intersectioncheck";
+            this.Intersectioncheck.Size = new System.Drawing.Size(88, 17);
+            this.Intersectioncheck.TabIndex = 17;
+            this.Intersectioncheck.Text = "InsectionSort";
+            this.Intersectioncheck.UseVisualStyleBackColor = true;
+            // 
+            // quickgraph
+            // 
+            this.quickgraph.Location = new System.Drawing.Point(684, 401);
+            this.quickgraph.Name = "quickgraph";
+            this.quickgraph.ScrollGrace = 0D;
+            this.quickgraph.ScrollMaxX = 0D;
+            this.quickgraph.ScrollMaxY = 0D;
+            this.quickgraph.ScrollMaxY2 = 0D;
+            this.quickgraph.ScrollMinX = 0D;
+            this.quickgraph.ScrollMinY = 0D;
+            this.quickgraph.ScrollMinY2 = 0D;
+            this.quickgraph.Size = new System.Drawing.Size(369, 285);
+            this.quickgraph.TabIndex = 20;
+            this.quickgraph.UseExtendedPrintDialog = true;
+            // 
+            // quickcheck
+            // 
+            this.quickcheck.AutoSize = true;
+            this.quickcheck.Location = new System.Drawing.Point(826, 378);
+            this.quickcheck.Name = "quickcheck";
+            this.quickcheck.Size = new System.Drawing.Size(73, 17);
+            this.quickcheck.TabIndex = 19;
+            this.quickcheck.Text = "QuickSort";
+            this.quickcheck.UseVisualStyleBackColor = true;
+            // 
+            // bogograph
+            // 
+            this.bogograph.Location = new System.Drawing.Point(684, 89);
+            this.bogograph.Name = "bogograph";
+            this.bogograph.ScrollGrace = 0D;
+            this.bogograph.ScrollMaxX = 0D;
+            this.bogograph.ScrollMaxY = 0D;
+            this.bogograph.ScrollMaxY2 = 0D;
+            this.bogograph.ScrollMinX = 0D;
+            this.bogograph.ScrollMinY = 0D;
+            this.bogograph.ScrollMinY2 = 0D;
+            this.bogograph.Size = new System.Drawing.Size(369, 285);
+            this.bogograph.TabIndex = 22;
+            this.bogograph.UseExtendedPrintDialog = true;
+            // 
+            // bogocheck
+            // 
+            this.bogocheck.AutoSize = true;
+            this.bogocheck.Location = new System.Drawing.Point(836, 66);
+            this.bogocheck.Name = "bogocheck";
+            this.bogocheck.Size = new System.Drawing.Size(57, 17);
+            this.bogocheck.TabIndex = 21;
+            this.bogocheck.Text = "BOGO";
+            this.bogocheck.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1329, 739);
+            this.ClientSize = new System.Drawing.Size(1506, 739);
+            this.Controls.Add(this.bogograph);
+            this.Controls.Add(this.bogocheck);
+            this.Controls.Add(this.quickgraph);
+            this.Controls.Add(this.quickcheck);
+            this.Controls.Add(this.intergraph);
+            this.Controls.Add(this.Intersectioncheck);
             this.Controls.Add(this.shakercheck);
             this.Controls.Add(this.zedGraphControl2);
             this.Controls.Add(this.button2);
@@ -306,6 +393,12 @@ namespace Algorithm
         private System.Windows.Forms.Button button2;
         private ZedGraph.ZedGraphControl zedGraphControl2;
         private System.Windows.Forms.CheckBox shakercheck;
+        private ZedGraph.ZedGraphControl intergraph;
+        private System.Windows.Forms.CheckBox Intersectioncheck;
+        private ZedGraph.ZedGraphControl quickgraph;
+        private System.Windows.Forms.CheckBox quickcheck;
+        private ZedGraph.ZedGraphControl bogograph;
+        private System.Windows.Forms.CheckBox bogocheck;
     }
 }
 
