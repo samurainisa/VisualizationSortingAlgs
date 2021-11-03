@@ -18,8 +18,12 @@ namespace Algorithm
 {
     public partial class Form1 : Form
     {
+        private Random rand = new Random();
         double[] unsortedArray;
         double[] unsortedArray1;
+        double[] unsortedArray2;
+        double[] unsortedArray3;
+        double[] unsortedArray4;
 
 
 
@@ -161,18 +165,24 @@ namespace Algorithm
 
         #endregion
 
-
+        #region Заполнение
         //From datagridview1 to mass
         private void DtgtoList()
         {
             dataGridView1.AllowUserToAddRows = false;
             unsortedArray = new double[dataGridView1.RowCount];
             unsortedArray1 = new double[dataGridView1.RowCount];
+            unsortedArray2 = new double[dataGridView1.RowCount];
+            unsortedArray3 = new double[dataGridView1.RowCount];
+            unsortedArray4 = new double[dataGridView1.RowCount];
 
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
                 unsortedArray[i] = double.Parse(dataGridView1[0, i].Value.ToString());
                 unsortedArray1[i] = double.Parse(dataGridView1[0, i].Value.ToString());
+                unsortedArray2[i] = double.Parse(dataGridView1[0, i].Value.ToString());
+                unsortedArray3[i] = double.Parse(dataGridView1[0, i].Value.ToString());
+                unsortedArray4[i] = double.Parse(dataGridView1[0, i].Value.ToString());
             }
 
             dataGridView1.AllowUserToAddRows = true;
@@ -190,11 +200,20 @@ namespace Algorithm
         {
             BubbleGraph(zedGraphControl1);
             ShakerGraph(zedGraphControl2);
+            BogoGraph(bogograph);
+            QuickGraph(quickgraph1);
+            InterGraph(intergraph);
         }
+        #endregion
 
-
+        #region Треды
         private void button1_Click(object sender, EventArgs e)
         {
+            if (quickcheck.Checked)
+            {
+                Thread quick = new Thread(new ThreadStart(QuickS));
+                quick.Start();
+            }
             if (bubblecheck.Checked)
             {
                 /*                Invoke((MethodInvoker)delegate
@@ -214,8 +233,25 @@ namespace Algorithm
                 Thread shaker = new Thread(new ThreadStart(ShakerS));
                 shaker.Start();
             }
-        }
+            if (bogocheck.Checked)
+            {
+                Thread bogo = new Thread(new ThreadStart(BogoS));
+                bogo.Start();
+            }
+            if (Intersectioncheck.Checked)
+            {
+                Thread inter = new Thread(new ThreadStart(InterS));
+                inter.Start();
+            }
 
+        }
+        #endregion
+
+        #region Таски сортировок
+        private async void QuickS()
+        {
+            await Task.Run(() => QuickSort(unsortedArray3, 0, unsortedArray3.Length-1));
+        }
         private async void BubbleS()
         {
             await Task.Run(() => BubbleSorting(unsortedArray));
@@ -226,61 +262,104 @@ namespace Algorithm
             await Task.Run(() => ShakerSorting(unsortedArray1));
         }
 
+        private async void BogoS()
+        {
+            await Task.Run(() => BogoSorting(unsortedArray2));
+        }
+
+        private async void InterS()
+        {
+            await Task.Run(() => InterSorting(unsortedArray4));
+        }
+        #endregion
+
+        #region Визуализация
+
         private void BubbleGraph(ZedGraphControl zedGraphControl1)
         {
-            // get a reference to the GraphPane
             GraphPane pane = zedGraphControl1.GraphPane;
-
-            // Set the Titles
-            pane.Title.Text = "Sorting";
-            //Clear current values
+            pane.Title.Text = "BubbleSort";
             pane.CurveList.Clear();
             var n = dataGridView1.RowCount-1;
-            // histogram high
             double[] values = new double[n];
-
-            //fill values
             for (int i = 0; i < n; i++)
             {
-                values[i] = unsortedArray[i]; //A1 is an array that is currently sort
+                values[i] = unsortedArray[i];
             }
-
-            //create histogram
             BarItem curve = pane.AddBar("Elements", null, values, Color.Blue);
-
             pane.BarSettings.MinClusterGap = 0.0F; //set columns references
-
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
 
         private void ShakerGraph(ZedGraphControl zedGraphControl2)
         {
-            // get a reference to the GraphPane
             GraphPane pane = zedGraphControl2.GraphPane;
-
-            // Set the Titles
-            pane.Title.Text = "Sorting";
-            //Clear current values
+            pane.Title.Text = "ShakerSort";
             pane.CurveList.Clear();
-            var n = unsortedArray1.Length;
-            // histogram high
+            var n = dataGridView1.RowCount - 1;
             double[] values = new double[n];
-
-            //fill values
             for (int i = 0; i < n; i++)
             {
-                values[i] = unsortedArray1[i]; //A1 is an array that is currently sort
+                values[i] = unsortedArray1[i];
             }
-
-            //create histogram
             BarItem curve = pane.AddBar("Elements", null, values, Color.Blue);
-
-            pane.BarSettings.MinClusterGap = 0.0F; //set columns references
-
+            pane.BarSettings.MinClusterGap = 0.0F;
             zedGraphControl2.AxisChange();
             zedGraphControl2.Invalidate();
         }
+        private void BogoGraph(ZedGraphControl bogograph)
+        {
+            GraphPane pane = bogograph.GraphPane;
+            pane.Title.Text = "BubbleSort";
+            pane.CurveList.Clear();
+            var n = dataGridView1.RowCount - 1;
+            double[] values = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                values[i] = unsortedArray2[i];
+            }
+            BarItem curve = pane.AddBar("Elements", null, values, Color.Blue);
+            pane.BarSettings.MinClusterGap = 0.0F;
+            bogograph.AxisChange();
+            bogograph.Invalidate();
+        }
+
+        private void QuickGraph(ZedGraphControl quickgraph1)
+        {
+            GraphPane pane = quickgraph1.GraphPane;
+            pane.Title.Text = "QuickSort";
+            pane.CurveList.Clear();
+            var n = dataGridView1.RowCount - 1;
+            double[] values = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                values[i] = unsortedArray3[i];
+            }
+            BarItem curve = pane.AddBar("Elements", null, values, Color.Blue);
+            pane.BarSettings.MinClusterGap = 0.0F;
+            quickgraph1.AxisChange();
+            quickgraph1.Invalidate();
+        }
+        private void InterGraph(ZedGraphControl intergraph)
+        {
+            GraphPane pane = intergraph.GraphPane;
+            pane.Title.Text = "IntersionSort";
+            pane.CurveList.Clear();
+            var n = dataGridView1.RowCount - 1;
+            double[] values = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                values[i] = unsortedArray4[i];
+            }
+            BarItem curve = pane.AddBar("Elements", null, values, Color.Blue);
+            pane.BarSettings.MinClusterGap = 0.0F;
+            intergraph.AxisChange();
+            intergraph.Invalidate();
+        }
+#endregion
+
+        #region Сортировочки
 
         static void Swap(double[] array, int i, int j)
         {
@@ -288,10 +367,10 @@ namespace Algorithm
             array[i] = array[j];
             array[j] = glass;
         }
-
+        //пузырьковая
         private void BubbleSorting(double[] unsortedArray)
         {
-            var n = dataGridView1.RowCount-1;
+            var n = dataGridView1.RowCount - 1;
             for (int i = 0; i < n; i++)
             { 
                 for (int j = 0; j < n - i - 1; j++)
@@ -307,9 +386,10 @@ namespace Algorithm
             BubbleGraph(zedGraphControl1);
         }
 
+        //шейкерная сортировка
         private void ShakerSorting(double[] array1)
         {
-            var n = unsortedArray1.Length;
+            var n = dataGridView1.RowCount - 1;
             int left = 0,
                 right = n - 1;
 
@@ -332,18 +412,124 @@ namespace Algorithm
                     {
                         Swap(array1, i - 1, i);
                         ShakerGraph(zedGraphControl2);
-
                     }
                 }
                 left++;
             }
             ShakerGraph(zedGraphControl2);
-
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        //самая тупая сортировка
+        double[] BogoSorting(double[] array)
         {
-
+            while (!IsSorted(array))
+            {
+                Thread.Sleep(5);
+                array = RandomPermutation(array);
+                BogoGraph(bogograph);
+            }
+            return array;
         }
+
+        static bool IsSorted(double[] array)
+        {
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                Thread.Sleep(5);
+                if (array[i] > array[i + 1])
+                    return false;
+            }
+            return true;
+        }
+
+        static double[] RandomPermutation(double[] array)
+        {
+            Random random = new Random();
+            var n = array.Length;
+            while (n > 1)
+            {
+
+                n--;
+                var i = random.Next(n + 1);
+                var temp = array[i];
+                array[i] = array[n];
+                array[n] = temp;
+            }
+            return array;
+        }
+
+        //quick sort
+        private void QuickSort(double[] arr, int leftStart, int rightEnd)
+        {
+            QuickGraph(quickgraph1);
+            Thread.Sleep(5);
+            if (leftStart >= rightEnd)
+            {
+                return;
+            }
+
+            int pivotLocation = ChosePivotLocation(arr, leftStart, rightEnd);
+
+            pivotLocation = OrderItemsAroundPivot(arr, leftStart, pivotLocation, rightEnd);
+
+            QuickSort(arr, leftStart, pivotLocation - 1);
+
+            QuickSort(arr, pivotLocation + 1, rightEnd);
+        }
+        private  int OrderItemsAroundPivot(double[] arr, int leftStart, int pivotLocation, int rightEnd)
+        {
+            var pivot = arr[pivotLocation];
+            Swap(arr, pivotLocation, rightEnd);
+            var leftIndex = leftStart;
+            var rightIndex = rightEnd - 1;
+            while (leftIndex <= rightIndex)
+            {
+                if (arr[leftIndex] <= pivot)
+                {
+                    leftIndex++;
+                    continue;
+                }
+
+                if (arr[rightIndex] >= pivot)
+                {
+                    rightIndex--;
+                    continue;
+                }
+
+                Swap(arr, leftIndex, rightIndex);
+            }
+
+            Swap(arr, rightEnd, leftIndex);
+            return leftIndex;
+        }
+
+        private  int ChosePivotLocation(double[] arr, int leftStart, int rightEnd)
+        {
+            var middle = leftStart + (rightEnd - leftStart) / 2;
+            return middle;
+        }
+
+        //intersion sort 
+
+        void InterSorting(double[] arr)
+        {
+            int n = arr.Length;
+            for (int i = 1; i < n; ++i)
+            {
+                int key = (int)arr[i];
+                int j = i - 1;
+                InterGraph(intergraph);
+
+                while (j >= 0 && arr[j] > key)
+                {
+                    arr[j + 1] = arr[j];
+                    j = j - 1;
+                    InterGraph(intergraph);
+                }
+                arr[j + 1] = key;
+                InterGraph(intergraph);
+            }
+        }
+        #endregion
     }
 }

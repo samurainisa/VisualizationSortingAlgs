@@ -53,7 +53,7 @@ namespace Algorithm
             this.shakercheck = new System.Windows.Forms.CheckBox();
             this.intergraph = new ZedGraph.ZedGraphControl();
             this.Intersectioncheck = new System.Windows.Forms.CheckBox();
-            this.quickgraph = new ZedGraph.ZedGraphControl();
+            this.quickgraph1 = new ZedGraph.ZedGraphControl();
             this.quickcheck = new System.Windows.Forms.CheckBox();
             this.bogograph = new ZedGraph.ZedGraphControl();
             this.bogocheck = new System.Windows.Forms.CheckBox();
@@ -281,20 +281,20 @@ namespace Algorithm
             this.Intersectioncheck.Text = "InsectionSort";
             this.Intersectioncheck.UseVisualStyleBackColor = true;
             // 
-            // quickgraph
+            // quickgraph1
             // 
-            this.quickgraph.Location = new System.Drawing.Point(684, 401);
-            this.quickgraph.Name = "quickgraph";
-            this.quickgraph.ScrollGrace = 0D;
-            this.quickgraph.ScrollMaxX = 0D;
-            this.quickgraph.ScrollMaxY = 0D;
-            this.quickgraph.ScrollMaxY2 = 0D;
-            this.quickgraph.ScrollMinX = 0D;
-            this.quickgraph.ScrollMinY = 0D;
-            this.quickgraph.ScrollMinY2 = 0D;
-            this.quickgraph.Size = new System.Drawing.Size(369, 285);
-            this.quickgraph.TabIndex = 20;
-            this.quickgraph.UseExtendedPrintDialog = true;
+            this.quickgraph1.Location = new System.Drawing.Point(684, 401);
+            this.quickgraph1.Name = "quickgraph1";
+            this.quickgraph1.ScrollGrace = 0D;
+            this.quickgraph1.ScrollMaxX = 0D;
+            this.quickgraph1.ScrollMaxY = 0D;
+            this.quickgraph1.ScrollMaxY2 = 0D;
+            this.quickgraph1.ScrollMinX = 0D;
+            this.quickgraph1.ScrollMinY = 0D;
+            this.quickgraph1.ScrollMinY2 = 0D;
+            this.quickgraph1.Size = new System.Drawing.Size(369, 285);
+            this.quickgraph1.TabIndex = 20;
+            this.quickgraph1.UseExtendedPrintDialog = true;
             // 
             // quickcheck
             // 
@@ -336,9 +336,9 @@ namespace Algorithm
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1506, 739);
+            this.Controls.Add(this.quickgraph1);
             this.Controls.Add(this.bogograph);
             this.Controls.Add(this.bogocheck);
-            this.Controls.Add(this.quickgraph);
             this.Controls.Add(this.quickcheck);
             this.Controls.Add(this.intergraph);
             this.Controls.Add(this.Intersectioncheck);
@@ -361,7 +361,6 @@ namespace Algorithm
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -395,7 +394,7 @@ namespace Algorithm
         private System.Windows.Forms.CheckBox shakercheck;
         private ZedGraph.ZedGraphControl intergraph;
         private System.Windows.Forms.CheckBox Intersectioncheck;
-        private ZedGraph.ZedGraphControl quickgraph;
+        private ZedGraph.ZedGraphControl quickgraph1;
         private System.Windows.Forms.CheckBox quickcheck;
         private ZedGraph.ZedGraphControl bogograph;
         private System.Windows.Forms.CheckBox bogocheck;
