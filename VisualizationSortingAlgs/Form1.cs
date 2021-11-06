@@ -157,7 +157,7 @@ namespace Algorithm
                 for (int row = 0; row < Yn; row++)
                 {
                     dataGridView1.Rows.Add();
-                    dataGridView1[0, row].Value = rnd.Next(100);
+                    dataGridView1[0, row].Value = rnd.Next(-100,100);
                 }
                 dataGridView1.AllowUserToAddRows = true;
         }
