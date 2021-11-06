@@ -166,6 +166,7 @@ namespace Algorithm
         #endregion
 
         #region Заполнение
+
         //From datagridview1 to mass
         private void DtgtoList()
         {
@@ -184,7 +185,6 @@ namespace Algorithm
                 unsortedArray3[i] = double.Parse(dataGridView1[0, i].Value.ToString());
                 unsortedArray4[i] = double.Parse(dataGridView1[0, i].Value.ToString());
             }
-
             dataGridView1.AllowUserToAddRows = true;
         }
 
@@ -216,20 +216,12 @@ namespace Algorithm
             }
             if (bubblecheck.Checked)
             {
-                /*                Invoke((MethodInvoker)delegate
-                                {
-                                    Task.Run(() => BubbleSorting(unsortedArray));
-                                });*/
                 Thread bubble = new Thread(new ThreadStart(BubbleS));
                 bubble.Start();
             }
 
             if (shakercheck.Checked)
             {
-                /*                Invoke((MethodInvoker)delegate
-                                {
-                                    Task.Run(() => ShakerSorting(unsortedArray1));
-                                });*/
                 Thread shaker = new Thread(new ThreadStart(ShakerS));
                 shaker.Start();
             }
@@ -424,10 +416,11 @@ namespace Algorithm
         {
             while (!IsSorted(array))
             {
-                Thread.Sleep(5);
+                Thread.Sleep(50);
                 array = RandomPermutation(array);
                 BogoGraph(bogograph);
             }
+            BogoGraph(bogograph);
             return array;
         }
 
@@ -448,7 +441,6 @@ namespace Algorithm
             var n = array.Length;
             while (n > 1)
             {
-
                 n--;
                 var i = random.Next(n + 1);
                 var temp = array[i];
@@ -475,7 +467,9 @@ namespace Algorithm
             QuickSort(arr, leftStart, pivotLocation - 1);
 
             QuickSort(arr, pivotLocation + 1, rightEnd);
+            QuickGraph(quickgraph1);
         }
+
         private  int OrderItemsAroundPivot(double[] arr, int leftStart, int pivotLocation, int rightEnd)
         {
             var pivot = arr[pivotLocation];
@@ -495,10 +489,8 @@ namespace Algorithm
                     rightIndex--;
                     continue;
                 }
-
                 Swap(arr, leftIndex, rightIndex);
             }
-
             Swap(arr, rightEnd, leftIndex);
             return leftIndex;
         }
@@ -529,6 +521,7 @@ namespace Algorithm
                 arr[j + 1] = key;
                 InterGraph(intergraph);
             }
+            InterGraph(intergraph);
         }
         #endregion
     }
