@@ -46,16 +46,15 @@ namespace Algorithm
             this.SortCounterLabel = new System.Windows.Forms.Label();
             this.TimeElapsedInt = new System.Windows.Forms.Label();
             this.ComparisonInt = new System.Windows.Forms.Label();
-            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
+            this.ShakerGraph1 = new ZedGraph.ZedGraphControl();
             this.shakercheck = new System.Windows.Forms.CheckBox();
-            this.intergraph = new ZedGraph.ZedGraphControl();
+            this.IntersectionGraph1 = new ZedGraph.ZedGraphControl();
             this.Intersectioncheck = new System.Windows.Forms.CheckBox();
-            this.quickgraph1 = new ZedGraph.ZedGraphControl();
+            this.QuickGraph1 = new ZedGraph.ZedGraphControl();
             this.quickcheck = new System.Windows.Forms.CheckBox();
-            this.bogograph = new ZedGraph.ZedGraphControl();
+            this.BogoGraph1 = new ZedGraph.ZedGraphControl();
             this.bogocheck = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -81,6 +80,9 @@ namespace Algorithm
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
+            this.BubbleGraph1 = new ZedGraph.ZedGraphControl();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -106,10 +108,10 @@ namespace Algorithm
             // 
             // genBtn
             // 
-            this.genBtn.Location = new System.Drawing.Point(77, 646);
+            this.genBtn.Location = new System.Drawing.Point(58, 677);
             this.genBtn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.genBtn.Name = "genBtn";
-            this.genBtn.Size = new System.Drawing.Size(107, 41);
+            this.genBtn.Size = new System.Drawing.Size(152, 41);
             this.genBtn.TabIndex = 1;
             this.genBtn.Text = "Сгенерировать массив";
             this.genBtn.UseVisualStyleBackColor = true;
@@ -117,7 +119,7 @@ namespace Algorithm
             // 
             // arraynum
             // 
-            this.arraynum.Location = new System.Drawing.Point(77, 620);
+            this.arraynum.Location = new System.Drawing.Point(78, 652);
             this.arraynum.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.arraynum.Name = "arraynum";
             this.arraynum.Size = new System.Drawing.Size(106, 19);
@@ -174,7 +176,7 @@ namespace Algorithm
             // SortLabel
             // 
             this.SortLabel.AutoSize = true;
-            this.SortLabel.Location = new System.Drawing.Point(745, 36);
+            this.SortLabel.Location = new System.Drawing.Point(739, 48);
             this.SortLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SortLabel.Name = "SortLabel";
             this.SortLabel.Size = new System.Drawing.Size(30, 15);
@@ -184,7 +186,7 @@ namespace Algorithm
             // TimeElapsedLabel
             // 
             this.TimeElapsedLabel.AutoSize = true;
-            this.TimeElapsedLabel.Location = new System.Drawing.Point(832, 36);
+            this.TimeElapsedLabel.Location = new System.Drawing.Point(826, 48);
             this.TimeElapsedLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TimeElapsedLabel.Name = "TimeElapsedLabel";
             this.TimeElapsedLabel.Size = new System.Drawing.Size(31, 15);
@@ -194,7 +196,7 @@ namespace Algorithm
             // ComparisonLabel
             // 
             this.ComparisonLabel.AutoSize = true;
-            this.ComparisonLabel.Location = new System.Drawing.Point(910, 36);
+            this.ComparisonLabel.Location = new System.Drawing.Point(904, 48);
             this.ComparisonLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ComparisonLabel.Name = "ComparisonLabel";
             this.ComparisonLabel.Size = new System.Drawing.Size(72, 15);
@@ -204,7 +206,7 @@ namespace Algorithm
             // SortCounterLabel
             // 
             this.SortCounterLabel.AutoSize = true;
-            this.SortCounterLabel.Location = new System.Drawing.Point(784, 36);
+            this.SortCounterLabel.Location = new System.Drawing.Point(778, 48);
             this.SortCounterLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SortCounterLabel.Name = "SortCounterLabel";
             this.SortCounterLabel.Size = new System.Drawing.Size(13, 15);
@@ -214,7 +216,7 @@ namespace Algorithm
             // TimeElapsedInt
             // 
             this.TimeElapsedInt.AutoSize = true;
-            this.TimeElapsedInt.Location = new System.Drawing.Point(864, 36);
+            this.TimeElapsedInt.Location = new System.Drawing.Point(858, 48);
             this.TimeElapsedInt.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TimeElapsedInt.Name = "TimeElapsedInt";
             this.TimeElapsedInt.Size = new System.Drawing.Size(13, 15);
@@ -224,32 +226,16 @@ namespace Algorithm
             // ComparisonInt
             // 
             this.ComparisonInt.AutoSize = true;
-            this.ComparisonInt.Location = new System.Drawing.Point(982, 36);
+            this.ComparisonInt.Location = new System.Drawing.Point(976, 48);
             this.ComparisonInt.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ComparisonInt.Name = "ComparisonInt";
             this.ComparisonInt.Size = new System.Drawing.Size(13, 15);
             this.ComparisonInt.TabIndex = 11;
             this.ComparisonInt.Text = "0";
             // 
-            // zedGraphControl1
-            // 
-            this.zedGraphControl1.Location = new System.Drawing.Point(275, 89);
-            this.zedGraphControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.zedGraphControl1.Name = "zedGraphControl1";
-            this.zedGraphControl1.ScrollGrace = 0D;
-            this.zedGraphControl1.ScrollMaxX = 0D;
-            this.zedGraphControl1.ScrollMaxY = 0D;
-            this.zedGraphControl1.ScrollMaxY2 = 0D;
-            this.zedGraphControl1.ScrollMinX = 0D;
-            this.zedGraphControl1.ScrollMinY = 0D;
-            this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(368, 285);
-            this.zedGraphControl1.TabIndex = 12;
-            this.zedGraphControl1.UseExtendedPrintDialog = true;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1174, 525);
+            this.button1.Location = new System.Drawing.Point(1182, 538);
             this.button1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 53);
@@ -260,29 +246,35 @@ namespace Algorithm
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1295, 525);
+            this.button2.Location = new System.Drawing.Point(1293, 538);
             this.button2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(91, 53);
             this.button2.TabIndex = 14;
             this.button2.Text = "Reset";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // zedGraphControl2
+            // ShakerGraph1
             // 
-            this.zedGraphControl2.Location = new System.Drawing.Point(1094, 89);
-            this.zedGraphControl2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.zedGraphControl2.Name = "zedGraphControl2";
-            this.zedGraphControl2.ScrollGrace = 0D;
-            this.zedGraphControl2.ScrollMaxX = 0D;
-            this.zedGraphControl2.ScrollMaxY = 0D;
-            this.zedGraphControl2.ScrollMaxY2 = 0D;
-            this.zedGraphControl2.ScrollMinX = 0D;
-            this.zedGraphControl2.ScrollMinY = 0D;
-            this.zedGraphControl2.ScrollMinY2 = 0D;
-            this.zedGraphControl2.Size = new System.Drawing.Size(377, 285);
-            this.zedGraphControl2.TabIndex = 15;
-            this.zedGraphControl2.UseExtendedPrintDialog = true;
+            this.ShakerGraph1.BackColor = System.Drawing.SystemColors.Control;
+            this.ShakerGraph1.IsEnableHPan = false;
+            this.ShakerGraph1.IsEnableHZoom = false;
+            this.ShakerGraph1.IsEnableVZoom = false;
+            this.ShakerGraph1.IsEnableWheelZoom = false;
+            this.ShakerGraph1.Location = new System.Drawing.Point(1094, 89);
+            this.ShakerGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ShakerGraph1.Name = "ShakerGraph1";
+            this.ShakerGraph1.ScrollGrace = 0D;
+            this.ShakerGraph1.ScrollMaxX = 0D;
+            this.ShakerGraph1.ScrollMaxY = 0D;
+            this.ShakerGraph1.ScrollMaxY2 = 0D;
+            this.ShakerGraph1.ScrollMinX = 0D;
+            this.ShakerGraph1.ScrollMinY = 0D;
+            this.ShakerGraph1.ScrollMinY2 = 0D;
+            this.ShakerGraph1.Size = new System.Drawing.Size(377, 285);
+            this.ShakerGraph1.TabIndex = 15;
+            this.ShakerGraph1.UseExtendedPrintDialog = true;
             // 
             // shakercheck
             // 
@@ -295,21 +287,25 @@ namespace Algorithm
             this.shakercheck.Text = "Shaker Sort";
             this.shakercheck.UseVisualStyleBackColor = true;
             // 
-            // intergraph
+            // IntersectionGraph1
             // 
-            this.intergraph.Location = new System.Drawing.Point(275, 433);
-            this.intergraph.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.intergraph.Name = "intergraph";
-            this.intergraph.ScrollGrace = 0D;
-            this.intergraph.ScrollMaxX = 0D;
-            this.intergraph.ScrollMaxY = 0D;
-            this.intergraph.ScrollMaxY2 = 0D;
-            this.intergraph.ScrollMinX = 0D;
-            this.intergraph.ScrollMinY = 0D;
-            this.intergraph.ScrollMinY2 = 0D;
-            this.intergraph.Size = new System.Drawing.Size(368, 285);
-            this.intergraph.TabIndex = 18;
-            this.intergraph.UseExtendedPrintDialog = true;
+            this.IntersectionGraph1.IsEnableHPan = false;
+            this.IntersectionGraph1.IsEnableHZoom = false;
+            this.IntersectionGraph1.IsEnableVZoom = false;
+            this.IntersectionGraph1.IsEnableWheelZoom = false;
+            this.IntersectionGraph1.Location = new System.Drawing.Point(275, 433);
+            this.IntersectionGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.IntersectionGraph1.Name = "IntersectionGraph1";
+            this.IntersectionGraph1.ScrollGrace = 0D;
+            this.IntersectionGraph1.ScrollMaxX = 0D;
+            this.IntersectionGraph1.ScrollMaxY = 0D;
+            this.IntersectionGraph1.ScrollMaxY2 = 0D;
+            this.IntersectionGraph1.ScrollMinX = 0D;
+            this.IntersectionGraph1.ScrollMinY = 0D;
+            this.IntersectionGraph1.ScrollMinY2 = 0D;
+            this.IntersectionGraph1.Size = new System.Drawing.Size(377, 285);
+            this.IntersectionGraph1.TabIndex = 18;
+            this.IntersectionGraph1.UseExtendedPrintDialog = true;
             // 
             // Intersectioncheck
             // 
@@ -322,21 +318,25 @@ namespace Algorithm
             this.Intersectioncheck.Text = "InsectionSort";
             this.Intersectioncheck.UseVisualStyleBackColor = true;
             // 
-            // quickgraph1
+            // QuickGraph1
             // 
-            this.quickgraph1.Location = new System.Drawing.Point(684, 433);
-            this.quickgraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.quickgraph1.Name = "quickgraph1";
-            this.quickgraph1.ScrollGrace = 0D;
-            this.quickgraph1.ScrollMaxX = 0D;
-            this.quickgraph1.ScrollMaxY = 0D;
-            this.quickgraph1.ScrollMaxY2 = 0D;
-            this.quickgraph1.ScrollMinX = 0D;
-            this.quickgraph1.ScrollMinY = 0D;
-            this.quickgraph1.ScrollMinY2 = 0D;
-            this.quickgraph1.Size = new System.Drawing.Size(368, 285);
-            this.quickgraph1.TabIndex = 20;
-            this.quickgraph1.UseExtendedPrintDialog = true;
+            this.QuickGraph1.IsEnableHPan = false;
+            this.QuickGraph1.IsEnableHZoom = false;
+            this.QuickGraph1.IsEnableVZoom = false;
+            this.QuickGraph1.IsEnableWheelZoom = false;
+            this.QuickGraph1.Location = new System.Drawing.Point(684, 433);
+            this.QuickGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.QuickGraph1.Name = "QuickGraph1";
+            this.QuickGraph1.ScrollGrace = 0D;
+            this.QuickGraph1.ScrollMaxX = 0D;
+            this.QuickGraph1.ScrollMaxY = 0D;
+            this.QuickGraph1.ScrollMaxY2 = 0D;
+            this.QuickGraph1.ScrollMinX = 0D;
+            this.QuickGraph1.ScrollMinY = 0D;
+            this.QuickGraph1.ScrollMinY2 = 0D;
+            this.QuickGraph1.Size = new System.Drawing.Size(378, 285);
+            this.QuickGraph1.TabIndex = 20;
+            this.QuickGraph1.UseExtendedPrintDialog = true;
             // 
             // quickcheck
             // 
@@ -349,21 +349,26 @@ namespace Algorithm
             this.quickcheck.Text = "QuickSort";
             this.quickcheck.UseVisualStyleBackColor = true;
             // 
-            // bogograph
+            // BogoGraph1
             // 
-            this.bogograph.Location = new System.Drawing.Point(684, 89);
-            this.bogograph.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.bogograph.Name = "bogograph";
-            this.bogograph.ScrollGrace = 0D;
-            this.bogograph.ScrollMaxX = 0D;
-            this.bogograph.ScrollMaxY = 0D;
-            this.bogograph.ScrollMaxY2 = 0D;
-            this.bogograph.ScrollMinX = 0D;
-            this.bogograph.ScrollMinY = 0D;
-            this.bogograph.ScrollMinY2 = 0D;
-            this.bogograph.Size = new System.Drawing.Size(368, 285);
-            this.bogograph.TabIndex = 22;
-            this.bogograph.UseExtendedPrintDialog = true;
+            this.BogoGraph1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.BogoGraph1.IsEnableHPan = false;
+            this.BogoGraph1.IsEnableHZoom = false;
+            this.BogoGraph1.IsEnableVZoom = false;
+            this.BogoGraph1.IsEnableWheelZoom = false;
+            this.BogoGraph1.Location = new System.Drawing.Point(684, 89);
+            this.BogoGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.BogoGraph1.Name = "BogoGraph1";
+            this.BogoGraph1.ScrollGrace = 0D;
+            this.BogoGraph1.ScrollMaxX = 0D;
+            this.BogoGraph1.ScrollMaxY = 0D;
+            this.BogoGraph1.ScrollMaxY2 = 0D;
+            this.BogoGraph1.ScrollMinX = 0D;
+            this.BogoGraph1.ScrollMinY = 0D;
+            this.BogoGraph1.ScrollMinY2 = 0D;
+            this.BogoGraph1.Size = new System.Drawing.Size(378, 285);
+            this.BogoGraph1.TabIndex = 22;
+            this.BogoGraph1.UseExtendedPrintDialog = true;
             // 
             // bogocheck
             // 
@@ -379,7 +384,7 @@ namespace Algorithm
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(567, 36);
+            this.label1.Location = new System.Drawing.Point(567, 48);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 15);
@@ -389,7 +394,7 @@ namespace Algorithm
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(445, 36);
+            this.label2.Location = new System.Drawing.Point(445, 48);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(13, 15);
@@ -399,7 +404,7 @@ namespace Algorithm
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(365, 36);
+            this.label3.Location = new System.Drawing.Point(365, 48);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(13, 15);
@@ -409,7 +414,7 @@ namespace Algorithm
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(491, 36);
+            this.label4.Location = new System.Drawing.Point(491, 48);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 15);
@@ -419,7 +424,7 @@ namespace Algorithm
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(413, 36);
+            this.label5.Location = new System.Drawing.Point(413, 48);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 15);
@@ -429,7 +434,7 @@ namespace Algorithm
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(326, 36);
+            this.label6.Location = new System.Drawing.Point(326, 48);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(30, 15);
@@ -439,7 +444,7 @@ namespace Algorithm
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1396, 36);
+            this.label7.Location = new System.Drawing.Point(1395, 48);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(13, 15);
@@ -449,7 +454,7 @@ namespace Algorithm
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1278, 36);
+            this.label8.Location = new System.Drawing.Point(1277, 48);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(13, 15);
@@ -459,7 +464,7 @@ namespace Algorithm
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1198, 36);
+            this.label9.Location = new System.Drawing.Point(1197, 48);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(13, 15);
@@ -469,7 +474,7 @@ namespace Algorithm
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1324, 36);
+            this.label10.Location = new System.Drawing.Point(1323, 48);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(72, 15);
@@ -479,7 +484,7 @@ namespace Algorithm
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1246, 36);
+            this.label11.Location = new System.Drawing.Point(1245, 48);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(31, 15);
@@ -489,7 +494,7 @@ namespace Algorithm
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(1159, 36);
+            this.label12.Location = new System.Drawing.Point(1158, 48);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(30, 15);
@@ -499,7 +504,7 @@ namespace Algorithm
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(976, 386);
+            this.label13.Location = new System.Drawing.Point(976, 392);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(13, 15);
@@ -509,7 +514,7 @@ namespace Algorithm
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(858, 386);
+            this.label14.Location = new System.Drawing.Point(858, 392);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(13, 15);
@@ -519,7 +524,7 @@ namespace Algorithm
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(778, 386);
+            this.label15.Location = new System.Drawing.Point(778, 392);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(13, 15);
@@ -529,7 +534,7 @@ namespace Algorithm
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(904, 386);
+            this.label16.Location = new System.Drawing.Point(904, 392);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(72, 15);
@@ -539,7 +544,7 @@ namespace Algorithm
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(826, 386);
+            this.label17.Location = new System.Drawing.Point(826, 392);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(31, 15);
@@ -549,7 +554,7 @@ namespace Algorithm
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(739, 386);
+            this.label18.Location = new System.Drawing.Point(739, 392);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(30, 15);
@@ -559,7 +564,7 @@ namespace Algorithm
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(563, 386);
+            this.label19.Location = new System.Drawing.Point(563, 392);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(13, 15);
@@ -569,7 +574,7 @@ namespace Algorithm
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(445, 386);
+            this.label20.Location = new System.Drawing.Point(445, 392);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(13, 15);
@@ -579,7 +584,7 @@ namespace Algorithm
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(365, 386);
+            this.label21.Location = new System.Drawing.Point(365, 392);
             this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(13, 15);
@@ -589,7 +594,7 @@ namespace Algorithm
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(491, 386);
+            this.label22.Location = new System.Drawing.Point(491, 392);
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(72, 15);
@@ -599,7 +604,7 @@ namespace Algorithm
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(413, 386);
+            this.label23.Location = new System.Drawing.Point(413, 392);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(31, 15);
@@ -609,18 +614,59 @@ namespace Algorithm
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(326, 386);
+            this.label24.Location = new System.Drawing.Point(326, 392);
             this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(30, 15);
             this.label24.TabIndex = 41;
             this.label24.Text = "Sorts";
             // 
+            // BubbleGraph1
+            // 
+            this.BubbleGraph1.BackColor = System.Drawing.SystemColors.Control;
+            this.BubbleGraph1.IsEnableHPan = false;
+            this.BubbleGraph1.IsEnableHZoom = false;
+            this.BubbleGraph1.IsEnableVZoom = false;
+            this.BubbleGraph1.IsEnableWheelZoom = false;
+            this.BubbleGraph1.Location = new System.Drawing.Point(275, 89);
+            this.BubbleGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.BubbleGraph1.Name = "BubbleGraph1";
+            this.BubbleGraph1.ScrollGrace = 0D;
+            this.BubbleGraph1.ScrollMaxX = 0D;
+            this.BubbleGraph1.ScrollMaxY = 0D;
+            this.BubbleGraph1.ScrollMaxY2 = 0D;
+            this.BubbleGraph1.ScrollMinX = 0D;
+            this.BubbleGraph1.ScrollMinY = 0D;
+            this.BubbleGraph1.ScrollMinY2 = 0D;
+            this.BubbleGraph1.Size = new System.Drawing.Size(377, 285);
+            this.BubbleGraph1.TabIndex = 12;
+            this.BubbleGraph1.UseExtendedPrintDialog = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(78, 49);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(43, 15);
+            this.label25.TabIndex = 47;
+            this.label25.Text = "Sorted:";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(127, 49);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(30, 15);
+            this.label26.TabIndex = 48;
+            this.label26.Text = "false";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1506, 769);
+            this.ClientSize = new System.Drawing.Size(1506, 757);
+            this.Controls.Add(this.label26);
+            this.Controls.Add(this.label25);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label21);
@@ -645,17 +691,17 @@ namespace Algorithm
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.quickgraph1);
-            this.Controls.Add(this.bogograph);
+            this.Controls.Add(this.QuickGraph1);
+            this.Controls.Add(this.BogoGraph1);
             this.Controls.Add(this.bogocheck);
             this.Controls.Add(this.quickcheck);
-            this.Controls.Add(this.intergraph);
+            this.Controls.Add(this.IntersectionGraph1);
             this.Controls.Add(this.Intersectioncheck);
             this.Controls.Add(this.shakercheck);
-            this.Controls.Add(this.zedGraphControl2);
+            this.Controls.Add(this.ShakerGraph1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.zedGraphControl1);
+            this.Controls.Add(this.BubbleGraph1);
             this.Controls.Add(this.ComparisonInt);
             this.Controls.Add(this.TimeElapsedInt);
             this.Controls.Add(this.SortCounterLabel);
@@ -698,16 +744,15 @@ namespace Algorithm
         private System.Windows.Forms.Label SortCounterLabel;
         private System.Windows.Forms.Label TimeElapsedInt;
         private System.Windows.Forms.Label ComparisonInt;
-        private ZedGraph.ZedGraphControl zedGraphControl1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private ZedGraph.ZedGraphControl zedGraphControl2;
+        private ZedGraph.ZedGraphControl ShakerGraph1;
         private System.Windows.Forms.CheckBox shakercheck;
-        private ZedGraph.ZedGraphControl intergraph;
+        private ZedGraph.ZedGraphControl IntersectionGraph1;
         private System.Windows.Forms.CheckBox Intersectioncheck;
-        private ZedGraph.ZedGraphControl quickgraph1;
+        private ZedGraph.ZedGraphControl QuickGraph1;
         private System.Windows.Forms.CheckBox quickcheck;
-        private ZedGraph.ZedGraphControl bogograph;
+        private ZedGraph.ZedGraphControl BogoGraph1;
         private System.Windows.Forms.CheckBox bogocheck;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -733,6 +778,9 @@ namespace Algorithm
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
+        private ZedGraph.ZedGraphControl BubbleGraph1;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
     }
 }
 

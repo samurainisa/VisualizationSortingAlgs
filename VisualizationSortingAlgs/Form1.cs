@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -24,19 +25,45 @@ namespace Algorithm
         double[] unsortedArray2;
         double[] unsortedArray3;
         double[] unsortedArray4;
+        ManualResetEventSlim limiter = new ManualResetEventSlim(true);
 
-
+        private Stopwatch watch = new Stopwatch();
+        private bool startedSort = false;
+        /*        double maximum = Math.Pow(2,60);
+                double minimum = -1/Math.Pow(2, 60);*/
 
 
         public Form1()
         {
             InitializeComponent();
+            zedGraphDesign(BubbleGraph1);
+            zedGraphDesign(ShakerGraph1);
+            zedGraphDesign(QuickGraph1);
+            zedGraphDesign(BogoGraph1);
+            zedGraphDesign(IntersectionGraph1);
         }
 
 
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            GC.Collect();
+            Dispose();
             Close();
+        }
+
+
+        public void zedGraphDesign(ZedGraphControl BubbleGraph1)
+        {
+            GraphPane graphfield = BubbleGraph1.GraphPane;
+            graphfield.Border.Color = Color.Black;
+            graphfield.Chart.Border.Color = Color.Black;
+            graphfield.Fill.Type = FillType.Solid;
+            graphfield.Fill.Color = Color.Black;
+            graphfield.Chart.Fill.Type = FillType.Solid;
+            graphfield.Chart.Fill.Color = Color.Black;
+            graphfield.YAxis.Title.Text = null;
+            graphfield.XAxis.Title.Text = null;
         }
 
         #region парсинг данных и генерация
@@ -157,11 +184,25 @@ namespace Algorithm
                 for (int row = 0; row < Yn; row++)
                 {
                     dataGridView1.Rows.Add();
-                    dataGridView1[0, row].Value = rnd.Next(-100,100);
+                    dataGridView1[0, row].Value = rnd.Next(1000);
                 }
                 dataGridView1.AllowUserToAddRows = true;
         }
-
+        //Максимум и минимум, надо переделать
+/*        private void MaxAndMin()
+        {
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                if (Convert.ToDouble(dataGridView1[0, i].Value) > maximum)
+                {
+                    maximum = Convert.ToDouble(dataGridView1[0, i].Value);
+                }
+                if (Convert.ToDouble(dataGridView1[0, i].Value) < minimum)
+                {
+                    minimum = Convert.ToDouble(dataGridView1[0, i].Value);
+                }
+            }
+        }*/
 
         #endregion
 
@@ -198,43 +239,62 @@ namespace Algorithm
 
         private void InitGraphics()
         {
-            BubbleGraph(zedGraphControl1);
-            ShakerGraph(zedGraphControl2);
-            BogoGraph(bogograph);
-            QuickGraph(quickgraph1);
-            InterGraph(intergraph);
+            BubbleGraph(BubbleGraph1);
+            ShakerGraph(ShakerGraph1);
+            BogoGraph(BogoGraph1);
+            QuickGraph(QuickGraph1);
+            InterGraph(IntersectionGraph1);
         }
         #endregion
 
         #region Треды
         private void button1_Click(object sender, EventArgs e)
         {
+
             if (quickcheck.Checked)
             {
                 Thread quick = new Thread(new ThreadStart(QuickS));
                 quick.Start();
+                watch.Restart();
+                watch.Start();
             }
             if (bubblecheck.Checked)
             {
                 Thread bubble = new Thread(new ThreadStart(BubbleS));
                 bubble.Start();
+                bubble.Priority = ThreadPriority.Highest;
+                watch.Restart();
+                watch.Start();
             }
 
             if (shakercheck.Checked)
             {
                 Thread shaker = new Thread(new ThreadStart(ShakerS));
                 shaker.Start();
+                shaker.Priority = ThreadPriority.Highest;
+                watch.Restart();
+                watch.Start();
             }
             if (bogocheck.Checked)
             {
                 Thread bogo = new Thread(new ThreadStart(BogoS));
                 bogo.Start();
+                bogo.Priority = ThreadPriority.Lowest;
+                watch.Restart();
+                watch.Start();
             }
             if (Intersectioncheck.Checked)
             {
                 Thread inter = new Thread(new ThreadStart(InterS));
                 inter.Start();
+                watch.Restart();
+                watch.Start();
             }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
 
         }
         #endregion
@@ -278,8 +338,8 @@ namespace Algorithm
             {
                 values[i] = unsortedArray[i];
             }
-            BarItem curve = pane.AddBar("Elements", null, values, Color.Blue);
-            pane.BarSettings.MinClusterGap = 0.0F; //set columns references
+            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+            pane.BarSettings.MinClusterGap = 0F;
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
@@ -295,8 +355,8 @@ namespace Algorithm
             {
                 values[i] = unsortedArray1[i];
             }
-            BarItem curve = pane.AddBar("Elements", null, values, Color.Blue);
-            pane.BarSettings.MinClusterGap = 0.0F;
+            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+            pane.BarSettings.MinClusterGap = 0F;
             zedGraphControl2.AxisChange();
             zedGraphControl2.Invalidate();
         }
@@ -311,8 +371,8 @@ namespace Algorithm
             {
                 values[i] = unsortedArray2[i];
             }
-            BarItem curve = pane.AddBar("Elements", null, values, Color.Blue);
-            pane.BarSettings.MinClusterGap = 0.0F;
+            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+            pane.BarSettings.MinClusterGap = 0F;
             bogograph.AxisChange();
             bogograph.Invalidate();
         }
@@ -328,8 +388,8 @@ namespace Algorithm
             {
                 values[i] = unsortedArray3[i];
             }
-            BarItem curve = pane.AddBar("Elements", null, values, Color.Blue);
-            pane.BarSettings.MinClusterGap = 0.0F;
+            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+            pane.BarSettings.MinClusterGap = 0F;
             quickgraph1.AxisChange();
             quickgraph1.Invalidate();
         }
@@ -344,8 +404,8 @@ namespace Algorithm
             {
                 values[i] = unsortedArray4[i];
             }
-            BarItem curve = pane.AddBar("Elements", null, values, Color.Blue);
-            pane.BarSettings.MinClusterGap = 0.0F;
+            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+            pane.BarSettings.MinClusterGap = 0F;
             intergraph.AxisChange();
             intergraph.Invalidate();
         }
@@ -370,12 +430,12 @@ namespace Algorithm
                     Thread.Sleep(5);
                     if (unsortedArray[j] > unsortedArray[j + 1])
                     {
-                        BubbleGraph(zedGraphControl1);
+                        BubbleGraph(BubbleGraph1);
                         Swap(unsortedArray, j, j + 1);
                     }
                 }
             }
-            BubbleGraph(zedGraphControl1);
+            BubbleGraph(BubbleGraph1);
         }
 
         //шейкерная сортировка
@@ -392,7 +452,7 @@ namespace Algorithm
                     if (array1[i] > array1[i + 1])
                     {
                         Swap(array1, i, i + 1);
-                        ShakerGraph(zedGraphControl2);
+                        ShakerGraph(ShakerGraph1);
                         Thread.Sleep(5);
                     }
                 }
@@ -403,12 +463,12 @@ namespace Algorithm
                     if (array1[i - 1] > array1[i])
                     {
                         Swap(array1, i - 1, i);
-                        ShakerGraph(zedGraphControl2);
+                        ShakerGraph(ShakerGraph1);
                     }
                 }
                 left++;
             }
-            ShakerGraph(zedGraphControl2);
+            ShakerGraph(ShakerGraph1);
         }
 
         //самая тупая сортировка
@@ -416,11 +476,11 @@ namespace Algorithm
         {
             while (!IsSorted(array))
             {
-                Thread.Sleep(50);
+                Thread.Sleep(5);
                 array = RandomPermutation(array);
-                BogoGraph(bogograph);
+                BogoGraph(BogoGraph1);
             }
-            BogoGraph(bogograph);
+            BogoGraph(BogoGraph1);
             return array;
         }
 
@@ -428,7 +488,6 @@ namespace Algorithm
         {
             for (int i = 0; i < array.Length - 1; i++)
             {
-                Thread.Sleep(5);
                 if (array[i] > array[i + 1])
                     return false;
             }
@@ -453,7 +512,7 @@ namespace Algorithm
         //quick sort
         private void QuickSort(double[] arr, int leftStart, int rightEnd)
         {
-            QuickGraph(quickgraph1);
+            QuickGraph(QuickGraph1);
             Thread.Sleep(5);
             if (leftStart >= rightEnd)
             {
@@ -467,7 +526,7 @@ namespace Algorithm
             QuickSort(arr, leftStart, pivotLocation - 1);
 
             QuickSort(arr, pivotLocation + 1, rightEnd);
-            QuickGraph(quickgraph1);
+            QuickGraph(QuickGraph1);
         }
 
         private  int OrderItemsAroundPivot(double[] arr, int leftStart, int pivotLocation, int rightEnd)
@@ -510,19 +569,27 @@ namespace Algorithm
             {
                 int key = (int)arr[i];
                 int j = i - 1;
-                InterGraph(intergraph);
+                InterGraph(IntersectionGraph1);
 
                 while (j >= 0 && arr[j] > key)
                 {
                     arr[j + 1] = arr[j];
                     j = j - 1;
-                    InterGraph(intergraph);
+                    Thread.Sleep(5);
+                    InterGraph(IntersectionGraph1);
                 }
                 arr[j + 1] = key;
-                InterGraph(intergraph);
+                InterGraph(IntersectionGraph1);
             }
-            InterGraph(intergraph);
+            InterGraph(IntersectionGraph1);
         }
         #endregion
+
+        private void zedGraphControl1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
