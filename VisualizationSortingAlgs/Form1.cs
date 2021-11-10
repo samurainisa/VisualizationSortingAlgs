@@ -25,10 +25,12 @@ namespace Algorithm
         double[] unsortedArray2;
         double[] unsortedArray3;
         double[] unsortedArray4;
-        ManualResetEventSlim limiter = new ManualResetEventSlim(true);
+        int c;
+        int d;
+        CancellationTokenSource tokenSource = new CancellationTokenSource();
+        CancellationToken token;
 
-        private Stopwatch watch = new Stopwatch();
-        private bool startedSort = false;
+
         /*        double maximum = Math.Pow(2,60);
                 double minimum = -1/Math.Pow(2, 60);*/
 
@@ -46,9 +48,7 @@ namespace Algorithm
 
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             GC.Collect();
-            Dispose();
             Close();
         }
 
@@ -184,25 +184,11 @@ namespace Algorithm
                 for (int row = 0; row < Yn; row++)
                 {
                     dataGridView1.Rows.Add();
-                    dataGridView1[0, row].Value = rnd.Next(1000);
+                    dataGridView1[0, row].Value = rnd.Next(100);
                 }
                 dataGridView1.AllowUserToAddRows = true;
         }
-        //Максимум и минимум, надо переделать
-/*        private void MaxAndMin()
-        {
-            for (int i = 0; i < dataGridView1.RowCount; i++)
-            {
-                if (Convert.ToDouble(dataGridView1[0, i].Value) > maximum)
-                {
-                    maximum = Convert.ToDouble(dataGridView1[0, i].Value);
-                }
-                if (Convert.ToDouble(dataGridView1[0, i].Value) < minimum)
-                {
-                    minimum = Convert.ToDouble(dataGridView1[0, i].Value);
-                }
-            }
-        }*/
+
 
         #endregion
 
@@ -239,89 +225,134 @@ namespace Algorithm
 
         private void InitGraphics()
         {
-            BubbleGraph(BubbleGraph1);
-            ShakerGraph(ShakerGraph1);
-            BogoGraph(BogoGraph1);
-            QuickGraph(QuickGraph1);
-            InterGraph(IntersectionGraph1);
+            if(bubblecheck.Checked) BubbleGraph(BubbleGraph1);
+            if(shakercheck.Checked) ShakerGraph(ShakerGraph1);
+            if(bogocheck.Checked) BogoGraph(BogoGraph1);
+            if(quickcheck.Checked) QuickGraph(QuickGraph1);
+            if(Intersectioncheck.Checked) InterGraph(IntersectionGraph1);
         }
+
         #endregion
-
-        #region Треды
-        private void button1_Click(object sender, EventArgs e)
+        public void buttoncheck()
         {
-
+            Invoke((MethodInvoker)delegate
+            {
+                if (c == d)
+                {
+                    button1.Enabled = true;
+                }
+                else
+                {
+                    button1.Enabled = false;
+                }
+            });
+        }
+        #region Треды
+        public void button1_Click(object sender, EventArgs e)
+        {
+            c = 0;
+            d = 0;
             if (quickcheck.Checked)
             {
+                c++;
                 Thread quick = new Thread(new ThreadStart(QuickS));
                 quick.Start();
-                watch.Restart();
-                watch.Start();
+
             }
+
             if (bubblecheck.Checked)
             {
+                c++;
                 Thread bubble = new Thread(new ThreadStart(BubbleS));
                 bubble.Start();
                 bubble.Priority = ThreadPriority.Highest;
-                watch.Restart();
-                watch.Start();
+
             }
 
             if (shakercheck.Checked)
             {
+                c++;
                 Thread shaker = new Thread(new ThreadStart(ShakerS));
                 shaker.Start();
                 shaker.Priority = ThreadPriority.Highest;
-                watch.Restart();
-                watch.Start();
+
             }
+
             if (bogocheck.Checked)
             {
+                c++;
                 Thread bogo = new Thread(new ThreadStart(BogoS));
                 bogo.Start();
                 bogo.Priority = ThreadPriority.Lowest;
-                watch.Restart();
-                watch.Start();
-            }
-            if (Intersectioncheck.Checked)
-            {
-                Thread inter = new Thread(new ThreadStart(InterS));
-                inter.Start();
-                watch.Restart();
-                watch.Start();
             }
 
+            if (Intersectioncheck.Checked)
+            {
+                c++;
+                Thread inter = new Thread(new ThreadStart(InterS));
+                inter.Start();
+
+            }
+            buttoncheck();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            tokenSource.Cancel();
         }
         #endregion
 
         #region Таски сортировок
         private async void QuickS()
         {
-            await Task.Run(() => QuickSort(unsortedArray3, 0, unsortedArray3.Length-1));
+
+            bool sorted = false;
+            if (!sorted)
+            {
+                await Task.Run(() => QuickSort(unsortedArray3, 0, unsortedArray3.Length - 1));
+                sorted = true;
+            }
+
         }
         private async void BubbleS()
-        {
-            await Task.Run(() => BubbleSorting(unsortedArray));
+        { 
+            bool sorted = false;
+            if (!sorted)
+            {
+                await Task.Run(() => BubbleSorting(unsortedArray, token));
+                sorted = true;
+            }
+
         }
 
         private async void ShakerS()
         {
-            await Task.Run(() => ShakerSorting(unsortedArray1));
+            bool sorted = false;
+            if (!sorted)
+            {
+                await Task.Run(() => ShakerSorting(unsortedArray1));
+                sorted = true;
+            }
         }
 
         private async void BogoS()
         {
-            await Task.Run(() => BogoSorting(unsortedArray2));
+            bool sorted = false;
+            if (!sorted)
+            {
+                await Task.Run(() => BogoSorting(unsortedArray2));
+                sorted = true;
+            }
         }
 
         private async void InterS()
         {
-            await Task.Run(() => InterSorting(unsortedArray4));
+            bool sorted = false;
+            if (!sorted)
+            {
+                await Task.Run(() => InterSorting(unsortedArray4));
+                sorted = true;
+            }
         }
         #endregion
 
@@ -392,6 +423,7 @@ namespace Algorithm
             pane.BarSettings.MinClusterGap = 0F;
             quickgraph1.AxisChange();
             quickgraph1.Invalidate();
+
         }
         private void InterGraph(ZedGraphControl intergraph)
         {
@@ -420,11 +452,15 @@ namespace Algorithm
             array[j] = glass;
         }
         //пузырьковая
-        private void BubbleSorting(double[] unsortedArray)
+        private void BubbleSorting(double[] unsortedArray, CancellationToken token)
         {
             var n = dataGridView1.RowCount - 1;
             for (int i = 0; i < n; i++)
-            { 
+            {
+                if (token.IsCancellationRequested)
+                {
+                    return;
+                }
                 for (int j = 0; j < n - i - 1; j++)
                 {
                     Thread.Sleep(5);
@@ -436,6 +472,8 @@ namespace Algorithm
                 }
             }
             BubbleGraph(BubbleGraph1);
+            d++;
+            buttoncheck();
         }
 
         //шейкерная сортировка
@@ -469,6 +507,8 @@ namespace Algorithm
                 left++;
             }
             ShakerGraph(ShakerGraph1);
+            d++;
+            buttoncheck();
         }
 
         //самая тупая сортировка
@@ -481,7 +521,10 @@ namespace Algorithm
                 BogoGraph(BogoGraph1);
             }
             BogoGraph(BogoGraph1);
+            d++;
+            buttoncheck();
             return array;
+
         }
 
         static bool IsSorted(double[] array)
@@ -494,7 +537,7 @@ namespace Algorithm
             return true;
         }
 
-        static double[] RandomPermutation(double[] array)
+         double[] RandomPermutation(double[] array)
         {
             Random random = new Random();
             var n = array.Length;
@@ -512,6 +555,7 @@ namespace Algorithm
         //quick sort
         private void QuickSort(double[] arr, int leftStart, int rightEnd)
         {
+
             QuickGraph(QuickGraph1);
             Thread.Sleep(5);
             if (leftStart >= rightEnd)
@@ -527,9 +571,11 @@ namespace Algorithm
 
             QuickSort(arr, pivotLocation + 1, rightEnd);
             QuickGraph(QuickGraph1);
+
+
         }
 
-        private  int OrderItemsAroundPivot(double[] arr, int leftStart, int pivotLocation, int rightEnd)
+        private int OrderItemsAroundPivot(double[] arr, int leftStart, int pivotLocation, int rightEnd)
         {
             var pivot = arr[pivotLocation];
             Swap(arr, pivotLocation, rightEnd);
@@ -551,12 +597,15 @@ namespace Algorithm
                 Swap(arr, leftIndex, rightIndex);
             }
             Swap(arr, rightEnd, leftIndex);
+
             return leftIndex;
         }
 
         private  int ChosePivotLocation(double[] arr, int leftStart, int rightEnd)
         {
             var middle = leftStart + (rightEnd - leftStart) / 2;
+            d++;
+            buttoncheck();
             return middle;
         }
 
@@ -582,6 +631,8 @@ namespace Algorithm
                 InterGraph(IntersectionGraph1);
             }
             InterGraph(IntersectionGraph1);
+            d++;
+            buttoncheck();
         }
         #endregion
 

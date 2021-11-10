@@ -81,8 +81,6 @@ namespace Algorithm
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.BubbleGraph1 = new ZedGraph.ZedGraphControl();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -642,31 +640,11 @@ namespace Algorithm
             this.BubbleGraph1.TabIndex = 12;
             this.BubbleGraph1.UseExtendedPrintDialog = true;
             // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(78, 49);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(43, 15);
-            this.label25.TabIndex = 47;
-            this.label25.Text = "Sorted:";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(127, 49);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(30, 15);
-            this.label26.TabIndex = 48;
-            this.label26.Text = "false";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1506, 757);
-            this.Controls.Add(this.label26);
-            this.Controls.Add(this.label25);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label21);
@@ -779,8 +757,6 @@ namespace Algorithm
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
         private ZedGraph.ZedGraphControl BubbleGraph1;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label26;
     }
 }
 
