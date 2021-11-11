@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -12,13 +13,14 @@ using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
 using Microsoft.Office.Interop.Excel;
 using ZedGraph;
+using Action = System.Action;
 using Application = Microsoft.Office.Interop.Excel.Application;
 
 
 namespace Algorithm
 {
     public partial class Form1 : Form
-    {
+    {   
         private Random rand = new Random();
         double[] unsortedArray;
         double[] unsortedArray1;
@@ -27,9 +29,13 @@ namespace Algorithm
         double[] unsortedArray4;
         int c;
         int d;
-        CancellationTokenSource tokenSource = new CancellationTokenSource();
-        CancellationToken token;
-
+        List<Thread> threads = new List<Thread>();
+        public bool pause;
+        Stopwatch sw = new Stopwatch();
+        Stopwatch sw1 = new Stopwatch();
+        Stopwatch sw2 = new Stopwatch();
+        Stopwatch sw3 = new Stopwatch();
+        Stopwatch sw4 = new Stopwatch();
 
         /*        double maximum = Math.Pow(2,60);
                 double minimum = -1/Math.Pow(2, 60);*/
@@ -44,14 +50,12 @@ namespace Algorithm
             zedGraphDesign(BogoGraph1);
             zedGraphDesign(IntersectionGraph1);
         }
-
-
+        
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GC.Collect();
             Close();
         }
-
 
         public void zedGraphDesign(ZedGraphControl BubbleGraph1)
         {
@@ -61,7 +65,7 @@ namespace Algorithm
             graphfield.Fill.Type = FillType.Solid;
             graphfield.Fill.Color = Color.Black;
             graphfield.Chart.Fill.Type = FillType.Solid;
-            graphfield.Chart.Fill.Color = Color.Black;
+            graphfield.Chart.Fill.Color = Color.White;
             graphfield.YAxis.Title.Text = null;
             graphfield.XAxis.Title.Text = null;
         }
@@ -184,7 +188,7 @@ namespace Algorithm
                 for (int row = 0; row < Yn; row++)
                 {
                     dataGridView1.Rows.Add();
-                    dataGridView1[0, row].Value = rnd.Next(100);
+                    dataGridView1[0, row].Value = rnd.Next(500);
                 }
                 dataGridView1.AllowUserToAddRows = true;
         }
@@ -233,6 +237,7 @@ namespace Algorithm
         }
 
         #endregion
+
         public void buttoncheck()
         {
             Invoke((MethodInvoker)delegate
@@ -248,122 +253,127 @@ namespace Algorithm
             });
         }
         #region Треды
+
+
         public void button1_Click(object sender, EventArgs e)
         {
             c = 0;
             d = 0;
+            pause = true;
+
             if (quickcheck.Checked)
             {
-                c++;
-                Thread quick = new Thread(new ThreadStart(QuickS));
-                quick.Start();
-
+                Thread quick = new Thread(new ParameterizedThreadStart(CreateQuickSort));
+                threads.Add(quick);
+                quick.Start(unsortedArray3);
             }
 
             if (bubblecheck.Checked)
             {
                 c++;
-                Thread bubble = new Thread(new ThreadStart(BubbleS));
-                bubble.Start();
-                bubble.Priority = ThreadPriority.Highest;
-
+                Thread bubble = new Thread(new ParameterizedThreadStart(BubbleSorting));
+                threads.Add(bubble);
+                bubble.Start(unsortedArray);
             }
 
             if (shakercheck.Checked)
             {
                 c++;
-                Thread shaker = new Thread(new ThreadStart(ShakerS));
-                shaker.Start();
-                shaker.Priority = ThreadPriority.Highest;
-
+                Thread shaker = new Thread(new ParameterizedThreadStart(ShakerSorting));
+                threads.Add(shaker);
+                shaker.Start(unsortedArray1);
             }
 
             if (bogocheck.Checked)
             {
                 c++;
-                Thread bogo = new Thread(new ThreadStart(BogoS));
-                bogo.Start();
-                bogo.Priority = ThreadPriority.Lowest;
+                Thread bogo = new Thread(new ParameterizedThreadStart(BogoSorting));
+                threads.Add(bogo);
+                bogo.Start(unsortedArray2);
             }
 
             if (Intersectioncheck.Checked)
             {
                 c++;
-                Thread inter = new Thread(new ThreadStart(InterS));
-                inter.Start();
-
+                Thread inter = new Thread(new ParameterizedThreadStart(InterSorting));
+                threads.Add(inter);
+                inter.Start(unsortedArray4);
             }
+
             buttoncheck();
+
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
-            tokenSource.Cancel();
+            foreach(var item in threads)
+            {
+                item.Abort();
+            }
         }
         #endregion
 
         #region Таски сортировок
-        private async void QuickS()
+
+/*        private async void QuickS()
         {
 
-            bool sorted = false;
-            if (!sorted)
-            {
+                sw.Restart();
+                sw.Start();
                 await Task.Run(() => QuickSort(unsortedArray3, 0, unsortedArray3.Length - 1));
-                sorted = true;
-            }
+                sw.Stop();
+                Invoke((MethodInvoker)delegate
+                {
+                    quicktime.Text = Math.Round((sw.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+                });
 
-        }
-        private async void BubbleS()
-        { 
-            bool sorted = false;
-            if (!sorted)
-            {
-                await Task.Run(() => BubbleSorting(unsortedArray, token));
-                sorted = true;
-            }
-
-        }
-
-        private async void ShakerS()
+        }*/
+/*        private async void BubbleS()
         {
             bool sorted = false;
             if (!sorted)
             {
-                await Task.Run(() => ShakerSorting(unsortedArray1));
+
                 sorted = true;
             }
-        }
+        }*/
 
+/*        private async void ShakerS()
+        {
+
+            bool sorted = false;
+            if (!sorted)
+            {
+
+
+            }
+        }*/
+/*
         private async void BogoS()
         {
+            sw.Restart();
             bool sorted = false;
             if (!sorted)
             {
-                await Task.Run(() => BogoSorting(unsortedArray2));
+
                 sorted = true;
             }
-        }
-
+        }*/
+/*
         private async void InterS()
         {
-            bool sorted = false;
-            if (!sorted)
-            {
-                await Task.Run(() => InterSorting(unsortedArray4));
-                sorted = true;
-            }
-        }
+
+        }*/
         #endregion
 
         #region Визуализация
-
         private void BubbleGraph(ZedGraphControl zedGraphControl1)
         {
             GraphPane pane = zedGraphControl1.GraphPane;
             pane.Title.Text = "BubbleSort";
             pane.CurveList.Clear();
-            var n = dataGridView1.RowCount-1;
+            var n = unsortedArray.Length;
             double[] values = new double[n];
             for (int i = 0; i < n; i++)
             {
@@ -380,7 +390,7 @@ namespace Algorithm
             GraphPane pane = zedGraphControl2.GraphPane;
             pane.Title.Text = "ShakerSort";
             pane.CurveList.Clear();
-            var n = dataGridView1.RowCount - 1;
+            var n = unsortedArray1.Length;
             double[] values = new double[n];
             for (int i = 0; i < n; i++)
             {
@@ -396,7 +406,7 @@ namespace Algorithm
             GraphPane pane = bogograph.GraphPane;
             pane.Title.Text = "BubbleSort";
             pane.CurveList.Clear();
-            var n = dataGridView1.RowCount - 1;
+            var n = unsortedArray2.Length;
             double[] values = new double[n];
             for (int i = 0; i < n; i++)
             {
@@ -407,13 +417,12 @@ namespace Algorithm
             bogograph.AxisChange();
             bogograph.Invalidate();
         }
-
         private void QuickGraph(ZedGraphControl quickgraph1)
         {
             GraphPane pane = quickgraph1.GraphPane;
             pane.Title.Text = "QuickSort";
             pane.CurveList.Clear();
-            var n = dataGridView1.RowCount - 1;
+            var n = unsortedArray3.Length;
             double[] values = new double[n];
             for (int i = 0; i < n; i++)
             {
@@ -430,7 +439,7 @@ namespace Algorithm
             GraphPane pane = intergraph.GraphPane;
             pane.Title.Text = "IntersionSort";
             pane.CurveList.Clear();
-            var n = dataGridView1.RowCount - 1;
+            var n = unsortedArray4.Length;
             double[] values = new double[n];
             for (int i = 0; i < n; i++)
             {
@@ -441,7 +450,8 @@ namespace Algorithm
             intergraph.AxisChange();
             intergraph.Invalidate();
         }
-#endregion
+        #endregion
+
 
         #region Сортировочки
 
@@ -451,16 +461,18 @@ namespace Algorithm
             array[i] = array[j];
             array[j] = glass;
         }
+
         //пузырьковая
-        private void BubbleSorting(double[] unsortedArray, CancellationToken token)
+        private void BubbleSorting(object unsortedArrayy)
         {
-            var n = dataGridView1.RowCount - 1;
+            sw1.Restart();
+            sw1.Start();
+
+
+            var n = unsortedArray.Length;
             for (int i = 0; i < n; i++)
             {
-                if (token.IsCancellationRequested)
-                {
-                    return;
-                }
+
                 for (int j = 0; j < n - i - 1; j++)
                 {
                     Thread.Sleep(5);
@@ -471,15 +483,24 @@ namespace Algorithm
                     }
                 }
             }
+            Thread.Sleep(500);
             BubbleGraph(BubbleGraph1);
+            sw1.Stop();
+            Invoke((MethodInvoker)delegate
+            {
+                bubbletime.Text = Math.Round((sw1.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+
+            });
             d++;
             buttoncheck();
         }
 
         //шейкерная сортировка
-        private void ShakerSorting(double[] array1)
+        private void ShakerSorting(object array)
         {
-            var n = dataGridView1.RowCount - 1;
+            sw2.Restart();
+            sw2.Start();
+            var n = unsortedArray1.Length;
             int left = 0,
                 right = n - 1;
 
@@ -487,9 +508,9 @@ namespace Algorithm
             {
                 for (int i = left; i < right; i++)
                 {
-                    if (array1[i] > array1[i + 1])
+                    if (unsortedArray1[i] > unsortedArray1[i + 1])
                     {
-                        Swap(array1, i, i + 1);
+                        Swap(unsortedArray1, i, i + 1);
                         ShakerGraph(ShakerGraph1);
                         Thread.Sleep(5);
                     }
@@ -498,32 +519,54 @@ namespace Algorithm
 
                 for (int i = right; i > left; i--)
                 {
-                    if (array1[i - 1] > array1[i])
+                    if (unsortedArray1[i - 1] > unsortedArray1[i])
                     {
-                        Swap(array1, i - 1, i);
+                        Swap(unsortedArray1, i - 1, i);
                         ShakerGraph(ShakerGraph1);
                     }
                 }
                 left++;
             }
             ShakerGraph(ShakerGraph1);
+            sw2.Stop();
+            Invoke((MethodInvoker)delegate
+            {
+                shakertime.Text = Math.Round((sw2.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+
+            });
             d++;
             buttoncheck();
+
+/*            await Task.Run(() => ShakerSorting(unsortedArray1));*/
+
+
         }
 
         //самая тупая сортировка
-        double[] BogoSorting(double[] array)
+        public void BogoSorting(object array2)
         {
-            while (!IsSorted(array))
+            sw3.Restart();
+            sw3.Start();
+            while (!IsSorted(unsortedArray2))
             {
-                Thread.Sleep(5);
-                array = RandomPermutation(array);
+
+                unsortedArray2 = RandomPermutation(unsortedArray2);
                 BogoGraph(BogoGraph1);
             }
             BogoGraph(BogoGraph1);
             d++;
             buttoncheck();
-            return array;
+            sw3.Stop();
+            Invoke((MethodInvoker)delegate
+            {
+                bogotime.Text = Math.Round((sw3.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+
+            });
+/*            return unsortedArray2;*/
+
+/*            await Task.Run(() => BogoSorting(unsortedArray2));*/
+
+
 
         }
 
@@ -540,45 +583,55 @@ namespace Algorithm
          double[] RandomPermutation(double[] array)
         {
             Random random = new Random();
-            var n = array.Length;
+            var n = dataGridView1.RowCount - 1;
             while (n > 1)
             {
                 n--;
                 var i = random.Next(n + 1);
                 var temp = array[i];
                 array[i] = array[n];
+                Thread.Sleep(5);
                 array[n] = temp;
             }
             return array;
         }
 
         //quick sort
+        private void CreateQuickSort(object array4)
+        {
+            sw.Restart();
+            sw.Start();
+
+            QuickSort(unsortedArray3, 0, unsortedArray3.Length - 1);
+
+            sw.Stop();
+            Invoke((MethodInvoker)delegate
+            {
+                quicktime.Text = Math.Round((sw.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+            });
+        }
+
         private void QuickSort(double[] arr, int leftStart, int rightEnd)
         {
-
             QuickGraph(QuickGraph1);
-            Thread.Sleep(5);
+
             if (leftStart >= rightEnd)
             {
                 return;
             }
-
             int pivotLocation = ChosePivotLocation(arr, leftStart, rightEnd);
-
             pivotLocation = OrderItemsAroundPivot(arr, leftStart, pivotLocation, rightEnd);
-
+            Thread.Sleep(5);
             QuickSort(arr, leftStart, pivotLocation - 1);
-
             QuickSort(arr, pivotLocation + 1, rightEnd);
             QuickGraph(QuickGraph1);
-
-
-        }
+       }
 
         private int OrderItemsAroundPivot(double[] arr, int leftStart, int pivotLocation, int rightEnd)
         {
             var pivot = arr[pivotLocation];
             Swap(arr, pivotLocation, rightEnd);
+            Thread.Sleep(5);
             var leftIndex = leftStart;
             var rightIndex = rightEnd - 1;
             while (leftIndex <= rightIndex)
@@ -594,53 +647,86 @@ namespace Algorithm
                     rightIndex--;
                     continue;
                 }
+
                 Swap(arr, leftIndex, rightIndex);
             }
-            Swap(arr, rightEnd, leftIndex);
 
+            Swap(arr, rightEnd, leftIndex);
             return leftIndex;
         }
 
         private  int ChosePivotLocation(double[] arr, int leftStart, int rightEnd)
         {
             var middle = leftStart + (rightEnd - leftStart) / 2;
-            d++;
-            buttoncheck();
             return middle;
         }
 
         //intersion sort 
 
-        void InterSorting(double[] arr)
+        public void InterSorting(object array3)
         {
-            int n = arr.Length;
+            sw4.Restart();
+            sw4.Start();
+            int n = dataGridView1.RowCount-1;
             for (int i = 1; i < n; ++i)
             {
-                int key = (int)arr[i];
+                int key = (int)unsortedArray4[i];
                 int j = i - 1;
                 InterGraph(IntersectionGraph1);
 
-                while (j >= 0 && arr[j] > key)
+                while (j >= 0 && unsortedArray4[j] > key)
                 {
-                    arr[j + 1] = arr[j];
-                    j = j - 1;
+                    unsortedArray4[j + 1] = unsortedArray4[j];
                     Thread.Sleep(5);
+                    j = j - 1;
+
                     InterGraph(IntersectionGraph1);
                 }
-                arr[j + 1] = key;
+                unsortedArray4[j + 1] = key;
                 InterGraph(IntersectionGraph1);
             }
             InterGraph(IntersectionGraph1);
+            sw4.Stop();
+            Invoke((MethodInvoker)delegate
+            {
+                insectime.Text = Math.Round((sw4.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+            });
             d++;
-            buttoncheck();
         }
         #endregion
 
-        private void zedGraphControl1_Load(object sender, EventArgs e)
+
+        private  void button3_Click(object sender, EventArgs e)
         {
+
+              foreach (var item in threads)
+              {
+                Thread.Sleep(100);
+                if (item.ThreadState != System.Threading.ThreadState.Stopped)
+                    item.Suspend();
+                if (bubblecheck.Checked) BubbleGraph(BubbleGraph1);
+                if (shakercheck.Checked) ShakerGraph(ShakerGraph1);
+                if (bogocheck.Checked) BogoGraph(BogoGraph1);
+                if (quickcheck.Checked) QuickGraph(QuickGraph1);
+                if (Intersectioncheck.Checked) InterGraph(IntersectionGraph1);
+
+            }
 
         }
 
-
+        private void button4_Click(object sender, EventArgs e)
+        {
+            foreach (var item in threads)
+            {
+                Thread.Sleep(100);
+                if (item.ThreadState != System.Threading.ThreadState.Stopped)
+                    item.Resume();
+                if (bubblecheck.Checked) BubbleGraph(BubbleGraph1);
+                if (shakercheck.Checked) ShakerGraph(ShakerGraph1);
+                if (bogocheck.Checked) BogoGraph(BogoGraph1);
+                if (quickcheck.Checked) QuickGraph(QuickGraph1);
+                if (Intersectioncheck.Checked) InterGraph(IntersectionGraph1);
+            }
+        }
     }
 }
