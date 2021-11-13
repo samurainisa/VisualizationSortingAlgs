@@ -20,37 +20,45 @@ using Application = Microsoft.Office.Interop.Excel.Application;
 namespace Algorithm
 {
     public partial class Form1 : Form
-    {   
+    {
         private Random rand = new Random();
         double[] unsortedArray;
         double[] unsortedArray1;
         double[] unsortedArray2;
         double[] unsortedArray3;
         double[] unsortedArray4;
+        double[] unsortedArray5;
+        double[] unsortedArray6;
         int c;
         int d;
         List<Thread> threads = new List<Thread>();
-        public bool pause;
         Stopwatch sw = new Stopwatch();
         Stopwatch sw1 = new Stopwatch();
         Stopwatch sw2 = new Stopwatch();
         Stopwatch sw3 = new Stopwatch();
         Stopwatch sw4 = new Stopwatch();
-
-        /*        double maximum = Math.Pow(2,60);
-                double minimum = -1/Math.Pow(2, 60);*/
-
+        Stopwatch sw5 = new Stopwatch();
+        Stopwatch sw6 = new Stopwatch();
 
         public Form1()
         {
             InitializeComponent();
+            if (!revshaker.Checked) revshakergraph.Visible = false;
+            if (!bubblecheck.Checked) BubbleGraph1.Visible = false;
+            if (!shakercheck.Checked) ShakerGraph1.Visible = false;
+            if (!quickcheck.Checked) QuickGraph1.Visible = false;
+            if (!bogocheck.Checked) BogoGraph1.Visible = false;
+            if (!Intersectioncheck.Checked) IntersectionGraph1.Visible = false;
+            if (!revbubble.Checked) Revbubblegraph.Visible = false;
             zedGraphDesign(BubbleGraph1);
             zedGraphDesign(ShakerGraph1);
             zedGraphDesign(QuickGraph1);
             zedGraphDesign(BogoGraph1);
             zedGraphDesign(IntersectionGraph1);
+            zedGraphDesign(Revbubblegraph);
+            zedGraphDesign(revshakergraph);
         }
-        
+
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -63,7 +71,7 @@ namespace Algorithm
                 GC.Collect();
                 Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -117,6 +125,14 @@ namespace Algorithm
                             dataGridView1.Rows.Add(sx);
                         }
                     }
+
+                    unsortedArray = null;
+                    unsortedArray1 = null;
+                    unsortedArray2 = null;
+                    unsortedArray3 = null;
+                    unsortedArray4 = null;
+                    unsortedArray5 = null;
+                    unsortedArray6 = null;
                     DtgtoList();
                     InitGraphics();
                     GC.Collect();
@@ -131,7 +147,7 @@ namespace Algorithm
 
             catch (Exception exception)
             {
-                MessageBox.Show($"При попытке загрузки из Excel произошла обшика!\n{exception.Message}", "Error!", MessageBoxButtons.OK,
+                MessageBox.Show($"При попытке загрузки из Excel произошла ошибка!\n{exception.Message}", "Error!", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
         }
@@ -149,6 +165,14 @@ namespace Algorithm
 
         private async void googleToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridView1.Rows.Clear();
+            unsortedArray = null;
+            unsortedArray1 = null;
+            unsortedArray2 = null;
+            unsortedArray3 = null;
+            unsortedArray4 = null;
+            unsortedArray5 = null;
+            unsortedArray6 = null;
             await readAsync();
         }
 
@@ -170,7 +194,7 @@ namespace Algorithm
             }
         }
 
-        private  async Task ReadAsync(SpreadsheetsResource.ValuesResource valuesResource)
+        private async Task ReadAsync(SpreadsheetsResource.ValuesResource valuesResource)
         {
             string SpreadsheetId = googleid.Text.ToString();
             var response = await valuesResource.Get(SpreadsheetId, ReadRange).ExecuteAsync();
@@ -188,6 +212,7 @@ namespace Algorithm
                 {
                     var res = string.Join(" ", row.Select(r => r.ToString()));
                     dataGridView1.Rows.Add(res);
+
                     DtgtoList();
                     InitGraphics();
                 }
@@ -205,7 +230,7 @@ namespace Algorithm
                 for (int row = 0; row < Yn; row++)
                 {
                     dataGridView1.Rows.Add();
-                    dataGridView1[0, row].Value = rnd.Next(500);
+                    dataGridView1[0, row].Value = rnd.Next(100);
                 }
                 dataGridView1.AllowUserToAddRows = true;
             }
@@ -229,6 +254,8 @@ namespace Algorithm
             unsortedArray2 = new double[dataGridView1.RowCount];
             unsortedArray3 = new double[dataGridView1.RowCount];
             unsortedArray4 = new double[dataGridView1.RowCount];
+            unsortedArray5 = new double[dataGridView1.RowCount];
+            unsortedArray6 = new double[dataGridView1.RowCount];
 
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
@@ -237,13 +264,21 @@ namespace Algorithm
                 unsortedArray2[i] = double.Parse(dataGridView1[0, i].Value.ToString());
                 unsortedArray3[i] = double.Parse(dataGridView1[0, i].Value.ToString());
                 unsortedArray4[i] = double.Parse(dataGridView1[0, i].Value.ToString());
+                unsortedArray5[i] = double.Parse(dataGridView1[0, i].Value.ToString());
+                unsortedArray6[i] = double.Parse(dataGridView1[0, i].Value.ToString());
             }
             dataGridView1.AllowUserToAddRows = true;
         }
 
-
         private void genBtn_Click_1(object sender, EventArgs e)
         {
+         if (bubblecheck.Checked) BubbleGraph1.Visible = true;
+         if (shakercheck.Checked) ShakerGraph1.Visible = true;
+         if (quickcheck.Checked) QuickGraph1.Visible = true;
+         if (bogocheck.Checked) BogoGraph1.Visible = true;
+         if (Intersectioncheck.Checked) IntersectionGraph1.Visible = true;
+         if (revbubble.Checked) Revbubblegraph.Visible = true;
+         if (revshaker.Checked) revshakergraph.Visible = true;
             GenerateData();
             DtgtoList();
             InitGraphics();
@@ -251,11 +286,13 @@ namespace Algorithm
 
         private void InitGraphics()
         {
-            if(bubblecheck.Checked) BubbleGraph();
-            if(shakercheck.Checked) ShakerGraph();
-            if(bogocheck.Checked) BogoGraph();
-            if(quickcheck.Checked) QuickGraph();
-            if(Intersectioncheck.Checked) InterGraph(IntersectionGraph1);
+            if (revbubble.Checked) RevBubbleGraph();
+            if (bubblecheck.Checked) BubbleGraph();
+            if (shakercheck.Checked) ShakerGraph();
+            if (bogocheck.Checked) BogoGraph();
+            if (quickcheck.Checked) QuickGraph();
+            if (Intersectioncheck.Checked) InterGraph();
+            if (revshaker.Checked) RevShakerGraph();
         }
 
         #endregion
@@ -279,49 +316,72 @@ namespace Algorithm
 
         public void button1_Click(object sender, EventArgs e)
         {
-            c = 0;
-            d = 0;
-            pause = true;
-
-            if (quickcheck.Checked)
+            try
             {
-                Thread quick = new Thread(new ParameterizedThreadStart(CreateQuickSort));
-                threads.Add(quick);
-                quick.Start(unsortedArray3);
+
+                c = 0;
+                d = 0;
+
+                if (quickcheck.Checked)
+                {
+                    Thread quick = new Thread(new ParameterizedThreadStart(CreateQuickSort));
+                    threads.Add(quick);
+                    quick.Start(unsortedArray3);
+                }
+
+                if (bubblecheck.Checked)
+                {
+                    c++;
+                    Thread bubble = new Thread(new ParameterizedThreadStart(BubbleSorting));
+                    threads.Add(bubble);
+                    bubble.Start(unsortedArray);
+                }
+                if (revbubble.Checked)
+                {
+                    c++;
+                    Thread revbubble = new Thread(new ParameterizedThreadStart(ReverseBubbleSort));
+                    threads.Add(revbubble);
+                    revbubble.Start(unsortedArray);
+                }
+
+                if (shakercheck.Checked)
+                {
+                    c++;
+                    Thread shaker = new Thread(new ParameterizedThreadStart(ShakerSorting));
+                    threads.Add(shaker);
+                    shaker.Start(unsortedArray1);
+                }
+                if (revshaker.Checked)
+                {
+                    c++;
+                    Thread revshaker = new Thread(new ParameterizedThreadStart(RevShakerSorting));
+                    threads.Add(revshaker);
+                    revshaker.Start(unsortedArray6);
+                }
+
+
+                if (bogocheck.Checked)
+                {
+                    c++;
+                    Thread bogo = new Thread(new ParameterizedThreadStart(BogoSorting));
+                    threads.Add(bogo);
+                    bogo.Start(unsortedArray2);
+                }
+
+                if (Intersectioncheck.Checked)
+                {
+                    c++;
+                    Thread inter = new Thread(new ParameterizedThreadStart(InterSorting));
+                    threads.Add(inter);
+                    inter.Start(unsortedArray4);
+                }
+                buttoncheck();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            if (bubblecheck.Checked)
-            {
-                c++;
-                Thread bubble = new Thread(new ParameterizedThreadStart(BubbleSorting));
-                threads.Add(bubble);
-                bubble.Start(unsortedArray);
-            }
-
-            if (shakercheck.Checked)
-            {
-                c++;
-                Thread shaker = new Thread(new ParameterizedThreadStart(ShakerSorting));
-                threads.Add(shaker);
-                shaker.Start(unsortedArray1);
-            }
-
-            if (bogocheck.Checked)
-            {
-                c++;
-                Thread bogo = new Thread(new ParameterizedThreadStart(BogoSorting));
-                threads.Add(bogo);
-                bogo.Start(unsortedArray2);
-            }
-
-            if (Intersectioncheck.Checked)
-            {
-                c++;
-                Thread inter = new Thread(new ParameterizedThreadStart(InterSorting));
-                threads.Add(inter);
-                inter.Start(unsortedArray4);
-            }
-            buttoncheck();
         }
 
 
@@ -337,7 +397,7 @@ namespace Algorithm
             GraphPane pane = BubbleGraph1.GraphPane;
             pane.Title.Text = "BubbleSort";
             pane.CurveList.Clear();
-            int n =  unsortedArray.Length;
+            int n = unsortedArray.Length;
             double[] values = new double[n];
             for (int k = 0; k < n; k++)
             {
@@ -365,6 +425,7 @@ namespace Algorithm
             ShakerGraph1.AxisChange();
             ShakerGraph1.Invalidate();
         }
+
         private void BogoGraph()
         {
             GraphPane pane = BogoGraph1.GraphPane;
@@ -381,6 +442,7 @@ namespace Algorithm
             BogoGraph1.AxisChange();
             BogoGraph1.Invalidate();
         }
+
         private void QuickGraph()
         {
             GraphPane pane = QuickGraph1.GraphPane;
@@ -398,9 +460,10 @@ namespace Algorithm
             QuickGraph1.Invalidate();
 
         }
-        private void InterGraph(ZedGraphControl intergraph)
+
+        private void InterGraph()
         {
-            GraphPane pane = intergraph.GraphPane;
+            GraphPane pane = IntersectionGraph1.GraphPane;
             pane.Title.Text = "IntersionSort";
             pane.CurveList.Clear();
             var n = unsortedArray4.Length;
@@ -411,8 +474,41 @@ namespace Algorithm
             }
             BarItem curve = pane.AddBar("Elements", null, values, Color.White);
             pane.BarSettings.MinClusterGap = 0F;
-            intergraph.AxisChange();
-            intergraph.Invalidate();
+            IntersectionGraph1.AxisChange();
+            IntersectionGraph1.Invalidate();
+        }
+        private void RevShakerGraph()
+        {
+            GraphPane pane = revshakergraph.GraphPane;
+            pane.Title.Text = "Reverse ShakerSort";
+            pane.CurveList.Clear();
+            var n = unsortedArray6.Length;
+            double[] values = new double[n];
+            for (int k = 0; k < n; k++)
+            {
+                values[k] = unsortedArray6[k];
+            }
+            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+            pane.BarSettings.MinClusterGap = 0F;
+            revshakergraph.AxisChange();
+            revshakergraph.Invalidate();
+        }
+
+        private void RevBubbleGraph()
+        {
+            GraphPane pane = Revbubblegraph.GraphPane;
+            pane.Title.Text = "Reverse BubbleSort";
+            pane.CurveList.Clear();
+            var n = unsortedArray5.Length;
+            double[] values = new double[n];
+            for (int k = 0; k < n; k++)
+            {
+                values[k] = unsortedArray5[k];
+            }
+            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+            pane.BarSettings.MinClusterGap = 0F;
+            Revbubblegraph.AxisChange();
+            Revbubblegraph.Invalidate();
         }
         #endregion
 
@@ -429,92 +525,239 @@ namespace Algorithm
         //пузырьковая
         private void BubbleSorting(object unsortedArrayy)
         {
-            sw1.Restart();
-            sw1.Start();
-            var n = unsortedArray.Length;
-            for (int i = 0; i < n; i++)
+            try
             {
-
-                for (int j = 0; j < n - i - 1; j++)
+                sw1.Restart();
+                sw1.Start();
+                var n = unsortedArray.Length;
+                for (int i = 0; i < n; i++)
                 {
-                    Thread.Sleep(5);
-                    if (unsortedArray[j] > unsortedArray[j + 1])
+
+                    for (int j = 0; j < n - i - 1; j++)
                     {
-                        GraphPane pane = BubbleGraph1.GraphPane;
-                        pane.Title.Text = "BubbleSort";
-                        pane.CurveList.Clear();
-                        double[] values = new double[n];
-                        for (int k = 0; k < n; k++)
+                        Thread.Sleep(5);
+                        if (unsortedArray[j] > unsortedArray[j + 1])
                         {
-                            values[k] = unsortedArray[k];
+                            GraphPane pane = BubbleGraph1.GraphPane;
+                            pane.CurveList.Clear();
+                            double[] values = new double[n];
+                            for (int k = 0; k < n; k++)
+                            {
+                                values[k] = unsortedArray[k];
+                            }
+                            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+                            pane.BarSettings.MinClusterGap = 0F;
+                            BubbleGraph1.AxisChange();
+                            BubbleGraph1.Invalidate();
+                            Swap(unsortedArray, j, j + 1);
                         }
-                        BarItem curve = pane.AddBar("Elements", null, values, Color.White);
-                        pane.BarSettings.MinClusterGap = 0F;
-                        BubbleGraph1.AxisChange();
-                        BubbleGraph1.Invalidate();
-                        Swap(unsortedArray, j, j + 1);
                     }
                 }
-            }
-            Thread.Sleep(500);
-            sw1.Stop();
-            Invoke((MethodInvoker)delegate
-            {
-                bubbletime.Text = Math.Round((sw1.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+                GraphPane pane1 = BubbleGraph1.GraphPane;
+                pane1.CurveList.Clear();
+                double[] values1 = new double[n];
+                for (int k = 0; k < n; k++)
+                {
+                    values1[k] = unsortedArray[k];
+                }
+                BarItem curve1 = pane1.AddBar("Elements", null, values1, Color.White);
+                pane1.BarSettings.MinClusterGap = 0F;
+                BubbleGraph1.AxisChange();
+                BubbleGraph1.Invalidate();
+                sw1.Stop();
+                Invoke((MethodInvoker)delegate
+                {
+                    bubbletime.Text = Math.Round((sw1.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
 
-            });
-            d++;
-            buttoncheck();
+                });
+                d++;
+                buttoncheck();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        private void ReverseBubbleSort(object unsarr)
+        {
+            try
+            {
+                sw5.Restart();
+                sw5.Start();
+                var n = unsortedArray5.Length;
+                for (int i = 0; i < n; i++)
+                {
+
+                    for (int j = 0; j < n - i - 1; j++)
+                    {
+                        Thread.Sleep(5);
+                        if (unsortedArray5[j] < unsortedArray5[j + 1])
+                        {
+                            GraphPane pane = Revbubblegraph.GraphPane;
+                            pane.CurveList.Clear();
+                            double[] values = new double[n];
+                            for (int k = 0; k < n; k++)
+                            {
+                                values[k] = unsortedArray5[k];
+                            }
+                            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+                            pane.BarSettings.MinClusterGap = 0F;
+                            Revbubblegraph.AxisChange();
+                            Revbubblegraph.Invalidate();
+                            Swap(unsortedArray5, j, j + 1);
+                        }
+                        GraphPane pane1 = Revbubblegraph.GraphPane;
+                        pane1.CurveList.Clear();
+                        double[] values1 = new double[n];
+                        for (int k = 0; k < n; k++)
+                        {
+                            values1[k] = unsortedArray5[k];
+                        }
+                        BarItem curve1 = pane1.AddBar("Elements", null, values1, Color.White);
+                        pane1.BarSettings.MinClusterGap = 0F;
+                        Revbubblegraph.AxisChange();
+                        Revbubblegraph.Invalidate();
+                    }
+                }
+                sw5.Stop();
+                Invoke((MethodInvoker)delegate
+                {
+                    label2.Text = Math.Round((sw5.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+
+                });
+                d++;
+                buttoncheck();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //шейкерная сортировка
         private void ShakerSorting(object array)
         {
-            sw2.Restart();
-            sw2.Start();
-            var n = unsortedArray1.Length;
-            int left = 0,
-                right = n - 1;
-
-            while (left < right)
+            try
             {
-                for (int i = left; i < right; i++)
-                {
-                    if (unsortedArray1[i] > unsortedArray1[i + 1])
-                    {
-                        Swap(unsortedArray1, i, i + 1);
+                sw2.Restart();
+                sw2.Start();
+                var n = unsortedArray1.Length;
+                int left = 0,
+                    right = n - 1;
 
-                        GraphPane pane = ShakerGraph1.GraphPane;
+                while (left < right)
+                {
+                    for (int i = left; i < right; i++)
+                    {
+                        if (unsortedArray1[i] > unsortedArray1[i + 1])
+                        {
+                            Swap(unsortedArray1, i, i + 1);
+
+                            GraphPane pane = ShakerGraph1.GraphPane;
+                            pane.CurveList.Clear();
+                            double[] values = new double[n];
+                            for (int k = 0; k < n; k++)
+                            {
+                                values[k] = unsortedArray1[k];
+                            }
+                            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+                            pane.BarSettings.MinClusterGap = 0F;
+                            ShakerGraph1.AxisChange();
+                            ShakerGraph1.Invalidate();
+                            Thread.Sleep(5);
+                        }
+                    }
+                    right--;
+
+                    for (int i = right; i > left; i--)
+                    {
+                        if (unsortedArray1[i - 1] > unsortedArray1[i])
+                        {
+                            Swap(unsortedArray1, i - 1, i);
+                            /*                        ShakerGraph(ShakerGraph1);*/
+                        }
+                    }
+                    left++;
+                }
+                /*            ShakerGraph(ShakerGraph1);*/
+                sw2.Stop();
+                Invoke((MethodInvoker)delegate
+                {
+                    shakertime.Text = Math.Round((sw2.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+                });
+                d++;
+                buttoncheck();
+            }
+
+                        catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RevShakerSorting(object array1)
+        {
+            int n = unsortedArray6.Length;
+            sw6.Restart();
+            sw6.Start();
+            for (int i = 0; i < unsortedArray6.Length / 2; i++)
+            {
+                bool swapped = false;
+                for (int j = i; j < unsortedArray6.Length - i - 1; j++)
+                {
+                    if (unsortedArray6[j] < unsortedArray6[j + 1])
+                    {
+                        double tmp = unsortedArray6[j];
+                        unsortedArray6[j] = unsortedArray6[j + 1];
+                        unsortedArray6[j + 1] = tmp;
+                        swapped = true;
+                        GraphPane pane = revshakergraph.GraphPane;
                         pane.CurveList.Clear();
                         double[] values = new double[n];
                         for (int k = 0; k < n; k++)
                         {
-                            values[k] = unsortedArray1[k];
+                            values[k] = unsortedArray6[k];
                         }
                         BarItem curve = pane.AddBar("Elements", null, values, Color.White);
                         pane.BarSettings.MinClusterGap = 0F;
-                        ShakerGraph1.AxisChange();
-                        ShakerGraph1.Invalidate();
+                        revshakergraph.AxisChange();
+                        revshakergraph.Invalidate();
                         Thread.Sleep(5);
                     }
                 }
-                right--;
-
-                for (int i = right; i > left; i--)
+                for (int j = unsortedArray6.Length - 2 - i; j > i; j--)
                 {
-                    if (unsortedArray1[i - 1] > unsortedArray1[i])
+                    if (unsortedArray6[j] > unsortedArray6[j - 1])
                     {
-                        Swap(unsortedArray1, i - 1, i);
-/*                        ShakerGraph(ShakerGraph1);*/
+                        double tmp = unsortedArray6[j];
+                        unsortedArray6[j] = unsortedArray6[j - 1];
+                        unsortedArray6[j - 1] = tmp;
+                        swapped = true;
                     }
                 }
-                left++;
+
+
+                if (!swapped) break;
+
+                GraphPane pane1 = revshakergraph.GraphPane;
+                pane1.CurveList.Clear();
+                double[] values1 = new double[n];
+                for (int k = 0; k < n; k++)
+                {
+                    values1[k] = unsortedArray6[k];
+                }
+                BarItem curve1 = pane1.AddBar("Elements", null, values1, Color.White);
+                pane1.BarSettings.MinClusterGap = 0F;
+                revshakergraph.AxisChange();
+                revshakergraph.Invalidate();
+                Thread.Sleep(5);
+
             }
-/*            ShakerGraph(ShakerGraph1);*/
-            sw2.Stop();
+            sw6.Stop();
             Invoke((MethodInvoker)delegate
             {
-                shakertime.Text = Math.Round((sw2.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+                revshakertime.Text = Math.Round((sw6.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
             });
             d++;
             buttoncheck();
@@ -523,35 +766,46 @@ namespace Algorithm
         //самая тупая сортировка
         public void BogoSorting(object array2)
         {
-            sw3.Restart();
-            sw3.Start();
-            while (!IsSorted(unsortedArray2))
+            try
             {
-                unsortedArray2 = RandomPermutation(unsortedArray2);
-                GraphPane pane = BogoGraph1.GraphPane;
-                pane.CurveList.Clear();
-                var n = unsortedArray2.Length;
-                double[] values = new double[n];
-                for (int i = 0; i < n; i++)
+                sw3.Restart();
+                sw3.Start();
+                while (!IsSorted(unsortedArray2))
                 {
-                    values[i] = unsortedArray2[i];
+                    unsortedArray2 = RandomPermutation(unsortedArray2);
+                    GraphPane pane = BogoGraph1.GraphPane;
+                    pane.CurveList.Clear();
+                    var n = unsortedArray2.Length;
+                    double[] values = new double[n];
+                    for (int i = 0; i < n; i++)
+                    {
+                        values[i] = unsortedArray2[i];
+                    }
+                    BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+                    pane.BarSettings.MinClusterGap = 0F;
+                    BogoGraph1.AxisChange();
+                    BogoGraph1.Invalidate();
                 }
-                BarItem curve = pane.AddBar("Elements", null, values, Color.White);
-                pane.BarSettings.MinClusterGap = 0F;
-                BogoGraph1.AxisChange();
-                BogoGraph1.Invalidate();
+                d++;
+                buttoncheck();
+                sw3.Stop();
+                Invoke((MethodInvoker)delegate
+                {
+                    bogotime.Text = Math.Round((sw3.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+                });
             }
-            d++;
-            buttoncheck();
-            sw3.Stop();
-            Invoke((MethodInvoker)delegate
+
+                        catch (Exception ex)
             {
-                bogotime.Text = Math.Round((sw3.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
-            });
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         static bool IsSorted(double[] array)
-        {
+        {if(array.Length == 0)
+            {
+                MessageBox.Show("Массив пуст");
+            }
             for (int i = 0; i < array.Length - 1; i++)
             {
                 if (array[i] > array[i + 1])
@@ -560,7 +814,7 @@ namespace Algorithm
             return true;
         }
 
-         double[] RandomPermutation(double[] array)
+        double[] RandomPermutation(double[] array)
         {
             Random random = new Random();
             var n = dataGridView1.RowCount - 1;
@@ -590,7 +844,7 @@ namespace Algorithm
                     quicktime.Text = Math.Round((sw.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Сгенерируйте данные", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -622,10 +876,12 @@ namespace Algorithm
             }
             BarItem curve = pane.AddBar("Elements", null, values, Color.White);
 
-            Invoke((MethodInvoker)delegate {             
-            QuickGraph1.AxisChange();
-            QuickGraph1.Invalidate(); });
-       }
+            Invoke((MethodInvoker)delegate
+            {
+                QuickGraph1.AxisChange();
+                QuickGraph1.Invalidate();
+            });
+        }
 
         private int OrderItemsAroundPivot(double[] arr, int leftStart, int pivotLocation, int rightEnd)
         {
@@ -661,73 +917,77 @@ namespace Algorithm
         //intersion sort 
         public void InterSorting(object array3)
         {
-            sw4.Restart();
-            sw4.Start();
-
-
-            var n = unsortedArray4.Length;
-            for (int i = 1; i < n; ++i)
+            try
             {
-                int key = (int)unsortedArray4[i];
-                int j = i - 1;
+                sw4.Restart();
+                sw4.Start();
 
-                /*Invoke((MethodInvoker)delegate { InterGraph(IntersectionGraph1); });*/
 
-                GraphPane pane = IntersectionGraph1.GraphPane;
-                pane.CurveList.Clear();
-                double[] values1 = new double[n];
+                var n = unsortedArray4.Length;
+                for (int i = 1; i < n; ++i)
+                {
+                    int key = (int)unsortedArray4[i];
+                    int j = i - 1;
+
+                    GraphPane pane = IntersectionGraph1.GraphPane;
+                    pane.CurveList.Clear();
+                    double[] values1 = new double[n];
+                    for (int k = 0; k < n; k++)
+                    {
+                        values1[k] = unsortedArray4[k];
+                    }
+                    BarItem curve1 = pane.AddBar("Elements", null, values1, Color.White);
+                    pane.BarSettings.MinClusterGap = 0F;
+                    IntersectionGraph1.AxisChange();
+                    IntersectionGraph1.Invalidate();
+
+                    while (j >= 0 && unsortedArray4[j] > key)
+                    {
+                        unsortedArray4[j + 1] = unsortedArray4[j];
+                        Thread.Sleep(5);
+                        j = j - 1;
+                    }
+                    unsortedArray4[j + 1] = key;
+                }
+                GraphPane pane1 = IntersectionGraph1.GraphPane;
+                pane1.CurveList.Clear();
+                double[] values = new double[n];
                 for (int k = 0; k < n; k++)
                 {
-                    values1[k] = unsortedArray4[k];
+                    values[k] = unsortedArray4[k];
                 }
-                BarItem curve1 = pane.AddBar("Elements", null, values1, Color.White);
-                pane.BarSettings.MinClusterGap = 0F;
+                BarItem curve = pane1.AddBar("Elements", null, values, Color.White);
+                pane1.BarSettings.MinClusterGap = 0F;
                 IntersectionGraph1.AxisChange();
                 IntersectionGraph1.Invalidate();
-
-                while (j >= 0 && unsortedArray4[j] > key)
+                sw4.Stop();
+                Invoke((MethodInvoker)delegate
                 {
-                    unsortedArray4[j + 1] = unsortedArray4[j];
-                    Thread.Sleep(5);
-                    j = j - 1;
-                }
-                unsortedArray4[j + 1] = key;
+                    insectime.Text = Math.Round((sw4.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+                });
+                d++;
+                buttoncheck();
             }
-            GraphPane pane1 = IntersectionGraph1.GraphPane;
-            pane1.CurveList.Clear();
-            double[] values = new double[n];
-            for (int k = 0; k < n; k++)
+
+            catch (Exception ex)
             {
-                values[k] = unsortedArray4[k];
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            BarItem curve = pane1.AddBar("Elements", null, values, Color.White);
-            pane1.BarSettings.MinClusterGap = 0F;
-            IntersectionGraph1.AxisChange();
-            IntersectionGraph1.Invalidate();
-            sw4.Stop();
-            Invoke((MethodInvoker)delegate
-            {
-                insectime.Text = Math.Round((sw4.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
-            });
-            d++;
         }
         #endregion
 
-        private  void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             try
             {
-                try
-                {
-                    foreach (var item in threads)
-                    {
-                        if (item.ThreadState != System.Threading.ThreadState.Stopped)
-                        {
-                            item.Suspend();
-                        }
-                    }
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                  foreach (var item in threads)
+                  {
+                      if (item.ThreadState != System.Threading.ThreadState.Stopped)
+                      {
+                          item.Suspend();
+                      }
+                  }
+
             }
 
             catch (Exception ex)
@@ -752,6 +1012,32 @@ namespace Algorithm
             {
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+        private void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void ClearAll()
+        {
+            try
+            {
+                foreach (var item in threads)
+                {
+                    item.Abort();
+                }
+
+                GC.Collect();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BogoGraph1_Load(object sender, EventArgs e)
+        {
 
         }
     }
