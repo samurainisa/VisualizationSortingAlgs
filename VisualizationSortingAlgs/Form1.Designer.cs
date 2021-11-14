@@ -64,8 +64,8 @@ namespace Algorithm
             this.button3 = new System.Windows.Forms.Button();
             this.googleid = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.revquick = new System.Windows.Forms.CheckBox();
-            this.revinsection = new System.Windows.Forms.CheckBox();
+            this.revquickcheck = new System.Windows.Forms.CheckBox();
+            this.revinsectioncheck = new System.Windows.Forms.CheckBox();
             this.revshaker = new System.Windows.Forms.CheckBox();
             this.revbubble = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -304,7 +304,6 @@ namespace Algorithm
             this.BogoGraph1.Size = new System.Drawing.Size(300, 250);
             this.BogoGraph1.TabIndex = 22;
             this.BogoGraph1.UseExtendedPrintDialog = true;
-            this.BogoGraph1.Load += new System.EventHandler(this.BogoGraph1_Load);
             // 
             // bogocheck
             // 
@@ -444,10 +443,10 @@ namespace Algorithm
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(106, 312);
+            this.button3.Location = new System.Drawing.Point(116, 312);
             this.button3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(86, 57);
+            this.button3.Size = new System.Drawing.Size(76, 57);
             this.button3.TabIndex = 46;
             this.button3.Text = "Pause";
             this.button3.UseVisualStyleBackColor = true;
@@ -470,27 +469,27 @@ namespace Algorithm
             this.label1.TabIndex = 49;
             this.label1.Text = "ID";
             // 
-            // revquick
+            // revquickcheck
             // 
-            this.revquick.AutoSize = true;
-            this.revquick.Location = new System.Drawing.Point(29, 641);
-            this.revquick.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.revquick.Name = "revquick";
-            this.revquick.Size = new System.Drawing.Size(95, 19);
-            this.revquick.TabIndex = 53;
-            this.revquick.Text = "Rev QuickSort";
-            this.revquick.UseVisualStyleBackColor = true;
+            this.revquickcheck.AutoSize = true;
+            this.revquickcheck.Location = new System.Drawing.Point(29, 641);
+            this.revquickcheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.revquickcheck.Name = "revquickcheck";
+            this.revquickcheck.Size = new System.Drawing.Size(95, 19);
+            this.revquickcheck.TabIndex = 53;
+            this.revquickcheck.Text = "Rev QuickSort";
+            this.revquickcheck.UseVisualStyleBackColor = true;
             // 
-            // revinsection
+            // revinsectioncheck
             // 
-            this.revinsection.AutoSize = true;
-            this.revinsection.Location = new System.Drawing.Point(29, 666);
-            this.revinsection.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.revinsection.Name = "revinsection";
-            this.revinsection.Size = new System.Drawing.Size(112, 19);
-            this.revinsection.TabIndex = 52;
-            this.revinsection.Text = "Rev InsectionSort";
-            this.revinsection.UseVisualStyleBackColor = true;
+            this.revinsectioncheck.AutoSize = true;
+            this.revinsectioncheck.Location = new System.Drawing.Point(29, 666);
+            this.revinsectioncheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.revinsectioncheck.Name = "revinsectioncheck";
+            this.revinsectioncheck.Size = new System.Drawing.Size(112, 19);
+            this.revinsectioncheck.TabIndex = 52;
+            this.revinsectioncheck.Text = "Rev InsectionSort";
+            this.revinsectioncheck.UseVisualStyleBackColor = true;
             // 
             // revshaker
             // 
@@ -688,7 +687,7 @@ namespace Algorithm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1160, 802);
+            this.ClientSize = new System.Drawing.Size(1160, 820);
             this.Controls.Add(this.revinter);
             this.Controls.Add(this.revquicksort);
             this.Controls.Add(this.revshakergraph);
@@ -701,8 +700,8 @@ namespace Algorithm
             this.Controls.Add(this.label8);
             this.Controls.Add(this.revshakertime);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.revquick);
-            this.Controls.Add(this.revinsection);
+            this.Controls.Add(this.revquickcheck);
+            this.Controls.Add(this.revinsectioncheck);
             this.Controls.Add(this.revshaker);
             this.Controls.Add(this.revbubble);
             this.Controls.Add(this.label1);
@@ -783,8 +782,8 @@ namespace Algorithm
         private System.Windows.Forms.TextBox googleid;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem очиститьToolStripMenuItem;
-        private System.Windows.Forms.CheckBox revquick;
-        private System.Windows.Forms.CheckBox revinsection;
+        private System.Windows.Forms.CheckBox revquickcheck;
+        private System.Windows.Forms.CheckBox revinsectioncheck;
         private System.Windows.Forms.CheckBox revshaker;
         private System.Windows.Forms.CheckBox revbubble;
         private System.Windows.Forms.Label label2;

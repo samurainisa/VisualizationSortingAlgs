@@ -29,6 +29,7 @@ namespace Algorithm
         double[] unsortedArray4;
         double[] unsortedArray5;
         double[] unsortedArray6;
+        double[] unsortedArray7;
         int c;
         int d;
         List<Thread> threads = new List<Thread>();
@@ -39,10 +40,12 @@ namespace Algorithm
         Stopwatch sw4 = new Stopwatch();
         Stopwatch sw5 = new Stopwatch();
         Stopwatch sw6 = new Stopwatch();
+        Stopwatch sw7 = new Stopwatch();
 
         public Form1()
         {
             InitializeComponent();
+            if (!revquickcheck.Checked) revquicksort.Visible = false;
             if (!revshaker.Checked) revshakergraph.Visible = false;
             if (!bubblecheck.Checked) BubbleGraph1.Visible = false;
             if (!shakercheck.Checked) ShakerGraph1.Visible = false;
@@ -57,6 +60,7 @@ namespace Algorithm
             zedGraphDesign(IntersectionGraph1);
             zedGraphDesign(Revbubblegraph);
             zedGraphDesign(revshakergraph);
+            zedGraphDesign(revquicksort);
         }
 
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -133,6 +137,7 @@ namespace Algorithm
                     unsortedArray4 = null;
                     unsortedArray5 = null;
                     unsortedArray6 = null;
+                    unsortedArray7 = null;
                     DtgtoList();
                     InitGraphics();
                     GC.Collect();
@@ -173,6 +178,7 @@ namespace Algorithm
             unsortedArray4 = null;
             unsortedArray5 = null;
             unsortedArray6 = null;
+            unsortedArray7 = null; 
             await readAsync();
         }
 
@@ -241,7 +247,6 @@ namespace Algorithm
             }
         }
 
-
         #endregion
 
         #region Заполнение
@@ -257,6 +262,7 @@ namespace Algorithm
             unsortedArray4 = new double[dataGridView1.RowCount];
             unsortedArray5 = new double[dataGridView1.RowCount];
             unsortedArray6 = new double[dataGridView1.RowCount];
+            unsortedArray7 = new double[dataGridView1.RowCount];
 
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
@@ -267,19 +273,21 @@ namespace Algorithm
                 unsortedArray4[i] = double.Parse(dataGridView1[0, i].Value.ToString());
                 unsortedArray5[i] = double.Parse(dataGridView1[0, i].Value.ToString());
                 unsortedArray6[i] = double.Parse(dataGridView1[0, i].Value.ToString());
+                unsortedArray7[i] = double.Parse(dataGridView1[0, i].Value.ToString());
             }
             dataGridView1.AllowUserToAddRows = true;
         }
 
         private void genBtn_Click_1(object sender, EventArgs e)
         {
-         if (bubblecheck.Checked) BubbleGraph1.Visible = true;
-         if (shakercheck.Checked) ShakerGraph1.Visible = true;
-         if (quickcheck.Checked) QuickGraph1.Visible = true;
-         if (bogocheck.Checked) BogoGraph1.Visible = true;
-         if (Intersectioncheck.Checked) IntersectionGraph1.Visible = true;
-         if (revbubble.Checked) Revbubblegraph.Visible = true;
-         if (revshaker.Checked) revshakergraph.Visible = true;
+            if (bubblecheck.Checked) BubbleGraph1.Visible = true;
+            if (shakercheck.Checked) ShakerGraph1.Visible = true;
+            if (quickcheck.Checked) QuickGraph1.Visible = true;
+            if (bogocheck.Checked) BogoGraph1.Visible = true;
+            if (Intersectioncheck.Checked) IntersectionGraph1.Visible = true;
+            if (revbubble.Checked) Revbubblegraph.Visible = true;
+            if (revshaker.Checked) revshakergraph.Visible = true;
+            if (revquickcheck.Checked) revquicksort.Visible = true;
             GenerateData();
             DtgtoList();
             InitGraphics();
@@ -294,6 +302,7 @@ namespace Algorithm
             if (quickcheck.Checked) QuickGraph();
             if (Intersectioncheck.Checked) InterGraph();
             if (revshaker.Checked) RevShakerGraph();
+            if (revquickcheck.Checked) RevQuickSort();
         }
 
         #endregion
@@ -313,16 +322,12 @@ namespace Algorithm
             });
         }
         #region Треды
-
-
         public void button1_Click(object sender, EventArgs e)
         {
             try
             {
-
                 c = 0;
                 d = 0;
-
                 if (quickcheck.Checked)
                 {
                     Thread quick = new Thread(new ParameterizedThreadStart(CreateQuickSort));
@@ -352,6 +357,7 @@ namespace Algorithm
                     threads.Add(shaker);
                     shaker.Start(unsortedArray1);
                 }
+
                 if (revshaker.Checked)
                 {
                     c++;
@@ -359,7 +365,6 @@ namespace Algorithm
                     threads.Add(revshaker);
                     revshaker.Start(unsortedArray6);
                 }
-
 
                 if (bogocheck.Checked)
                 {
@@ -376,23 +381,39 @@ namespace Algorithm
                     threads.Add(inter);
                     inter.Start(unsortedArray4);
                 }
+                if (revquickcheck.Checked)
+                {
+                    c++;
+                    Thread revquick = new Thread(new ParameterizedThreadStart(ReverseQuickSorting));
+                    threads.Add(revquick);
+                    revquick.Start(unsortedArray7);
+                }
+
                 buttoncheck();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-        }
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
         }
         #endregion
-
         #region Визуализация
+        private void RevQuickSort()
+        {
+            GraphPane pane = revquicksort.GraphPane;
+            pane.Title.Text = "Reverse QuickSort";
+            pane.CurveList.Clear();
+            int n = unsortedArray7.Length;
+            double[] values = new double[n];
+            for (int k = 0; k < n; k++)
+            {
+                values[k] = unsortedArray7[k];
+            }
+            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+            pane.BarSettings.MinClusterGap = 0F;
+            revquicksort.AxisChange();
+            revquicksort.Invalidate();
+        }
         private void BubbleGraph()
         {
             GraphPane pane = BubbleGraph1.GraphPane;
@@ -478,6 +499,7 @@ namespace Algorithm
             IntersectionGraph1.AxisChange();
             IntersectionGraph1.Invalidate();
         }
+
         private void RevShakerGraph()
         {
             GraphPane pane = revshakergraph.GraphPane;
@@ -512,8 +534,6 @@ namespace Algorithm
             Revbubblegraph.Invalidate();
         }
         #endregion
-
-
         #region Сортировочки
 
         static void Swap(double[] array, int i, int j)
@@ -580,6 +600,7 @@ namespace Algorithm
             }
 
         }
+
         private void ReverseBubbleSort(object unsarr)
         {
             try
@@ -635,7 +656,6 @@ namespace Algorithm
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         //шейкерная сортировка
         private void ShakerSorting(object array)
         {
@@ -654,24 +674,19 @@ namespace Algorithm
                         if (unsortedArray1[i] > unsortedArray1[i + 1])
                         {
                             Swap(unsortedArray1, i, i + 1);
-                            Invoke((MethodInvoker)delegate
-                            {
-                                GraphPane pane = ShakerGraph1.GraphPane;
-                                pane.CurveList.Clear();
-                            });
+
+                             GraphPane pane = ShakerGraph1.GraphPane;
+                             pane.CurveList.Clear();
                             double[] values = new double[n];
                             for (int k = 0; k < n; k++)
                             {
                                 values[k] = unsortedArray1[k];
                             }
-                            Invoke((MethodInvoker)delegate
-                            {
-                                GraphPane pane = ShakerGraph1.GraphPane;
-                                BarItem curve = pane.AddBar("Elements", null, values, Color.White);
-                                pane.BarSettings.MinClusterGap = 0F;
-                                ShakerGraph1.AxisChange();
-                                ShakerGraph1.Invalidate();
-                            });
+                             BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+                             pane.BarSettings.MinClusterGap = 0F;
+                             ShakerGraph1.AxisChange();
+                             ShakerGraph1.Invalidate();
+
                             Thread.Sleep(5);
                         }
                     }
@@ -738,6 +753,7 @@ namespace Algorithm
                             revshakergraph.AxisChange();
                             revshakergraph.Invalidate();  
                         });
+                        Thread.Sleep(5);
                     }
                 }
                 for (int j = unsortedArray6.Length - 2 - i; j > i; j--)
@@ -757,7 +773,6 @@ namespace Algorithm
                 {
                     pane1.CurveList.Clear();
                 });
-
 
                 double[] values1 = new double[n];
                 for (int k = 0; k < n; k++)
@@ -781,7 +796,6 @@ namespace Algorithm
             d++;
             buttoncheck();
         }
-
         //самая тупая сортировка
         public void BogoSorting(object array2)
         {
@@ -849,7 +863,6 @@ namespace Algorithm
             }
             return array;
         }
-
         //quick sort
         private void CreateQuickSort(object array4)
         {
@@ -900,7 +913,6 @@ namespace Algorithm
             //отрисовка
             Invoke((MethodInvoker)delegate
             {
-
                 pane.CurveList.Clear();
             });
 
@@ -919,6 +931,7 @@ namespace Algorithm
             });
         }
 
+        
         private int OrderItemsAroundPivot(double[] arr, int leftStart, int pivotLocation, int rightEnd)
         {
             var pivot = arr[pivotLocation];
@@ -950,6 +963,61 @@ namespace Algorithm
             return middle;
         }
 
+        //реверс быстрая сорт
+
+
+        public void ReverseQuickSorting(object array)
+        {
+            sw7.Restart();
+            sw7.Start();
+            quickSort(unsortedArray7, 0, unsortedArray7.Length - 1);
+            sw7.Stop();
+            Invoke((MethodInvoker)delegate
+            {
+                label7.Text = Math.Round((sw7.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+            });
+        }
+
+        private void quickSort(double[] array, int p, int r)
+        {
+            if (p < r)
+            {
+                int q = partition(array, p, r);
+                Thread.Sleep(5);
+                quickSort(array, p, q - 1);
+                quickSort(array, q + 1, r);
+                GraphPane pane = revquicksort.GraphPane;
+                pane.CurveList.Clear();
+                int n = unsortedArray7.Length;
+                double[] values = new double[n];
+                for (int k = 0; k < n; k++)
+                {
+                    values[k] = unsortedArray7[k];
+                }
+                BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+                pane.BarSettings.MinClusterGap = 0F;
+                revquicksort.AxisChange();
+                revquicksort.Invalidate();
+            }
+        }
+
+        private int partition(double[] array, int p, int r)
+        {
+            int i = p - 1;
+            int j = p;
+            while (j < r)
+            {
+                /** Just change compare condition **/
+                if (array[j] > array[r])
+                {
+                    Swap(array, i + 1, j);
+                    i++;
+                }
+                j++;
+            }
+            Swap(array, i + 1, r);
+            return i + 1;
+        }
         //intersion sort 
         public void InterSorting(object array3)
         {
@@ -1013,6 +1081,7 @@ namespace Algorithm
         }
         #endregion
 
+
         private void button3_Click(object sender, EventArgs e)
         {
             try
@@ -1063,18 +1132,12 @@ namespace Algorithm
                 {
                     item.Abort();
                 }
-
                 GC.Collect();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-        }
-
-        private void BogoGraph1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
