@@ -22,6 +22,7 @@ namespace Algorithm
     public partial class Form1 : Form
     {
         private Random rand = new Random();
+
         double[] unsortedArray;
         double[] unsortedArray1;
         double[] unsortedArray2;
@@ -30,9 +31,13 @@ namespace Algorithm
         double[] unsortedArray5;
         double[] unsortedArray6;
         double[] unsortedArray7;
+        double[] unsortedArray8;
+
         int c;
         int d;
+
         List<Thread> threads = new List<Thread>();
+
         Stopwatch sw = new Stopwatch();
         Stopwatch sw1 = new Stopwatch();
         Stopwatch sw2 = new Stopwatch();
@@ -41,6 +46,7 @@ namespace Algorithm
         Stopwatch sw5 = new Stopwatch();
         Stopwatch sw6 = new Stopwatch();
         Stopwatch sw7 = new Stopwatch();
+        Stopwatch sw8 = new Stopwatch();
 
         public Form1()
         {
@@ -53,6 +59,8 @@ namespace Algorithm
             if (!bogocheck.Checked) BogoGraph1.Visible = false;
             if (!Intersectioncheck.Checked) IntersectionGraph1.Visible = false;
             if (!revbubble.Checked) Revbubblegraph.Visible = false;
+            if (!revinsectioncheck.Checked) Revintergraph.Visible = false;
+
             zedGraphDesign(BubbleGraph1);
             zedGraphDesign(ShakerGraph1);
             zedGraphDesign(QuickGraph1);
@@ -61,6 +69,7 @@ namespace Algorithm
             zedGraphDesign(Revbubblegraph);
             zedGraphDesign(revshakergraph);
             zedGraphDesign(revquicksort);
+            zedGraphDesign(Revintergraph);
         }
 
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -138,6 +147,7 @@ namespace Algorithm
                     unsortedArray5 = null;
                     unsortedArray6 = null;
                     unsortedArray7 = null;
+                    unsortedArray8 = null;
                     DtgtoList();
                     InitGraphics();
                     GC.Collect();
@@ -178,7 +188,8 @@ namespace Algorithm
             unsortedArray4 = null;
             unsortedArray5 = null;
             unsortedArray6 = null;
-            unsortedArray7 = null; 
+            unsortedArray7 = null;
+            unsortedArray8 = null;
             await readAsync();
         }
 
@@ -263,6 +274,7 @@ namespace Algorithm
             unsortedArray5 = new double[dataGridView1.RowCount];
             unsortedArray6 = new double[dataGridView1.RowCount];
             unsortedArray7 = new double[dataGridView1.RowCount];
+            unsortedArray8 = new double[dataGridView1.RowCount];
 
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
@@ -274,6 +286,7 @@ namespace Algorithm
                 unsortedArray5[i] = double.Parse(dataGridView1[0, i].Value.ToString());
                 unsortedArray6[i] = double.Parse(dataGridView1[0, i].Value.ToString());
                 unsortedArray7[i] = double.Parse(dataGridView1[0, i].Value.ToString());
+                unsortedArray8[i] = double.Parse(dataGridView1[0, i].Value.ToString());
             }
             dataGridView1.AllowUserToAddRows = true;
         }
@@ -288,6 +301,7 @@ namespace Algorithm
             if (revbubble.Checked) Revbubblegraph.Visible = true;
             if (revshaker.Checked) revshakergraph.Visible = true;
             if (revquickcheck.Checked) revquicksort.Visible = true;
+            if (revinsectioncheck.Checked) Revintergraph.Visible = true;
             GenerateData();
             DtgtoList();
             InitGraphics();
@@ -303,6 +317,7 @@ namespace Algorithm
             if (Intersectioncheck.Checked) InterGraph();
             if (revshaker.Checked) RevShakerGraph();
             if (revquickcheck.Checked) RevQuickSort();
+            if (revinsectioncheck.Checked) RevInterSort();
         }
 
         #endregion
@@ -328,6 +343,13 @@ namespace Algorithm
             {
                 c = 0;
                 d = 0;
+                if (revinsectioncheck.Checked)
+                {
+                    c++;
+                    Thread revinsec = new Thread(new ParameterizedThreadStart(ReverseInterSorting));
+                    threads.Add(revinsec);
+                    revinsec.Start(unsortedArray8);
+                }
                 if (quickcheck.Checked)
                 {
                     Thread quick = new Thread(new ParameterizedThreadStart(CreateQuickSort));
@@ -389,6 +411,7 @@ namespace Algorithm
                     revquick.Start(unsortedArray7);
                 }
 
+
                 buttoncheck();
             }
             catch (Exception ex)
@@ -414,6 +437,24 @@ namespace Algorithm
             revquicksort.AxisChange();
             revquicksort.Invalidate();
         }
+
+        private void RevInterSort()
+        {
+            GraphPane pane = Revintergraph.GraphPane;
+            pane.Title.Text = "Reverse InserSort";
+            pane.CurveList.Clear();
+            int n = unsortedArray8.Length;
+            double[] values = new double[n];
+            for (int k = 0; k < n; k++)
+            {
+                values[k] = unsortedArray8[k];
+            }
+            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+            pane.BarSettings.MinClusterGap = 0F;
+            Revintergraph.AxisChange();
+            Revintergraph.Invalidate();
+        }
+
         private void BubbleGraph()
         {
             GraphPane pane = BubbleGraph1.GraphPane;
@@ -533,6 +574,7 @@ namespace Algorithm
             Revbubblegraph.AxisChange();
             Revbubblegraph.Invalidate();
         }
+
         #endregion
         #region Сортировочки
 
@@ -899,7 +941,6 @@ namespace Algorithm
 
         private void QuickSort(double[] arr, int leftStart, int rightEnd)
         {
-            GraphPane pane = QuickGraph1.GraphPane;
             if (leftStart >= rightEnd)
             {
                 return;
@@ -911,10 +952,9 @@ namespace Algorithm
             QuickSort(arr, pivotLocation + 1, rightEnd);
 
             //отрисовка
-            Invoke((MethodInvoker)delegate
-            {
-                pane.CurveList.Clear();
-            });
+            GraphPane pane = QuickGraph1.GraphPane;
+
+            pane.CurveList.Clear();
 
             var n = unsortedArray3.Length;
             double[] values = new double[n];
@@ -922,21 +962,15 @@ namespace Algorithm
             {
                 values[i] = unsortedArray3[i];
             }
-
-            Invoke((MethodInvoker)delegate
-            {
-                BarItem curve = pane.AddBar("Elements", null, values, Color.White);
-                QuickGraph1.AxisChange();
-                QuickGraph1.Invalidate();
-            });
+            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+            QuickGraph1.AxisChange();
+            QuickGraph1.Invalidate();
         }
 
-        
         private int OrderItemsAroundPivot(double[] arr, int leftStart, int pivotLocation, int rightEnd)
         {
             var pivot = arr[pivotLocation];
             Swap(arr, pivotLocation, rightEnd);
-            Thread.Sleep(5);
             var leftIndex = leftStart;
             var rightIndex = rightEnd - 1;
             while (leftIndex <= rightIndex)
@@ -964,8 +998,6 @@ namespace Algorithm
         }
 
         //реверс быстрая сорт
-
-
         public void ReverseQuickSorting(object array)
         {
             sw7.Restart();
@@ -1018,6 +1050,7 @@ namespace Algorithm
             Swap(array, i + 1, r);
             return i + 1;
         }
+
         //intersion sort 
         public void InterSorting(object array3)
         {
@@ -1056,10 +1089,12 @@ namespace Algorithm
                 GraphPane pane1 = IntersectionGraph1.GraphPane;
                 pane1.CurveList.Clear();
                 double[] values = new double[n];
+
                 for (int k = 0; k < n; k++)
                 {
                     values[k] = unsortedArray4[k];
                 }
+
                 BarItem curve = pane1.AddBar("Elements", null, values, Color.White);
                 pane1.BarSettings.MinClusterGap = 0F;
                 IntersectionGraph1.AxisChange();
@@ -1079,6 +1114,61 @@ namespace Algorithm
                 Console.WriteLine(ex.Message);
             }
         }
+
+        //reverse intesion sort
+        public void ReverseInterSorting(object array3)
+        {
+
+            sw8.Restart();
+            sw8.Start();
+
+
+            var n = unsortedArray8.Length;
+            for (int i = 1; i < n; ++i)
+            {
+                int key = (int)unsortedArray8[i];
+                int j = i - 1;
+
+                GraphPane pane = Revintergraph.GraphPane;
+                pane.CurveList.Clear();
+                double[] values1 = new double[n];
+                for (int k = 0; k < n; k++)
+                {
+                    values1[k] = unsortedArray8[k];
+                }
+                BarItem curve1 = pane.AddBar("Elements", null, values1, Color.White);
+                pane.BarSettings.MinClusterGap = 0F;
+                Revintergraph.AxisChange();
+                Revintergraph.Invalidate();
+
+                while (j >= 0 && unsortedArray8[j] < key)
+                {
+                    unsortedArray8[j + 1] = unsortedArray8[j];
+                    Thread.Sleep(5);
+                    j = j - 1;
+                }
+                unsortedArray8[j + 1] = key;
+            }
+            GraphPane pane1 = Revintergraph.GraphPane;
+            pane1.CurveList.Clear();
+            double[] values = new double[n];
+            for (int k = 0; k < n; k++)
+            {
+                values[k] = unsortedArray8[k];
+            }
+            BarItem curve = pane1.AddBar("Elements", null, values, Color.White);
+            pane1.BarSettings.MinClusterGap = 0F;
+            Revintergraph.AxisChange();
+            Revintergraph.Invalidate();
+            sw8.Stop();
+            Invoke((MethodInvoker)delegate
+            {
+                label4.Text = Math.Round((sw8.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+            });
+            d++;
+            buttoncheck();
+
+        }
         #endregion
 
 
@@ -1093,6 +1183,7 @@ namespace Algorithm
                           item.Abort();
                       }
                   }
+                button1.Enabled = true;
             }
 
             catch (Exception ex)

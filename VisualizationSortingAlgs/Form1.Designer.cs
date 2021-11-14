@@ -79,7 +79,7 @@ namespace Algorithm
             this.Revbubblegraph = new ZedGraph.ZedGraphControl();
             this.revshakergraph = new ZedGraph.ZedGraphControl();
             this.revquicksort = new ZedGraph.ZedGraphControl();
-            this.revinter = new ZedGraph.ZedGraphControl();
+            this.Revintergraph = new ZedGraph.ZedGraphControl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -539,9 +539,8 @@ namespace Algorithm
             this.label4.Location = new System.Drawing.Point(176, 668);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(13, 15);
+            this.label4.Size = new System.Drawing.Size(0, 15);
             this.label4.TabIndex = 61;
-            this.label4.Text = "1";
             // 
             // label6
             // 
@@ -558,12 +557,11 @@ namespace Algorithm
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label7.Location = new System.Drawing.Point(176, 645);
+            this.label7.Location = new System.Drawing.Point(176, 643);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(13, 15);
+            this.label7.Size = new System.Drawing.Size(0, 15);
             this.label7.TabIndex = 59;
-            this.label7.Text = "1";
             // 
             // label8
             // 
@@ -662,33 +660,33 @@ namespace Algorithm
             this.revquicksort.TabIndex = 64;
             this.revquicksort.UseExtendedPrintDialog = true;
             // 
-            // revinter
+            // Revintergraph
             // 
-            this.revinter.Font = new System.Drawing.Font("Century Gothic", 6F);
-            this.revinter.IsEnableHPan = false;
-            this.revinter.IsEnableHZoom = false;
-            this.revinter.IsEnableVZoom = false;
-            this.revinter.IsEnableWheelZoom = false;
-            this.revinter.Location = new System.Drawing.Point(840, 547);
-            this.revinter.Margin = new System.Windows.Forms.Padding(0);
-            this.revinter.Name = "revinter";
-            this.revinter.ScrollGrace = 0D;
-            this.revinter.ScrollMaxX = 0D;
-            this.revinter.ScrollMaxY = 0D;
-            this.revinter.ScrollMaxY2 = 0D;
-            this.revinter.ScrollMinX = 0D;
-            this.revinter.ScrollMinY = 0D;
-            this.revinter.ScrollMinY2 = 0D;
-            this.revinter.Size = new System.Drawing.Size(300, 250);
-            this.revinter.TabIndex = 65;
-            this.revinter.UseExtendedPrintDialog = true;
+            this.Revintergraph.Font = new System.Drawing.Font("Century Gothic", 6F);
+            this.Revintergraph.IsEnableHPan = false;
+            this.Revintergraph.IsEnableHZoom = false;
+            this.Revintergraph.IsEnableVZoom = false;
+            this.Revintergraph.IsEnableWheelZoom = false;
+            this.Revintergraph.Location = new System.Drawing.Point(840, 547);
+            this.Revintergraph.Margin = new System.Windows.Forms.Padding(0);
+            this.Revintergraph.Name = "Revintergraph";
+            this.Revintergraph.ScrollGrace = 0D;
+            this.Revintergraph.ScrollMaxX = 0D;
+            this.Revintergraph.ScrollMaxY = 0D;
+            this.Revintergraph.ScrollMaxY2 = 0D;
+            this.Revintergraph.ScrollMinX = 0D;
+            this.Revintergraph.ScrollMinY = 0D;
+            this.Revintergraph.ScrollMinY2 = 0D;
+            this.Revintergraph.Size = new System.Drawing.Size(300, 250);
+            this.Revintergraph.TabIndex = 65;
+            this.Revintergraph.UseExtendedPrintDialog = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1160, 820);
-            this.Controls.Add(this.revinter);
+            this.Controls.Add(this.Revintergraph);
             this.Controls.Add(this.revquicksort);
             this.Controls.Add(this.revshakergraph);
             this.Controls.Add(this.Revbubblegraph);
@@ -797,7 +795,7 @@ namespace Algorithm
         private ZedGraph.ZedGraphControl Revbubblegraph;
         private ZedGraph.ZedGraphControl revshakergraph;
         private ZedGraph.ZedGraphControl revquicksort;
-        private ZedGraph.ZedGraphControl revinter;
+        private ZedGraph.ZedGraphControl Revintergraph;
     }
 }
 
