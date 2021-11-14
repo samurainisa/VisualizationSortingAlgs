@@ -100,10 +100,15 @@ namespace Algorithm
             GraphPane graphfield = BubbleGraph1.GraphPane;
             graphfield.Border.Color = Color.Black;
             graphfield.Chart.Border.Color = Color.Black;
-            graphfield.Fill.Type = FillType.Solid;
-            graphfield.Fill.Color = Color.Black;
-            graphfield.Chart.Fill.Type = FillType.Solid;
             graphfield.Chart.Fill.Color = Color.White;
+            graphfield.Title.FontSpec.Fill.Brush = new SolidBrush(Color.White);
+            graphfield.Title.FontSpec.Fill.IsVisible = true;
+            graphfield.Fill.Type = FillType.Solid;
+            graphfield.Fill.Color = Color.FromArgb(50, 49, 69);
+            graphfield.Chart.Fill.Type = FillType.Solid;
+            graphfield.Chart.Fill.Color = Color.Black;
+            graphfield.XAxis.Color = Color.CornflowerBlue;
+            graphfield.YAxis.Color = Color.CornflowerBlue;
             graphfield.YAxis.Title.Text = null;
             graphfield.XAxis.Title.Text = null;
         }
@@ -354,21 +359,6 @@ namespace Algorithm
 
         #endregion
 
-        public void buttoncheck()
-        {
-            Invoke((MethodInvoker)delegate
-            {
-                if (c == d)
-                {
-                    button1.Enabled = true;
-                }
-                else
-                {
-                    button1.Enabled = false;
-                }
-            });
-        }
-
         #region Треды
         public void button1_Click(object sender, EventArgs e)
         {
@@ -399,7 +389,7 @@ namespace Algorithm
 
                 if (bubblecheck.Checked)
                 {
-                    c++;
+                    
                     Thread bubble = new Thread(new ParameterizedThreadStart(BubbleSorting));
                     threads.Add(bubble);
                     bubble.Start(unsortedArray);
@@ -532,7 +522,7 @@ namespace Algorithm
         private void BogoGraph()
         {
             GraphPane pane = BogoGraph1.GraphPane;
-            pane.Title.Text = "BubbleSort";
+            pane.Title.Text = "BogoSort";
             pane.CurveList.Clear();
             var n = unsortedArray2.Length;
             double[] values = new double[n];
@@ -545,6 +535,7 @@ namespace Algorithm
             BogoGraph1.AxisChange();
             BogoGraph1.Invalidate();
         }
+
         private void RevBogoGraph()
         {
             GraphPane pane = revbogograph.GraphPane;
@@ -1020,6 +1011,7 @@ namespace Algorithm
 
             }
         }
+
         public bool IsSorted1(double[] array)
         {
             try
@@ -1059,36 +1051,16 @@ namespace Algorithm
         //quick sort
         private void CreateQuickSort(object array4)
         {
-            try
+            sw.Restart();
+            sw.Start();
+
+            QuickSort(unsortedArray3, 0, unsortedArray3.Length - 1);
+
+            sw.Stop();
+            Invoke((MethodInvoker)delegate
             {
-                sw.Restart();
-                sw.Start();
-                if (array4 != null)
-                {
-                    Invoke((MethodInvoker)delegate
-                {
-                    button1.Enabled = false;
-
-                });
-                    QuickSort(unsortedArray3, 0, unsortedArray3.Length - 1);
-                }
-                sw.Stop();
-                Invoke((MethodInvoker)delegate
-                {
-                    quicktime.Text = Math.Round((sw.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
-                });
-                Invoke((MethodInvoker)delegate
-                {
-                    button1.Enabled = true;
-
-                });
-               
-            }
-            catch (Exception ex)
-            {
-
-            }
-
+                quicktime.Text = Math.Round((sw.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
+            });
         }
 
         private void QuickSort(double[] arr, int leftStart, int rightEnd)
@@ -1333,6 +1305,22 @@ namespace Algorithm
 
         }
         #endregion
+
+        public void buttoncheck()
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                if (c == d)
+                {
+                    button1.Enabled = true;
+                }
+                else
+                {
+                    button1.Enabled = false;
+                }
+            });
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             try
@@ -1437,9 +1425,34 @@ namespace Algorithm
             }
         }
 
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void menuStrip1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
     }
 }

@@ -63,7 +63,6 @@ namespace Algorithm
             this.bubblecheck = new System.Windows.Forms.CheckBox();
             this.button3 = new System.Windows.Forms.Button();
             this.googleid = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.revquickcheck = new System.Windows.Forms.CheckBox();
             this.revinsectioncheck = new System.Windows.Forms.CheckBox();
             this.revshaker = new System.Windows.Forms.CheckBox();
@@ -90,14 +89,16 @@ namespace Algorithm
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(43)))), ((int)(((byte)(60)))));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Mass});
-            this.dataGridView1.Location = new System.Drawing.Point(11, 51);
+            this.dataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(43)))), ((int)(((byte)(60)))));
+            this.dataGridView1.Location = new System.Drawing.Point(27, 51);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(163, 251);
+            this.dataGridView1.Size = new System.Drawing.Size(155, 251);
             this.dataGridView1.TabIndex = 0;
             // 
             // Mass
@@ -109,25 +110,28 @@ namespace Algorithm
             // 
             // genBtn
             // 
-            this.genBtn.Location = new System.Drawing.Point(15, 349);
+            this.genBtn.BackColor = System.Drawing.Color.White;
+            this.genBtn.Location = new System.Drawing.Point(27, 335);
             this.genBtn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.genBtn.Name = "genBtn";
-            this.genBtn.Size = new System.Drawing.Size(163, 26);
+            this.genBtn.Size = new System.Drawing.Size(156, 26);
             this.genBtn.TabIndex = 1;
             this.genBtn.Text = "Сгенерировать массив";
-            this.genBtn.UseVisualStyleBackColor = true;
+            this.genBtn.UseVisualStyleBackColor = false;
             this.genBtn.Click += new System.EventHandler(this.genBtn_Click_1);
             // 
             // arraynum
             // 
-            this.arraynum.Location = new System.Drawing.Point(15, 324);
+            this.arraynum.Location = new System.Drawing.Point(27, 310);
             this.arraynum.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.arraynum.Name = "arraynum";
-            this.arraynum.Size = new System.Drawing.Size(163, 19);
+            this.arraynum.Size = new System.Drawing.Size(156, 19);
             this.arraynum.TabIndex = 2;
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(75)))), ((int)(((byte)(105)))));
+            this.menuStrip1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.закрытьToolStripMenuItem,
             this.excelToolStripMenuItem,
@@ -135,35 +139,40 @@ namespace Algorithm
             this.очиститьToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1224, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1226, 25);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseDown);
             // 
             // закрытьToolStripMenuItem
             // 
+            this.закрытьToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Control;
             this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
-            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.закрытьToolStripMenuItem.Text = "Закрыть";
             this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
             // 
             // excelToolStripMenuItem
             // 
+            this.excelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
-            this.excelToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(51, 21);
             this.excelToolStripMenuItem.Text = "Excel";
             this.excelToolStripMenuItem.Click += new System.EventHandler(this.excelToolStripMenuItem_Click);
             // 
             // googleToolStripMenuItem
             // 
+            this.googleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.googleToolStripMenuItem.Name = "googleToolStripMenuItem";
-            this.googleToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.googleToolStripMenuItem.Size = new System.Drawing.Size(65, 21);
             this.googleToolStripMenuItem.Text = "Google";
             this.googleToolStripMenuItem.Click += new System.EventHandler(this.googleToolStripMenuItem_Click);
             // 
             // очиститьToolStripMenuItem
             // 
+            this.очиститьToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.очиститьToolStripMenuItem.Name = "очиститьToolStripMenuItem";
-            this.очиститьToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.очиститьToolStripMenuItem.Size = new System.Drawing.Size(74, 21);
             this.очиститьToolStripMenuItem.Text = "Очистить";
             this.очиститьToolStripMenuItem.Click += new System.EventHandler(this.очиститьToolStripMenuItem_Click);
             // 
@@ -174,7 +183,8 @@ namespace Algorithm
             // TimeElapsedLabel
             // 
             this.TimeElapsedLabel.AutoSize = true;
-            this.TimeElapsedLabel.Location = new System.Drawing.Point(297, 81);
+            this.TimeElapsedLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.TimeElapsedLabel.Location = new System.Drawing.Point(295, 79);
             this.TimeElapsedLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TimeElapsedLabel.Name = "TimeElapsedLabel";
             this.TimeElapsedLabel.Size = new System.Drawing.Size(31, 15);
@@ -184,7 +194,8 @@ namespace Algorithm
             // bogotime
             // 
             this.bogotime.AutoSize = true;
-            this.bogotime.Location = new System.Drawing.Point(332, 83);
+            this.bogotime.ForeColor = System.Drawing.SystemColors.Control;
+            this.bogotime.Location = new System.Drawing.Point(322, 81);
             this.bogotime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.bogotime.Name = "bogotime";
             this.bogotime.Size = new System.Drawing.Size(0, 15);
@@ -192,13 +203,14 @@ namespace Algorithm
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(187, 324);
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(190, 310);
             this.button1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 51);
+            this.button1.Size = new System.Drawing.Size(63, 51);
             this.button1.TabIndex = 13;
             this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ShakerGraph1
@@ -230,7 +242,7 @@ namespace Algorithm
             this.IntersectionGraph1.IsEnableHZoom = false;
             this.IntersectionGraph1.IsEnableVZoom = false;
             this.IntersectionGraph1.IsEnableWheelZoom = false;
-            this.IntersectionGraph1.Location = new System.Drawing.Point(370, 263);
+            this.IntersectionGraph1.Location = new System.Drawing.Point(370, 261);
             this.IntersectionGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.IntersectionGraph1.Name = "IntersectionGraph1";
             this.IntersectionGraph1.ScrollGrace = 0D;
@@ -247,7 +259,8 @@ namespace Algorithm
             // Intersectioncheck
             // 
             this.Intersectioncheck.AutoSize = true;
-            this.Intersectioncheck.Location = new System.Drawing.Point(182, 154);
+            this.Intersectioncheck.ForeColor = System.Drawing.SystemColors.Control;
+            this.Intersectioncheck.Location = new System.Drawing.Point(190, 154);
             this.Intersectioncheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Intersectioncheck.Name = "Intersectioncheck";
             this.Intersectioncheck.Size = new System.Drawing.Size(90, 19);
@@ -262,7 +275,7 @@ namespace Algorithm
             this.QuickGraph1.IsEnableHZoom = false;
             this.QuickGraph1.IsEnableVZoom = false;
             this.QuickGraph1.IsEnableWheelZoom = false;
-            this.QuickGraph1.Location = new System.Drawing.Point(648, 263);
+            this.QuickGraph1.Location = new System.Drawing.Point(648, 261);
             this.QuickGraph1.Margin = new System.Windows.Forms.Padding(0);
             this.QuickGraph1.Name = "QuickGraph1";
             this.QuickGraph1.ScrollGrace = 0D;
@@ -279,7 +292,8 @@ namespace Algorithm
             // quickcheck
             // 
             this.quickcheck.AutoSize = true;
-            this.quickcheck.Location = new System.Drawing.Point(182, 129);
+            this.quickcheck.ForeColor = System.Drawing.SystemColors.Control;
+            this.quickcheck.Location = new System.Drawing.Point(190, 129);
             this.quickcheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.quickcheck.Name = "quickcheck";
             this.quickcheck.Size = new System.Drawing.Size(73, 19);
@@ -312,7 +326,8 @@ namespace Algorithm
             // bogocheck
             // 
             this.bogocheck.AutoSize = true;
-            this.bogocheck.Location = new System.Drawing.Point(182, 79);
+            this.bogocheck.ForeColor = System.Drawing.SystemColors.Control;
+            this.bogocheck.Location = new System.Drawing.Point(190, 79);
             this.bogocheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.bogocheck.Name = "bogocheck";
             this.bogocheck.Size = new System.Drawing.Size(59, 19);
@@ -323,7 +338,8 @@ namespace Algorithm
             // bubbletime
             // 
             this.bubbletime.AutoSize = true;
-            this.bubbletime.Location = new System.Drawing.Point(332, 56);
+            this.bubbletime.ForeColor = System.Drawing.SystemColors.Control;
+            this.bubbletime.Location = new System.Drawing.Point(322, 54);
             this.bubbletime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.bubbletime.Name = "bubbletime";
             this.bubbletime.Size = new System.Drawing.Size(0, 15);
@@ -332,7 +348,8 @@ namespace Algorithm
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(297, 56);
+            this.label5.ForeColor = System.Drawing.SystemColors.Control;
+            this.label5.Location = new System.Drawing.Point(295, 54);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 15);
@@ -342,7 +359,8 @@ namespace Algorithm
             // shakertime
             // 
             this.shakertime.AutoSize = true;
-            this.shakertime.Location = new System.Drawing.Point(332, 110);
+            this.shakertime.ForeColor = System.Drawing.SystemColors.Control;
+            this.shakertime.Location = new System.Drawing.Point(322, 108);
             this.shakertime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.shakertime.Name = "shakertime";
             this.shakertime.Size = new System.Drawing.Size(0, 15);
@@ -351,7 +369,8 @@ namespace Algorithm
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(297, 108);
+            this.label11.ForeColor = System.Drawing.SystemColors.Control;
+            this.label11.Location = new System.Drawing.Point(295, 106);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(31, 15);
@@ -362,7 +381,8 @@ namespace Algorithm
             // 
             this.quicktime.AutoSize = true;
             this.quicktime.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.quicktime.Location = new System.Drawing.Point(332, 135);
+            this.quicktime.ForeColor = System.Drawing.SystemColors.Control;
+            this.quicktime.Location = new System.Drawing.Point(322, 133);
             this.quicktime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.quicktime.Name = "quicktime";
             this.quicktime.Size = new System.Drawing.Size(0, 15);
@@ -372,7 +392,8 @@ namespace Algorithm
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label17.Location = new System.Drawing.Point(297, 133);
+            this.label17.ForeColor = System.Drawing.SystemColors.Control;
+            this.label17.Location = new System.Drawing.Point(295, 131);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(31, 15);
@@ -383,7 +404,8 @@ namespace Algorithm
             // 
             this.insectime.AutoSize = true;
             this.insectime.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.insectime.Location = new System.Drawing.Point(332, 158);
+            this.insectime.ForeColor = System.Drawing.SystemColors.Control;
+            this.insectime.Location = new System.Drawing.Point(322, 156);
             this.insectime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.insectime.Name = "insectime";
             this.insectime.Size = new System.Drawing.Size(0, 15);
@@ -393,7 +415,8 @@ namespace Algorithm
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label23.Location = new System.Drawing.Point(297, 158);
+            this.label23.ForeColor = System.Drawing.SystemColors.Control;
+            this.label23.Location = new System.Drawing.Point(295, 156);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(31, 15);
@@ -426,7 +449,8 @@ namespace Algorithm
             // shakercheck
             // 
             this.shakercheck.AutoSize = true;
-            this.shakercheck.Location = new System.Drawing.Point(182, 104);
+            this.shakercheck.ForeColor = System.Drawing.SystemColors.Control;
+            this.shakercheck.Location = new System.Drawing.Point(190, 104);
             this.shakercheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.shakercheck.Name = "shakercheck";
             this.shakercheck.Size = new System.Drawing.Size(81, 19);
@@ -437,7 +461,8 @@ namespace Algorithm
             // bubblecheck
             // 
             this.bubblecheck.AutoSize = true;
-            this.bubblecheck.Location = new System.Drawing.Point(182, 54);
+            this.bubblecheck.ForeColor = System.Drawing.SystemColors.Control;
+            this.bubblecheck.Location = new System.Drawing.Point(190, 54);
             this.bubblecheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.bubblecheck.Name = "bubblecheck";
             this.bubblecheck.Size = new System.Drawing.Size(80, 19);
@@ -447,36 +472,29 @@ namespace Algorithm
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(262, 324);
+            this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(264, 310);
             this.button3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(70, 51);
+            this.button3.Size = new System.Drawing.Size(62, 51);
             this.button3.TabIndex = 46;
             this.button3.Text = "Pause";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // googleid
             // 
-            this.googleid.Location = new System.Drawing.Point(26, 26);
+            this.googleid.Location = new System.Drawing.Point(27, 29);
             this.googleid.Name = "googleid";
-            this.googleid.Size = new System.Drawing.Size(148, 19);
+            this.googleid.Size = new System.Drawing.Size(308, 19);
             this.googleid.TabIndex = 48;
             this.googleid.Text = "1GoOUEb2OdQWLqPIJbEB_wMnfy4sJwc4cSkdMra2AEKM";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 15);
-            this.label1.TabIndex = 49;
-            this.label1.Text = "ID";
             // 
             // revquickcheck
             // 
             this.revquickcheck.AutoSize = true;
-            this.revquickcheck.Location = new System.Drawing.Point(181, 235);
+            this.revquickcheck.ForeColor = System.Drawing.SystemColors.Control;
+            this.revquickcheck.Location = new System.Drawing.Point(189, 235);
             this.revquickcheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.revquickcheck.Name = "revquickcheck";
             this.revquickcheck.Size = new System.Drawing.Size(95, 19);
@@ -487,7 +505,8 @@ namespace Algorithm
             // revinsectioncheck
             // 
             this.revinsectioncheck.AutoSize = true;
-            this.revinsectioncheck.Location = new System.Drawing.Point(181, 260);
+            this.revinsectioncheck.ForeColor = System.Drawing.SystemColors.Control;
+            this.revinsectioncheck.Location = new System.Drawing.Point(189, 260);
             this.revinsectioncheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.revinsectioncheck.Name = "revinsectioncheck";
             this.revinsectioncheck.Size = new System.Drawing.Size(112, 19);
@@ -498,7 +517,8 @@ namespace Algorithm
             // revshaker
             // 
             this.revshaker.AutoSize = true;
-            this.revshaker.Location = new System.Drawing.Point(181, 209);
+            this.revshaker.ForeColor = System.Drawing.SystemColors.Control;
+            this.revshaker.Location = new System.Drawing.Point(189, 209);
             this.revshaker.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.revshaker.Name = "revshaker";
             this.revshaker.Size = new System.Drawing.Size(103, 19);
@@ -509,7 +529,8 @@ namespace Algorithm
             // revbubble
             // 
             this.revbubble.AutoSize = true;
-            this.revbubble.Location = new System.Drawing.Point(182, 180);
+            this.revbubble.ForeColor = System.Drawing.SystemColors.Control;
+            this.revbubble.Location = new System.Drawing.Point(190, 180);
             this.revbubble.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.revbubble.Name = "revbubble";
             this.revbubble.Size = new System.Drawing.Size(102, 19);
@@ -520,7 +541,8 @@ namespace Algorithm
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(332, 184);
+            this.label2.ForeColor = System.Drawing.SystemColors.Control;
+            this.label2.Location = new System.Drawing.Point(322, 182);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 15);
@@ -529,7 +551,8 @@ namespace Algorithm
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(297, 182);
+            this.label3.ForeColor = System.Drawing.SystemColors.Control;
+            this.label3.Location = new System.Drawing.Point(295, 180);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 15);
@@ -540,7 +563,8 @@ namespace Algorithm
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label4.Location = new System.Drawing.Point(331, 266);
+            this.label4.ForeColor = System.Drawing.SystemColors.Control;
+            this.label4.Location = new System.Drawing.Point(321, 264);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(0, 15);
@@ -550,7 +574,8 @@ namespace Algorithm
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label6.Location = new System.Drawing.Point(296, 264);
+            this.label6.ForeColor = System.Drawing.SystemColors.Control;
+            this.label6.Location = new System.Drawing.Point(294, 262);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 15);
@@ -561,7 +586,8 @@ namespace Algorithm
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label7.Location = new System.Drawing.Point(331, 239);
+            this.label7.ForeColor = System.Drawing.SystemColors.Control;
+            this.label7.Location = new System.Drawing.Point(321, 237);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(0, 15);
@@ -571,7 +597,8 @@ namespace Algorithm
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label8.Location = new System.Drawing.Point(296, 239);
+            this.label8.ForeColor = System.Drawing.SystemColors.Control;
+            this.label8.Location = new System.Drawing.Point(294, 237);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(31, 15);
@@ -581,7 +608,8 @@ namespace Algorithm
             // revshakertime
             // 
             this.revshakertime.AutoSize = true;
-            this.revshakertime.Location = new System.Drawing.Point(331, 215);
+            this.revshakertime.ForeColor = System.Drawing.SystemColors.Control;
+            this.revshakertime.Location = new System.Drawing.Point(321, 213);
             this.revshakertime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.revshakertime.Name = "revshakertime";
             this.revshakertime.Size = new System.Drawing.Size(0, 15);
@@ -590,7 +618,8 @@ namespace Algorithm
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(296, 213);
+            this.label10.ForeColor = System.Drawing.SystemColors.Control;
+            this.label10.Location = new System.Drawing.Point(294, 211);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(31, 15);
@@ -606,7 +635,7 @@ namespace Algorithm
             this.Revbubblegraph.IsEnableHZoom = false;
             this.Revbubblegraph.IsEnableVZoom = false;
             this.Revbubblegraph.IsEnableWheelZoom = false;
-            this.Revbubblegraph.Location = new System.Drawing.Point(926, 263);
+            this.Revbubblegraph.Location = new System.Drawing.Point(926, 260);
             this.Revbubblegraph.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Revbubblegraph.Name = "Revbubblegraph";
             this.Revbubblegraph.ScrollGrace = 0D;
@@ -712,7 +741,8 @@ namespace Algorithm
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label9.Location = new System.Drawing.Point(331, 291);
+            this.label9.ForeColor = System.Drawing.SystemColors.Control;
+            this.label9.Location = new System.Drawing.Point(321, 289);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(0, 15);
@@ -722,7 +752,8 @@ namespace Algorithm
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label12.Location = new System.Drawing.Point(296, 291);
+            this.label12.ForeColor = System.Drawing.SystemColors.Control;
+            this.label12.Location = new System.Drawing.Point(294, 289);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(31, 15);
@@ -732,19 +763,21 @@ namespace Algorithm
             // revbogocheck
             // 
             this.revbogocheck.AutoSize = true;
-            this.revbogocheck.Location = new System.Drawing.Point(181, 285);
+            this.revbogocheck.ForeColor = System.Drawing.SystemColors.Control;
+            this.revbogocheck.Location = new System.Drawing.Point(189, 285);
             this.revbogocheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.revbogocheck.Name = "revbogocheck";
-            this.revbogocheck.Size = new System.Drawing.Size(94, 19);
+            this.revbogocheck.Size = new System.Drawing.Size(81, 19);
             this.revbogocheck.TabIndex = 67;
-            this.revbogocheck.Text = "Rev BogoSort";
+            this.revbogocheck.Text = "Rev BOGO";
             this.revbogocheck.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1224, 745);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(43)))), ((int)(((byte)(60)))));
+            this.ClientSize = new System.Drawing.Size(1226, 748);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.revbogocheck);
@@ -765,7 +798,6 @@ namespace Algorithm
             this.Controls.Add(this.revinsectioncheck);
             this.Controls.Add(this.revshaker);
             this.Controls.Add(this.revbubble);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.googleid);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.bogotime);
@@ -798,8 +830,10 @@ namespace Algorithm
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "Form1";
-            this.Text = "p";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Визуализация сортировок";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -841,7 +875,6 @@ namespace Algorithm
         private System.Windows.Forms.CheckBox bubblecheck;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox googleid;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem очиститьToolStripMenuItem;
         private System.Windows.Forms.CheckBox revquickcheck;
         private System.Windows.Forms.CheckBox revinsectioncheck;
