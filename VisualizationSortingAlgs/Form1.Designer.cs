@@ -62,7 +62,6 @@ namespace Algorithm
             this.shakercheck = new System.Windows.Forms.CheckBox();
             this.bubblecheck = new System.Windows.Forms.CheckBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.googleid = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.revquick = new System.Windows.Forms.CheckBox();
@@ -79,6 +78,8 @@ namespace Algorithm
             this.label10 = new System.Windows.Forms.Label();
             this.Revbubblegraph = new ZedGraph.ZedGraphControl();
             this.revshakergraph = new ZedGraph.ZedGraphControl();
+            this.revquicksort = new ZedGraph.ZedGraphControl();
+            this.revinter = new ZedGraph.ZedGraphControl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -130,7 +131,7 @@ namespace Algorithm
             this.очиститьToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1446, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1160, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -190,7 +191,7 @@ namespace Algorithm
             this.button1.Location = new System.Drawing.Point(29, 312);
             this.button1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(62, 57);
+            this.button1.Size = new System.Drawing.Size(73, 57);
             this.button1.TabIndex = 13;
             this.button1.Text = "Start";
             this.button1.UseVisualStyleBackColor = true;
@@ -204,7 +205,7 @@ namespace Algorithm
             this.ShakerGraph1.IsEnableHZoom = false;
             this.ShakerGraph1.IsEnableVZoom = false;
             this.ShakerGraph1.IsEnableWheelZoom = false;
-            this.ShakerGraph1.Location = new System.Drawing.Point(840, 33);
+            this.ShakerGraph1.Location = new System.Drawing.Point(840, 27);
             this.ShakerGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ShakerGraph1.Name = "ShakerGraph1";
             this.ShakerGraph1.ScrollGrace = 0D;
@@ -225,7 +226,7 @@ namespace Algorithm
             this.IntersectionGraph1.IsEnableHZoom = false;
             this.IntersectionGraph1.IsEnableVZoom = false;
             this.IntersectionGraph1.IsEnableWheelZoom = false;
-            this.IntersectionGraph1.Location = new System.Drawing.Point(217, 289);
+            this.IntersectionGraph1.Location = new System.Drawing.Point(217, 286);
             this.IntersectionGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.IntersectionGraph1.Name = "IntersectionGraph1";
             this.IntersectionGraph1.ScrollGrace = 0D;
@@ -257,7 +258,7 @@ namespace Algorithm
             this.QuickGraph1.IsEnableHZoom = false;
             this.QuickGraph1.IsEnableVZoom = false;
             this.QuickGraph1.IsEnableWheelZoom = false;
-            this.QuickGraph1.Location = new System.Drawing.Point(529, 287);
+            this.QuickGraph1.Location = new System.Drawing.Point(529, 286);
             this.QuickGraph1.Margin = new System.Windows.Forms.Padding(0);
             this.QuickGraph1.Name = "QuickGraph1";
             this.QuickGraph1.ScrollGrace = 0D;
@@ -290,7 +291,7 @@ namespace Algorithm
             this.BogoGraph1.IsEnableHZoom = false;
             this.BogoGraph1.IsEnableVZoom = false;
             this.BogoGraph1.IsEnableWheelZoom = false;
-            this.BogoGraph1.Location = new System.Drawing.Point(529, 30);
+            this.BogoGraph1.Location = new System.Drawing.Point(529, 27);
             this.BogoGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.BogoGraph1.Name = "BogoGraph1";
             this.BogoGraph1.ScrollGrace = 0D;
@@ -405,7 +406,7 @@ namespace Algorithm
             this.BubbleGraph1.IsEnableHZoom = false;
             this.BubbleGraph1.IsEnableVZoom = false;
             this.BubbleGraph1.IsEnableWheelZoom = false;
-            this.BubbleGraph1.Location = new System.Drawing.Point(217, 30);
+            this.BubbleGraph1.Location = new System.Drawing.Point(217, 27);
             this.BubbleGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.BubbleGraph1.Name = "BubbleGraph1";
             this.BubbleGraph1.ScrollGrace = 0D;
@@ -443,25 +444,14 @@ namespace Algorithm
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(95, 312);
+            this.button3.Location = new System.Drawing.Point(106, 312);
             this.button3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(97, 28);
+            this.button3.Size = new System.Drawing.Size(86, 57);
             this.button3.TabIndex = 46;
             this.button3.Text = "Pause";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(95, 341);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(97, 28);
-            this.button4.TabIndex = 47;
-            this.button4.Text = "Resume";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // googleid
             // 
@@ -593,9 +583,8 @@ namespace Algorithm
             this.revshakertime.Location = new System.Drawing.Point(176, 620);
             this.revshakertime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.revshakertime.Name = "revshakertime";
-            this.revshakertime.Size = new System.Drawing.Size(13, 15);
+            this.revshakertime.Size = new System.Drawing.Size(0, 15);
             this.revshakertime.TabIndex = 57;
-            this.revshakertime.Text = "1";
             // 
             // label10
             // 
@@ -616,7 +605,7 @@ namespace Algorithm
             this.Revbubblegraph.IsEnableHZoom = false;
             this.Revbubblegraph.IsEnableVZoom = false;
             this.Revbubblegraph.IsEnableWheelZoom = false;
-            this.Revbubblegraph.Location = new System.Drawing.Point(840, 287);
+            this.Revbubblegraph.Location = new System.Drawing.Point(840, 286);
             this.Revbubblegraph.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Revbubblegraph.Name = "Revbubblegraph";
             this.Revbubblegraph.ScrollGrace = 0D;
@@ -653,11 +642,55 @@ namespace Algorithm
             this.revshakergraph.TabIndex = 63;
             this.revshakergraph.UseExtendedPrintDialog = true;
             // 
+            // revquicksort
+            // 
+            this.revquicksort.Font = new System.Drawing.Font("Century Gothic", 6F);
+            this.revquicksort.IsEnableHPan = false;
+            this.revquicksort.IsEnableHZoom = false;
+            this.revquicksort.IsEnableVZoom = false;
+            this.revquicksort.IsEnableWheelZoom = false;
+            this.revquicksort.Location = new System.Drawing.Point(529, 547);
+            this.revquicksort.Margin = new System.Windows.Forms.Padding(0);
+            this.revquicksort.Name = "revquicksort";
+            this.revquicksort.ScrollGrace = 0D;
+            this.revquicksort.ScrollMaxX = 0D;
+            this.revquicksort.ScrollMaxY = 0D;
+            this.revquicksort.ScrollMaxY2 = 0D;
+            this.revquicksort.ScrollMinX = 0D;
+            this.revquicksort.ScrollMinY = 0D;
+            this.revquicksort.ScrollMinY2 = 0D;
+            this.revquicksort.Size = new System.Drawing.Size(300, 250);
+            this.revquicksort.TabIndex = 64;
+            this.revquicksort.UseExtendedPrintDialog = true;
+            // 
+            // revinter
+            // 
+            this.revinter.Font = new System.Drawing.Font("Century Gothic", 6F);
+            this.revinter.IsEnableHPan = false;
+            this.revinter.IsEnableHZoom = false;
+            this.revinter.IsEnableVZoom = false;
+            this.revinter.IsEnableWheelZoom = false;
+            this.revinter.Location = new System.Drawing.Point(840, 547);
+            this.revinter.Margin = new System.Windows.Forms.Padding(0);
+            this.revinter.Name = "revinter";
+            this.revinter.ScrollGrace = 0D;
+            this.revinter.ScrollMaxX = 0D;
+            this.revinter.ScrollMaxY = 0D;
+            this.revinter.ScrollMaxY2 = 0D;
+            this.revinter.ScrollMinX = 0D;
+            this.revinter.ScrollMinY = 0D;
+            this.revinter.ScrollMinY2 = 0D;
+            this.revinter.Size = new System.Drawing.Size(300, 250);
+            this.revinter.TabIndex = 65;
+            this.revinter.UseExtendedPrintDialog = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1446, 802);
+            this.ClientSize = new System.Drawing.Size(1160, 802);
+            this.Controls.Add(this.revinter);
+            this.Controls.Add(this.revquicksort);
             this.Controls.Add(this.revshakergraph);
             this.Controls.Add(this.Revbubblegraph);
             this.Controls.Add(this.label2);
@@ -674,7 +707,6 @@ namespace Algorithm
             this.Controls.Add(this.revbubble);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.googleid);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.bogotime);
             this.Controls.Add(this.TimeElapsedLabel);
@@ -748,7 +780,6 @@ namespace Algorithm
         private System.Windows.Forms.CheckBox shakercheck;
         private System.Windows.Forms.CheckBox bubblecheck;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox googleid;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem очиститьToolStripMenuItem;
@@ -766,6 +797,8 @@ namespace Algorithm
         private System.Windows.Forms.Label label10;
         private ZedGraph.ZedGraphControl Revbubblegraph;
         private ZedGraph.ZedGraphControl revshakergraph;
+        private ZedGraph.ZedGraphControl revquicksort;
+        private ZedGraph.ZedGraphControl revinter;
     }
 }
 

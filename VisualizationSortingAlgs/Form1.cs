@@ -218,6 +218,7 @@ namespace Algorithm
                 }
             }
         }
+
         public void GenerateData()
         {
             try
@@ -565,10 +566,10 @@ namespace Algorithm
                 BubbleGraph1.AxisChange();
                 BubbleGraph1.Invalidate();
                 sw1.Stop();
+
                 Invoke((MethodInvoker)delegate
                 {
                     bubbletime.Text = Math.Round((sw1.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
-
                 });
                 d++;
                 buttoncheck();
@@ -653,18 +654,24 @@ namespace Algorithm
                         if (unsortedArray1[i] > unsortedArray1[i + 1])
                         {
                             Swap(unsortedArray1, i, i + 1);
-
-                            GraphPane pane = ShakerGraph1.GraphPane;
-                            pane.CurveList.Clear();
+                            Invoke((MethodInvoker)delegate
+                            {
+                                GraphPane pane = ShakerGraph1.GraphPane;
+                                pane.CurveList.Clear();
+                            });
                             double[] values = new double[n];
                             for (int k = 0; k < n; k++)
                             {
                                 values[k] = unsortedArray1[k];
                             }
-                            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
-                            pane.BarSettings.MinClusterGap = 0F;
-                            ShakerGraph1.AxisChange();
-                            ShakerGraph1.Invalidate();
+                            Invoke((MethodInvoker)delegate
+                            {
+                                GraphPane pane = ShakerGraph1.GraphPane;
+                                BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+                                pane.BarSettings.MinClusterGap = 0F;
+                                ShakerGraph1.AxisChange();
+                                ShakerGraph1.Invalidate();
+                            });
                             Thread.Sleep(5);
                         }
                     }
@@ -675,12 +682,11 @@ namespace Algorithm
                         if (unsortedArray1[i - 1] > unsortedArray1[i])
                         {
                             Swap(unsortedArray1, i - 1, i);
-                            /*                        ShakerGraph(ShakerGraph1);*/
                         }
                     }
                     left++;
                 }
-                /*            ShakerGraph(ShakerGraph1);*/
+
                 sw2.Stop();
                 Invoke((MethodInvoker)delegate
                 {
@@ -690,7 +696,7 @@ namespace Algorithm
                 buttoncheck();
             }
 
-                        catch (Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -698,6 +704,8 @@ namespace Algorithm
 
         private void RevShakerSorting(object array1)
         {
+            GraphPane pane = revshakergraph.GraphPane;
+            GraphPane pane1 = revshakergraph.GraphPane;
             int n = unsortedArray6.Length;
             sw6.Restart();
             sw6.Start();
@@ -712,18 +720,24 @@ namespace Algorithm
                         unsortedArray6[j] = unsortedArray6[j + 1];
                         unsortedArray6[j + 1] = tmp;
                         swapped = true;
-                        GraphPane pane = revshakergraph.GraphPane;
-                        pane.CurveList.Clear();
+
+                        Invoke((MethodInvoker)delegate
+                        {
+                            pane.CurveList.Clear();
+                        });
+
                         double[] values = new double[n];
                         for (int k = 0; k < n; k++)
                         {
                             values[k] = unsortedArray6[k];
                         }
-                        BarItem curve = pane.AddBar("Elements", null, values, Color.White);
-                        pane.BarSettings.MinClusterGap = 0F;
-                        revshakergraph.AxisChange();
-                        revshakergraph.Invalidate();
-                        Thread.Sleep(5);
+                        Invoke((MethodInvoker)delegate
+                        {
+                            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
+                            pane.BarSettings.MinClusterGap = 0F;
+                            revshakergraph.AxisChange();
+                            revshakergraph.Invalidate();  
+                        });
                     }
                 }
                 for (int j = unsortedArray6.Length - 2 - i; j > i; j--)
@@ -739,20 +753,25 @@ namespace Algorithm
 
 
                 if (!swapped) break;
+                Invoke((MethodInvoker)delegate
+                {
+                    pane1.CurveList.Clear();
+                });
 
-                GraphPane pane1 = revshakergraph.GraphPane;
-                pane1.CurveList.Clear();
+
                 double[] values1 = new double[n];
                 for (int k = 0; k < n; k++)
                 {
                     values1[k] = unsortedArray6[k];
                 }
-                BarItem curve1 = pane1.AddBar("Elements", null, values1, Color.White);
-                pane1.BarSettings.MinClusterGap = 0F;
-                revshakergraph.AxisChange();
-                revshakergraph.Invalidate();
-                Thread.Sleep(5);
 
+                Invoke((MethodInvoker)delegate
+                { 
+                    BarItem curve1 = pane1.AddBar("Elements", null, values1, Color.White);
+                    pane1.BarSettings.MinClusterGap = 0F;
+                    revshakergraph.AxisChange();
+                    revshakergraph.Invalidate();
+                });
             }
             sw6.Stop();
             Invoke((MethodInvoker)delegate
@@ -795,9 +814,10 @@ namespace Algorithm
                 });
             }
 
-                        catch (Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+/*                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);*/
+                Console.WriteLine(ex. Message);
             }
         }
 
@@ -837,22 +857,36 @@ namespace Algorithm
             {
                 sw.Restart();
                 sw.Start();
+               
+                Invoke((MethodInvoker)delegate
+                {
+                    button1.Enabled = false;
+
+                });
                 QuickSort(unsortedArray3, 0, unsortedArray3.Length - 1);
                 sw.Stop();
                 Invoke((MethodInvoker)delegate
                 {
                     quicktime.Text = Math.Round((sw.Elapsed.TotalMilliseconds / 1000), 2).ToString() + "s";
                 });
+                Invoke((MethodInvoker)delegate
+                {
+                    button1.Enabled = true;
+
+                });
+               
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Сгенерируйте данные", MessageBoxButtons.OK, MessageBoxIcon.Error);
+/*                MessageBox.Show(ex.Message, "Сгенерируйте данные", MessageBoxButtons.OK, MessageBoxIcon.Error);*/
+                Console.WriteLine(ex.Message);
             }
 
         }
 
         private void QuickSort(double[] arr, int leftStart, int rightEnd)
         {
+            GraphPane pane = QuickGraph1.GraphPane;
             if (leftStart >= rightEnd)
             {
                 return;
@@ -864,9 +898,11 @@ namespace Algorithm
             QuickSort(arr, pivotLocation + 1, rightEnd);
 
             //отрисовка
-            GraphPane pane = QuickGraph1.GraphPane;
+            Invoke((MethodInvoker)delegate
+            {
 
-            pane.CurveList.Clear();
+                pane.CurveList.Clear();
+            });
 
             var n = unsortedArray3.Length;
             double[] values = new double[n];
@@ -874,10 +910,10 @@ namespace Algorithm
             {
                 values[i] = unsortedArray3[i];
             }
-            BarItem curve = pane.AddBar("Elements", null, values, Color.White);
 
             Invoke((MethodInvoker)delegate
             {
+                BarItem curve = pane.AddBar("Elements", null, values, Color.White);
                 QuickGraph1.AxisChange();
                 QuickGraph1.Invalidate();
             });
@@ -971,7 +1007,8 @@ namespace Algorithm
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+/*                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);*/
+                Console.WriteLine(ex.Message);
             }
         }
         #endregion
@@ -984,15 +1021,15 @@ namespace Algorithm
                   {
                       if (item.ThreadState != System.Threading.ThreadState.Stopped)
                       {
-                          item.Suspend();
+                          item.Abort();
                       }
                   }
-
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+/*                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);*/
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -1012,12 +1049,11 @@ namespace Algorithm
             {
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ClearAll();
         }
         private void ClearAll()
         {
@@ -1032,7 +1068,7 @@ namespace Algorithm
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(ex.Message);
             }
         }
 
