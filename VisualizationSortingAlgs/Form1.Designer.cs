@@ -80,6 +80,10 @@ namespace Algorithm
             this.revshakergraph = new ZedGraph.ZedGraphControl();
             this.revquicksort = new ZedGraph.ZedGraphControl();
             this.Revintergraph = new ZedGraph.ZedGraphControl();
+            this.revbogograph = new ZedGraph.ZedGraphControl();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.revbogocheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -90,7 +94,7 @@ namespace Algorithm
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Mass});
-            this.dataGridView1.Location = new System.Drawing.Point(29, 55);
+            this.dataGridView1.Location = new System.Drawing.Point(11, 51);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(163, 251);
@@ -101,11 +105,11 @@ namespace Algorithm
             this.Mass.HeaderText = "Массив";
             this.Mass.Name = "Mass";
             this.Mass.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Mass.Width = 200;
+            this.Mass.Width = 121;
             // 
             // genBtn
             // 
-            this.genBtn.Location = new System.Drawing.Point(29, 400);
+            this.genBtn.Location = new System.Drawing.Point(15, 349);
             this.genBtn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.genBtn.Name = "genBtn";
             this.genBtn.Size = new System.Drawing.Size(163, 26);
@@ -116,7 +120,7 @@ namespace Algorithm
             // 
             // arraynum
             // 
-            this.arraynum.Location = new System.Drawing.Point(29, 375);
+            this.arraynum.Location = new System.Drawing.Point(15, 324);
             this.arraynum.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.arraynum.Name = "arraynum";
             this.arraynum.Size = new System.Drawing.Size(163, 19);
@@ -131,7 +135,7 @@ namespace Algorithm
             this.очиститьToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1160, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1224, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -170,7 +174,7 @@ namespace Algorithm
             // TimeElapsedLabel
             // 
             this.TimeElapsedLabel.AutoSize = true;
-            this.TimeElapsedLabel.Location = new System.Drawing.Point(141, 470);
+            this.TimeElapsedLabel.Location = new System.Drawing.Point(297, 81);
             this.TimeElapsedLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TimeElapsedLabel.Name = "TimeElapsedLabel";
             this.TimeElapsedLabel.Size = new System.Drawing.Size(31, 15);
@@ -180,7 +184,7 @@ namespace Algorithm
             // bogotime
             // 
             this.bogotime.AutoSize = true;
-            this.bogotime.Location = new System.Drawing.Point(176, 472);
+            this.bogotime.Location = new System.Drawing.Point(332, 83);
             this.bogotime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.bogotime.Name = "bogotime";
             this.bogotime.Size = new System.Drawing.Size(0, 15);
@@ -188,10 +192,10 @@ namespace Algorithm
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(29, 312);
+            this.button1.Location = new System.Drawing.Point(187, 324);
             this.button1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(73, 57);
+            this.button1.Size = new System.Drawing.Size(71, 51);
             this.button1.TabIndex = 13;
             this.button1.Text = "Start";
             this.button1.UseVisualStyleBackColor = true;
@@ -205,7 +209,7 @@ namespace Algorithm
             this.ShakerGraph1.IsEnableHZoom = false;
             this.ShakerGraph1.IsEnableVZoom = false;
             this.ShakerGraph1.IsEnableWheelZoom = false;
-            this.ShakerGraph1.Location = new System.Drawing.Point(840, 27);
+            this.ShakerGraph1.Location = new System.Drawing.Point(926, 29);
             this.ShakerGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ShakerGraph1.Name = "ShakerGraph1";
             this.ShakerGraph1.ScrollGrace = 0D;
@@ -215,7 +219,7 @@ namespace Algorithm
             this.ShakerGraph1.ScrollMinX = 0D;
             this.ShakerGraph1.ScrollMinY = 0D;
             this.ShakerGraph1.ScrollMinY2 = 0D;
-            this.ShakerGraph1.Size = new System.Drawing.Size(300, 250);
+            this.ShakerGraph1.Size = new System.Drawing.Size(270, 226);
             this.ShakerGraph1.TabIndex = 15;
             this.ShakerGraph1.UseExtendedPrintDialog = true;
             // 
@@ -226,7 +230,7 @@ namespace Algorithm
             this.IntersectionGraph1.IsEnableHZoom = false;
             this.IntersectionGraph1.IsEnableVZoom = false;
             this.IntersectionGraph1.IsEnableWheelZoom = false;
-            this.IntersectionGraph1.Location = new System.Drawing.Point(217, 286);
+            this.IntersectionGraph1.Location = new System.Drawing.Point(370, 263);
             this.IntersectionGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.IntersectionGraph1.Name = "IntersectionGraph1";
             this.IntersectionGraph1.ScrollGrace = 0D;
@@ -236,14 +240,14 @@ namespace Algorithm
             this.IntersectionGraph1.ScrollMinX = 0D;
             this.IntersectionGraph1.ScrollMinY = 0D;
             this.IntersectionGraph1.ScrollMinY2 = 0D;
-            this.IntersectionGraph1.Size = new System.Drawing.Size(300, 250);
+            this.IntersectionGraph1.Size = new System.Drawing.Size(270, 226);
             this.IntersectionGraph1.TabIndex = 18;
             this.IntersectionGraph1.UseExtendedPrintDialog = true;
             // 
             // Intersectioncheck
             // 
             this.Intersectioncheck.AutoSize = true;
-            this.Intersectioncheck.Location = new System.Drawing.Point(29, 545);
+            this.Intersectioncheck.Location = new System.Drawing.Point(182, 154);
             this.Intersectioncheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Intersectioncheck.Name = "Intersectioncheck";
             this.Intersectioncheck.Size = new System.Drawing.Size(90, 19);
@@ -258,7 +262,7 @@ namespace Algorithm
             this.QuickGraph1.IsEnableHZoom = false;
             this.QuickGraph1.IsEnableVZoom = false;
             this.QuickGraph1.IsEnableWheelZoom = false;
-            this.QuickGraph1.Location = new System.Drawing.Point(529, 286);
+            this.QuickGraph1.Location = new System.Drawing.Point(648, 263);
             this.QuickGraph1.Margin = new System.Windows.Forms.Padding(0);
             this.QuickGraph1.Name = "QuickGraph1";
             this.QuickGraph1.ScrollGrace = 0D;
@@ -268,14 +272,14 @@ namespace Algorithm
             this.QuickGraph1.ScrollMinX = 0D;
             this.QuickGraph1.ScrollMinY = 0D;
             this.QuickGraph1.ScrollMinY2 = 0D;
-            this.QuickGraph1.Size = new System.Drawing.Size(300, 250);
+            this.QuickGraph1.Size = new System.Drawing.Size(270, 226);
             this.QuickGraph1.TabIndex = 20;
             this.QuickGraph1.UseExtendedPrintDialog = true;
             // 
             // quickcheck
             // 
             this.quickcheck.AutoSize = true;
-            this.quickcheck.Location = new System.Drawing.Point(29, 520);
+            this.quickcheck.Location = new System.Drawing.Point(182, 129);
             this.quickcheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.quickcheck.Name = "quickcheck";
             this.quickcheck.Size = new System.Drawing.Size(73, 19);
@@ -291,7 +295,7 @@ namespace Algorithm
             this.BogoGraph1.IsEnableHZoom = false;
             this.BogoGraph1.IsEnableVZoom = false;
             this.BogoGraph1.IsEnableWheelZoom = false;
-            this.BogoGraph1.Location = new System.Drawing.Point(529, 27);
+            this.BogoGraph1.Location = new System.Drawing.Point(648, 29);
             this.BogoGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.BogoGraph1.Name = "BogoGraph1";
             this.BogoGraph1.ScrollGrace = 0D;
@@ -301,14 +305,14 @@ namespace Algorithm
             this.BogoGraph1.ScrollMinX = 0D;
             this.BogoGraph1.ScrollMinY = 0D;
             this.BogoGraph1.ScrollMinY2 = 0D;
-            this.BogoGraph1.Size = new System.Drawing.Size(300, 250);
+            this.BogoGraph1.Size = new System.Drawing.Size(270, 226);
             this.BogoGraph1.TabIndex = 22;
             this.BogoGraph1.UseExtendedPrintDialog = true;
             // 
             // bogocheck
             // 
             this.bogocheck.AutoSize = true;
-            this.bogocheck.Location = new System.Drawing.Point(29, 470);
+            this.bogocheck.Location = new System.Drawing.Point(182, 79);
             this.bogocheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.bogocheck.Name = "bogocheck";
             this.bogocheck.Size = new System.Drawing.Size(59, 19);
@@ -319,7 +323,7 @@ namespace Algorithm
             // bubbletime
             // 
             this.bubbletime.AutoSize = true;
-            this.bubbletime.Location = new System.Drawing.Point(176, 445);
+            this.bubbletime.Location = new System.Drawing.Point(332, 56);
             this.bubbletime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.bubbletime.Name = "bubbletime";
             this.bubbletime.Size = new System.Drawing.Size(0, 15);
@@ -328,7 +332,7 @@ namespace Algorithm
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(141, 445);
+            this.label5.Location = new System.Drawing.Point(297, 56);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 15);
@@ -338,7 +342,7 @@ namespace Algorithm
             // shakertime
             // 
             this.shakertime.AutoSize = true;
-            this.shakertime.Location = new System.Drawing.Point(176, 499);
+            this.shakertime.Location = new System.Drawing.Point(332, 110);
             this.shakertime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.shakertime.Name = "shakertime";
             this.shakertime.Size = new System.Drawing.Size(0, 15);
@@ -347,7 +351,7 @@ namespace Algorithm
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(141, 497);
+            this.label11.Location = new System.Drawing.Point(297, 108);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(31, 15);
@@ -358,7 +362,7 @@ namespace Algorithm
             // 
             this.quicktime.AutoSize = true;
             this.quicktime.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.quicktime.Location = new System.Drawing.Point(176, 524);
+            this.quicktime.Location = new System.Drawing.Point(332, 135);
             this.quicktime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.quicktime.Name = "quicktime";
             this.quicktime.Size = new System.Drawing.Size(0, 15);
@@ -368,7 +372,7 @@ namespace Algorithm
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label17.Location = new System.Drawing.Point(141, 522);
+            this.label17.Location = new System.Drawing.Point(297, 133);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(31, 15);
@@ -379,7 +383,7 @@ namespace Algorithm
             // 
             this.insectime.AutoSize = true;
             this.insectime.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.insectime.Location = new System.Drawing.Point(176, 547);
+            this.insectime.Location = new System.Drawing.Point(332, 158);
             this.insectime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.insectime.Name = "insectime";
             this.insectime.Size = new System.Drawing.Size(0, 15);
@@ -389,7 +393,7 @@ namespace Algorithm
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label23.Location = new System.Drawing.Point(141, 547);
+            this.label23.Location = new System.Drawing.Point(297, 158);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(31, 15);
@@ -405,7 +409,7 @@ namespace Algorithm
             this.BubbleGraph1.IsEnableHZoom = false;
             this.BubbleGraph1.IsEnableVZoom = false;
             this.BubbleGraph1.IsEnableWheelZoom = false;
-            this.BubbleGraph1.Location = new System.Drawing.Point(217, 27);
+            this.BubbleGraph1.Location = new System.Drawing.Point(370, 29);
             this.BubbleGraph1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.BubbleGraph1.Name = "BubbleGraph1";
             this.BubbleGraph1.ScrollGrace = 0D;
@@ -415,14 +419,14 @@ namespace Algorithm
             this.BubbleGraph1.ScrollMinX = 0D;
             this.BubbleGraph1.ScrollMinY = 0D;
             this.BubbleGraph1.ScrollMinY2 = 0D;
-            this.BubbleGraph1.Size = new System.Drawing.Size(300, 250);
+            this.BubbleGraph1.Size = new System.Drawing.Size(270, 226);
             this.BubbleGraph1.TabIndex = 12;
             this.BubbleGraph1.UseExtendedPrintDialog = true;
             // 
             // shakercheck
             // 
             this.shakercheck.AutoSize = true;
-            this.shakercheck.Location = new System.Drawing.Point(29, 495);
+            this.shakercheck.Location = new System.Drawing.Point(182, 104);
             this.shakercheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.shakercheck.Name = "shakercheck";
             this.shakercheck.Size = new System.Drawing.Size(81, 19);
@@ -433,7 +437,7 @@ namespace Algorithm
             // bubblecheck
             // 
             this.bubblecheck.AutoSize = true;
-            this.bubblecheck.Location = new System.Drawing.Point(29, 445);
+            this.bubblecheck.Location = new System.Drawing.Point(182, 54);
             this.bubblecheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.bubblecheck.Name = "bubblecheck";
             this.bubblecheck.Size = new System.Drawing.Size(80, 19);
@@ -443,10 +447,10 @@ namespace Algorithm
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(116, 312);
+            this.button3.Location = new System.Drawing.Point(262, 324);
             this.button3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(76, 57);
+            this.button3.Size = new System.Drawing.Size(70, 51);
             this.button3.TabIndex = 46;
             this.button3.Text = "Pause";
             this.button3.UseVisualStyleBackColor = true;
@@ -454,7 +458,7 @@ namespace Algorithm
             // 
             // googleid
             // 
-            this.googleid.Location = new System.Drawing.Point(44, 30);
+            this.googleid.Location = new System.Drawing.Point(26, 26);
             this.googleid.Name = "googleid";
             this.googleid.Size = new System.Drawing.Size(148, 19);
             this.googleid.TabIndex = 48;
@@ -463,7 +467,7 @@ namespace Algorithm
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 33);
+            this.label1.Location = new System.Drawing.Point(8, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(17, 15);
             this.label1.TabIndex = 49;
@@ -472,7 +476,7 @@ namespace Algorithm
             // revquickcheck
             // 
             this.revquickcheck.AutoSize = true;
-            this.revquickcheck.Location = new System.Drawing.Point(29, 641);
+            this.revquickcheck.Location = new System.Drawing.Point(181, 235);
             this.revquickcheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.revquickcheck.Name = "revquickcheck";
             this.revquickcheck.Size = new System.Drawing.Size(95, 19);
@@ -483,7 +487,7 @@ namespace Algorithm
             // revinsectioncheck
             // 
             this.revinsectioncheck.AutoSize = true;
-            this.revinsectioncheck.Location = new System.Drawing.Point(29, 666);
+            this.revinsectioncheck.Location = new System.Drawing.Point(181, 260);
             this.revinsectioncheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.revinsectioncheck.Name = "revinsectioncheck";
             this.revinsectioncheck.Size = new System.Drawing.Size(112, 19);
@@ -494,7 +498,7 @@ namespace Algorithm
             // revshaker
             // 
             this.revshaker.AutoSize = true;
-            this.revshaker.Location = new System.Drawing.Point(29, 616);
+            this.revshaker.Location = new System.Drawing.Point(181, 209);
             this.revshaker.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.revshaker.Name = "revshaker";
             this.revshaker.Size = new System.Drawing.Size(103, 19);
@@ -505,7 +509,7 @@ namespace Algorithm
             // revbubble
             // 
             this.revbubble.AutoSize = true;
-            this.revbubble.Location = new System.Drawing.Point(29, 591);
+            this.revbubble.Location = new System.Drawing.Point(182, 180);
             this.revbubble.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.revbubble.Name = "revbubble";
             this.revbubble.Size = new System.Drawing.Size(102, 19);
@@ -516,7 +520,7 @@ namespace Algorithm
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(176, 593);
+            this.label2.Location = new System.Drawing.Point(332, 184);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 15);
@@ -525,7 +529,7 @@ namespace Algorithm
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(141, 591);
+            this.label3.Location = new System.Drawing.Point(297, 182);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 15);
@@ -536,7 +540,7 @@ namespace Algorithm
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label4.Location = new System.Drawing.Point(176, 668);
+            this.label4.Location = new System.Drawing.Point(331, 266);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(0, 15);
@@ -546,7 +550,7 @@ namespace Algorithm
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label6.Location = new System.Drawing.Point(141, 668);
+            this.label6.Location = new System.Drawing.Point(296, 264);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 15);
@@ -557,7 +561,7 @@ namespace Algorithm
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label7.Location = new System.Drawing.Point(176, 643);
+            this.label7.Location = new System.Drawing.Point(331, 239);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(0, 15);
@@ -567,7 +571,7 @@ namespace Algorithm
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.label8.Location = new System.Drawing.Point(141, 643);
+            this.label8.Location = new System.Drawing.Point(296, 239);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(31, 15);
@@ -577,7 +581,7 @@ namespace Algorithm
             // revshakertime
             // 
             this.revshakertime.AutoSize = true;
-            this.revshakertime.Location = new System.Drawing.Point(176, 620);
+            this.revshakertime.Location = new System.Drawing.Point(331, 215);
             this.revshakertime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.revshakertime.Name = "revshakertime";
             this.revshakertime.Size = new System.Drawing.Size(0, 15);
@@ -586,7 +590,7 @@ namespace Algorithm
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(141, 618);
+            this.label10.Location = new System.Drawing.Point(296, 213);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(31, 15);
@@ -602,7 +606,7 @@ namespace Algorithm
             this.Revbubblegraph.IsEnableHZoom = false;
             this.Revbubblegraph.IsEnableVZoom = false;
             this.Revbubblegraph.IsEnableWheelZoom = false;
-            this.Revbubblegraph.Location = new System.Drawing.Point(840, 286);
+            this.Revbubblegraph.Location = new System.Drawing.Point(926, 263);
             this.Revbubblegraph.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Revbubblegraph.Name = "Revbubblegraph";
             this.Revbubblegraph.ScrollGrace = 0D;
@@ -612,7 +616,7 @@ namespace Algorithm
             this.Revbubblegraph.ScrollMinX = 0D;
             this.Revbubblegraph.ScrollMinY = 0D;
             this.Revbubblegraph.ScrollMinY2 = 0D;
-            this.Revbubblegraph.Size = new System.Drawing.Size(300, 250);
+            this.Revbubblegraph.Size = new System.Drawing.Size(270, 226);
             this.Revbubblegraph.TabIndex = 62;
             this.Revbubblegraph.UseExtendedPrintDialog = true;
             // 
@@ -625,7 +629,7 @@ namespace Algorithm
             this.revshakergraph.IsEnableHZoom = false;
             this.revshakergraph.IsEnableVZoom = false;
             this.revshakergraph.IsEnableWheelZoom = false;
-            this.revshakergraph.Location = new System.Drawing.Point(217, 547);
+            this.revshakergraph.Location = new System.Drawing.Point(370, 494);
             this.revshakergraph.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.revshakergraph.Name = "revshakergraph";
             this.revshakergraph.ScrollGrace = 0D;
@@ -635,7 +639,7 @@ namespace Algorithm
             this.revshakergraph.ScrollMinX = 0D;
             this.revshakergraph.ScrollMinY = 0D;
             this.revshakergraph.ScrollMinY2 = 0D;
-            this.revshakergraph.Size = new System.Drawing.Size(300, 250);
+            this.revshakergraph.Size = new System.Drawing.Size(270, 226);
             this.revshakergraph.TabIndex = 63;
             this.revshakergraph.UseExtendedPrintDialog = true;
             // 
@@ -646,7 +650,7 @@ namespace Algorithm
             this.revquicksort.IsEnableHZoom = false;
             this.revquicksort.IsEnableVZoom = false;
             this.revquicksort.IsEnableWheelZoom = false;
-            this.revquicksort.Location = new System.Drawing.Point(529, 547);
+            this.revquicksort.Location = new System.Drawing.Point(648, 494);
             this.revquicksort.Margin = new System.Windows.Forms.Padding(0);
             this.revquicksort.Name = "revquicksort";
             this.revquicksort.ScrollGrace = 0D;
@@ -656,7 +660,7 @@ namespace Algorithm
             this.revquicksort.ScrollMinX = 0D;
             this.revquicksort.ScrollMinY = 0D;
             this.revquicksort.ScrollMinY2 = 0D;
-            this.revquicksort.Size = new System.Drawing.Size(300, 250);
+            this.revquicksort.Size = new System.Drawing.Size(270, 226);
             this.revquicksort.TabIndex = 64;
             this.revquicksort.UseExtendedPrintDialog = true;
             // 
@@ -667,7 +671,7 @@ namespace Algorithm
             this.Revintergraph.IsEnableHZoom = false;
             this.Revintergraph.IsEnableVZoom = false;
             this.Revintergraph.IsEnableWheelZoom = false;
-            this.Revintergraph.Location = new System.Drawing.Point(840, 547);
+            this.Revintergraph.Location = new System.Drawing.Point(926, 494);
             this.Revintergraph.Margin = new System.Windows.Forms.Padding(0);
             this.Revintergraph.Name = "Revintergraph";
             this.Revintergraph.ScrollGrace = 0D;
@@ -677,15 +681,74 @@ namespace Algorithm
             this.Revintergraph.ScrollMinX = 0D;
             this.Revintergraph.ScrollMinY = 0D;
             this.Revintergraph.ScrollMinY2 = 0D;
-            this.Revintergraph.Size = new System.Drawing.Size(300, 250);
+            this.Revintergraph.Size = new System.Drawing.Size(270, 226);
             this.Revintergraph.TabIndex = 65;
             this.Revintergraph.UseExtendedPrintDialog = true;
+            // 
+            // revbogograph
+            // 
+            this.revbogograph.AutoSize = true;
+            this.revbogograph.BackColor = System.Drawing.SystemColors.Control;
+            this.revbogograph.Font = new System.Drawing.Font("Century Gothic", 6F);
+            this.revbogograph.IsEnableHPan = false;
+            this.revbogograph.IsEnableHZoom = false;
+            this.revbogograph.IsEnableVZoom = false;
+            this.revbogograph.IsEnableWheelZoom = false;
+            this.revbogograph.Location = new System.Drawing.Point(92, 494);
+            this.revbogograph.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.revbogograph.Name = "revbogograph";
+            this.revbogograph.ScrollGrace = 0D;
+            this.revbogograph.ScrollMaxX = 0D;
+            this.revbogograph.ScrollMaxY = 0D;
+            this.revbogograph.ScrollMaxY2 = 0D;
+            this.revbogograph.ScrollMinX = 0D;
+            this.revbogograph.ScrollMinY = 0D;
+            this.revbogograph.ScrollMinY2 = 0D;
+            this.revbogograph.Size = new System.Drawing.Size(274, 228);
+            this.revbogograph.TabIndex = 66;
+            this.revbogograph.UseExtendedPrintDialog = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 7F);
+            this.label9.Location = new System.Drawing.Point(331, 291);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(0, 15);
+            this.label9.TabIndex = 69;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Century Gothic", 7F);
+            this.label12.Location = new System.Drawing.Point(296, 291);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(31, 15);
+            this.label12.TabIndex = 68;
+            this.label12.Text = "Time";
+            // 
+            // revbogocheck
+            // 
+            this.revbogocheck.AutoSize = true;
+            this.revbogocheck.Location = new System.Drawing.Point(181, 285);
+            this.revbogocheck.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.revbogocheck.Name = "revbogocheck";
+            this.revbogocheck.Size = new System.Drawing.Size(94, 19);
+            this.revbogocheck.TabIndex = 67;
+            this.revbogocheck.Text = "Rev BogoSort";
+            this.revbogocheck.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1160, 820);
+            this.ClientSize = new System.Drawing.Size(1224, 745);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.revbogocheck);
+            this.Controls.Add(this.revbogograph);
             this.Controls.Add(this.Revintergraph);
             this.Controls.Add(this.revquicksort);
             this.Controls.Add(this.revshakergraph);
@@ -736,6 +799,7 @@ namespace Algorithm
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "Form1";
             this.Text = "p";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -754,7 +818,6 @@ namespace Algorithm
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem googleToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mass;
         private System.Windows.Forms.Label TimeElapsedLabel;
         private System.Windows.Forms.Label bogotime;
         private System.Windows.Forms.Button button1;
@@ -796,6 +859,11 @@ namespace Algorithm
         private ZedGraph.ZedGraphControl revshakergraph;
         private ZedGraph.ZedGraphControl revquicksort;
         private ZedGraph.ZedGraphControl Revintergraph;
+        private ZedGraph.ZedGraphControl revbogograph;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox revbogocheck;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Mass;
     }
 }
 
